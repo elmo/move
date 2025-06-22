@@ -1,0 +1,7 @@
+<%= render "shared/components/listings/listing",
+           listing_link: rfp_path(rfp),
+           title: rfp.load_address,
+           description: t('scaffold.created_ago', time: time_ago_in_words(rfp.created_at), default: 'Created %{time} ago') do %>
+  <%= render "rfp_settings",
+             rfp: rfp %>
+<% end %>

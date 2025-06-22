@@ -1,0 +1,27 @@
+<%= render "shared/components/dropdown/dropdown",
+           menu_position: "left-auto right-8 -top-4" do %>
+
+  <%= render "shared/components/dropdown/dropdown_link",
+             link_text: t('scaffold.view', resource: Rfp, default: 'View %{resource}'),
+             link_path: rfp_path(rfp),
+             icon_name: "arrow-right" %>
+
+
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: t('scaffold.edit', resource: Rfp, default: 'Edit %{resource}'),
+               link_path: edit_rfp_path(rfp),
+               icon_name: "square-pen" %>
+
+
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: t('scaffold.delete', resource: Rfp, default: 'Delete %{resource}'),
+               icon_name: "trash",
+               link_path: rfp_path(rfp),
+               link_method: :delete,
+               button_link: true,
+               data: {
+                   turbo_method: :delete,
+                   turbo_confirm: t('scaffold.really_delete', resource: rfp, default: 'Really delete %{resource}?')
+               } %>
+
+<% end %>

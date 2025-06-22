@@ -1,0 +1,26 @@
+<%= content_for(:title) do %>
+  Edit <%= @rfp.load_address %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Requests",
+               link: rfps_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               link: rfp_path(@rfp),
+               text: @rfp.load_address %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: t('scaffold.edit', default: 'Edit') %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "rfps/rfp_subnav", active: "edit_rfp", rfp: @rfp %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render 'form', rfp: @rfp %>
+</div>

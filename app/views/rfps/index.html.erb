@@ -1,0 +1,42 @@
+<%= content_for(:title) do %>
+  Rfps
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Requests" %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+
+  <% if @rfps.any? %>
+    <%= render "shared/components/page_header",
+                title: "Help Request",
+                button_link_path: new_rfp_path %>
+
+    <div class="space-y-6">
+
+      <%= render "shared/components/listings/listings" do %>
+        <% @rfps.each do |rfp| %>
+          <%= render "rfps/rfp_listing", rfp: rfp %>
+        <% end %>
+      <% end %>
+
+      <% if @pagy.pages > 1 %>
+        <div class="pagy-container">
+          <%== pagy_nav(@pagy) %>
+        </div>
+      <% end %>
+
+    </div>
+
+  <% else %>
+    <%= render "shared/components/listings/no_listings",
+                singular_object_name: "Help request",
+                plural_object_name: "Help request",
+                new_path: new_rfp_path %>
+  <% end %>
+
+</div>

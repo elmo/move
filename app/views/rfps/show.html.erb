@@ -1,0 +1,30 @@
+<%= content_for(:title) do %>
+  <%= @rfp.load_address %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Rfps",
+               link: rfps_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @rfp.load_address %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "rfps/rfp_subnav",
+             active: "edit_rfp",
+             rfp: @rfp %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: @rfp.load_address %>
+
+  <div>
+    <%= t('scaffold.show_body', resource: 'rfp', field: 'load_address', default: 'This is the show view for the rfp, load_address.') %>
+  </div>
+
+</div>

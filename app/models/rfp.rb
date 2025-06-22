@@ -1,0 +1,38 @@
+class Rfp < ApplicationRecord
+  include SlugGenerator
+  attr_accessor :current_step
+
+  before_validation :generate_slug, on: :create
+  validates :load_address, presence: true
+  validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-_]+\z/, message: "only allows letters, numbers, hyphens, and underscores" }
+  validates :move_date, presence: true, if: -> { current_step > 1 }
+  validates :move_type, presence: true, if: -> { current_step > 1 }
+  validates :load_address, presence: true, if: -> { current_step > 1 }
+  validates :unload_address, presence: true, if: -> { current_step > 1 }
+  validates :number_of_movers_requested, presence: true, if: -> { current_step > 1 }
+  validates :estimated_time_in_hours, presence: true, if: -> { current_step > 1 }
+  validates :loading_stairs, presence: true, if: -> { current_step > 1 }
+  validates :loading_floor, presence: true, if: -> { current_step > 1 }
+  validates :loading_elevator, presence: true, if: -> { current_step > 1 }
+  validates :loading_stairs_details, presence: true, if: -> { current_step > 1 && loading_stairs == "Yes" }
+  validates :unloading_floor, presence: true, if: -> { current_step > 1 }
+  validates :unloading_elevator, presence: true, if: -> { current_step > 1 }
+  validates :unloading_stairs_details, presence: true, if: -> { current_step > 1 && loading_stairs == "Yes" }
+  validates :earliest_move_date, presence: true, if: -> { current_step > 1 }
+  validates :move_finish_date, presence: true, if: -> { current_step > 1 }
+  validates :specialty_items, presence: true, if: -> { current_step > 1 }
+  validates :specialty_items, presence: true, if: -> { current_step > 1 }
+  validates :specialty_items_details, presence: true, if: -> { current_step > 1 }
+  validates :need_assistance_with_moving_supplies, presence: true, if: -> { current_step > 1 }
+  validates :donation_junk_removal, presence: true, if: -> { current_step > 1 }
+
+  def to_param
+    slug
+  end
+
+  private
+
+  def generate_slug
+    generate_random_slug
+  end
+end

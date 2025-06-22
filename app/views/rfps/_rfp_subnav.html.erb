@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: rfps_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_rfp_path(rfp),
+             link_text: t('scaffold.edit', resource: Rfp, default: 'Edit %{resource}'),
+             icon_name: "square-pen",
+             active: current_page?(edit_rfp_path(rfp)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: rfp_path(rfp),
+             link_text: t('scaffold.view', resource: Rfp, default: 'View %{resource}'),
+             icon_name: "arrow-right",
+             active: current_page?(rfp_path(rfp)) %>
+
+<% end %>
