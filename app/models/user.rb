@@ -1,14 +1,9 @@
 class User < ApplicationRecord
-
   validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-
-
-
   has_one_attached :avatar
-
   has_secure_password
   has_many :sessions, dependent: :destroy
-
+  has_many :rfps
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   def name
@@ -22,7 +17,6 @@ class User < ApplicationRecord
       email_address
     end
   end
-
 
   def initials
     if first_name?

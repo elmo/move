@@ -14,7 +14,7 @@ class RfpsController < ApplicationController
   end
 
   def create
-    @rfp = Rfp.new(rfp_params)
+    @rfp = current_users.rfps.new(rfp_params)
     if @rfp.save
       redirect_to edit_rfp_path(@rfp.slug), notice: "rfp was successfully created."
     else
@@ -26,6 +26,7 @@ class RfpsController < ApplicationController
   end
 
   def edit
+    @rfp.current_step = 2
   end
 
   def update
@@ -53,6 +54,6 @@ class RfpsController < ApplicationController
   end
 
   def rfp_params
-    params.require(:rfp).permit(:move_date, :type, :move_type, :load_address, :unload_address, :number_of_movers_requested, :estimated_time_in_hours, :loading_stairs, :loading_floor, :loading_stairs_details, :unloading_stairs, :unloading_floor, :specialty_items_details, :need_assistance_with_moving_supplies, :donation_junk_removal, :slug, :specialty_items, :loading_elevator, :unloading_elevator, :earliest_move_date, :move_finish_date)
+    params.require(:rfp).permit(:move_date, :type, :move_type, :load_address, :unload_address, :number_of_movers_requested, :estimated_time_in_hours, :loading_stairs, :loading_floor, :loading_stairs_details, :unloading_stairs, :unloading_stairs_details, :unloading_floor, :specialty_items_details, :need_assistance_with_moving_supplies, :donation_junk_removal, :slug, :has_specialty_items, :loading_elevator, :unloading_elevator, :earliest_move_date, :move_finish_date, :current_step, specialty_item_ids: [])
   end
 end

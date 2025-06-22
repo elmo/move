@@ -1,6 +1,7 @@
 <%= form_with(model: @rfp,
                url: @rfp.new_record? ? rfps_path : rfp_path(@rfp),
                local: true) do |f| %>
+  <%= f.hidden_field :current_step %>
   <%= render 'shared/components/forms/errors', model: @rfp %>
 
   <div class="space-y-8">
@@ -41,8 +42,8 @@
                   form: f,
                   label: "What date is the earliest you can move?",
                   name: :earliest_move_date do %>
-        <%= f.date_field :earlies_move_date,
-                class: form_control_classes%>
+        <%= f.date_field :earliest_move_date,
+                class: form_control_classes %>
       <% end %>
 
       <%= render "shared/components/forms/field",
@@ -62,7 +63,6 @@
                 class: form_control_classes %>
       <% end %>
       
-      
       <%= render "shared/components/forms/field",
                   form: f,
                   label: "How many movers are you requesting?",
@@ -71,16 +71,18 @@
                     number_of_movers_options, prompt: "Choose",
                 class: form_control_classes %>
       <% end %>
-      
+
+      <% if false %>
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "Please estimate the amount of time you expect this to take",
+                  label: "Please estimate the amount of time you expect this to move take",
                   name: :estimated_time_in_hours do %>
-                  <%= f.select :estimated_time_in_hours, 
-                    number_of_hours_options, 
+
+                  <%= f.select :estimated_time_in_hours, number_of_hours_options, 
                     prompt: "Choose",
                     class: form_control_classes %>
       <% end %>
+    <% end %>
 
       <h3>Loading</h3>
       
@@ -104,7 +106,7 @@
       
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "What floor is the loading location on? (if applicable) ",
+                  label: "What floor is the loading location on? (if applicable)",
                   name: :loading_floor do %>
         <%= f.select :loading_floor, loading_floor_options, prompt: "Choose",
                 placeholder: "Loading_floor",
@@ -113,7 +115,7 @@
       
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "Please describe the stairs situation",
+                  label: "Please describe the stairs situation at the loading location",
                   name: :loading_stairs_details do %>
         <%= f.text_area :loading_stairs_details,
                 class: form_control_classes %>
@@ -132,8 +134,8 @@
       <%= render "shared/components/forms/field",
                   form: f,
                   label: "Is there an elevator at the unloading location?",
-                  name: :loading_elevator do %>
-                  <%= f.select :loading_elevator, yes_or_no_options, 
+                  name: :unloading_elevator do %>
+                  <%= f.select :unloading_elevator, yes_or_no_options, 
                     prompt: "Choose",
                    class: form_control_classes %>
       <% end %>
@@ -147,31 +149,67 @@
                 class: form_control_classes %>
       <% end %>
 
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Please describe the stairs situation at the unloading location",
+                  name: :unloading_stairs_details do %>
+        <%= f.text_area :unloading_stairs_details,
+                class: form_control_classes %>
+      <% end %>
+
       <h3>Other assistance</h3>
       
       <%= render "shared/components/forms/field",
                   form: f,
                   label: "Do you any heavy or speciality items? ",
+                  name: :has_specialty_items do %>
+        <%= f.select :specialty_items, yes_or_no_options, prompt: "Choose", class: form_control_classes %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Please select all that apply? ",
+                  name: :specialty_items_list do %>
+                  <%= collection_check_boxes(:rfp, 
+                                             :specialty_item_ids, 
+                                             SpecialtyItem.all, 
+                                             :id, 
+                                             :name) do |b|  -%>
+
+                                             <p>
+                                               <%= b.check_box -%>
+                                               <%= b.label -%>
+                                             </p>
+
+                                           <% end %>
+      <% end %>
+
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Please describe any heavy or speciality items?",
                   name: :specialty_items_details do %>
-        <%= f.select :specialty_items, yes_or_no_options, prompt: "Choose",
-                class: form_control_classes %>
+        <%= f.text_area :specialty_items_details, class: form_control_classes %>
+
       <% end %>
       
       <%= render "shared/components/forms/field",
                   form: f,
                   label: "Do you need assistance with moving supplies?",
                   name: :need_assistance_with_moving_supplies do %>
-                  <%= f.select :need_assistance_with_moving_supplies, yes_or_no_options, prompt: 'Choose', class: form_control_classes%>
+                  <%= f.select :need_assistance_with_moving_supplies, yes_or_no_options, 
+                    prompt: 'Choose', class: form_control_classes%>
       <% end %>
       
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "Are you interesetd in donation or junk removal?",
+                  label: "Are you interested in donation or junk removal?",
                   name: :donation_junk_removal do %>
         <%= f.select :donation_junk_removal, yes_or_no_options ,class: form_control_classes %>
       <% end %>
       
     <% end %> <!-- new record -->
+
     
     <div>
       <%= f.submit "Save", class: "btn btn-primary" %>

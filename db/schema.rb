@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_22_162244) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_22_194253) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -68,11 +68,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_22_162244) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "specialty_items"
-    t.string "loading_elevator"
-    t.string "un_loading_elevator"
     t.date "earliest_move_date"
     t.date "move_finish_date"
+    t.string "has_specialty_items"
+    t.string "loading_elevator"
+    t.string "unloading_elevator"
+    t.text "unloading_stairs_details"
+    t.integer "user_id"
+  end
+
+  create_table "rfps_specialty_items", id: false, force: :cascade do |t|
+    t.integer "rfp_id", null: false
+    t.integer "specialty_item_id", null: false
+    t.index ["rfp_id", "specialty_item_id"], name: "index_rfps_specialty_items_on_rfp_id_and_specialty_item_id"
+    t.index ["specialty_item_id", "rfp_id"], name: "index_rfps_specialty_items_on_specialty_item_id_and_rfp_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -82,6 +91,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_22_162244) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
+  create_table "specialty_items", force: :cascade do |t|
+    t.integer "rfp_id"
+    t.string "name"
   end
 
   create_table "users", force: :cascade do |t|

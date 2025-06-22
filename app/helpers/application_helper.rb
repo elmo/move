@@ -32,6 +32,16 @@ module ApplicationHelper
       "6+ hours",
       "Not sure"
     ]
+
+   def specialty_items
+     [
+      'Safe',
+      'Piano',
+      'Pool Table',
+      'Large Appliances',
+      'Other'
+     ]
+   end
   end
 
   def loading_stairs_options
