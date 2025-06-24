@@ -22,5 +22,9 @@
 <% end %>
 
 <div class="space-y-12">
-  <%= render 'form', rfp: @rfp %>
+    <% if @rfp.is_a?(MovingRequest) %>
+     <%= render 'moving_form', rfp: @rfp %>
+    <% else %>
+     <%= render 'hauling_form', rfp: @rfp %>
+    <% end %>
 </div>

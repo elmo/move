@@ -1,0 +1,2 @@
+class HaulingRequest < Rfp
+end

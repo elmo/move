@@ -11,10 +11,11 @@ class RfpsController < ApplicationController
 
   def new
     @rfp = Rfp.new
+    @rfp.current_step = 0
   end
 
   def create
-    @rfp = current_users.rfps.new(rfp_params)
+    @rfp = current_user.rfps.new(rfp_params)
     if @rfp.save
       redirect_to edit_rfp_path(@rfp.slug), notice: "rfp was successfully created."
     else
@@ -26,7 +27,7 @@ class RfpsController < ApplicationController
   end
 
   def edit
-    @rfp.current_step = 2
+    @rfp.current_step = @rfp.type.present? ? 3 : 2 
   end
 
   def update

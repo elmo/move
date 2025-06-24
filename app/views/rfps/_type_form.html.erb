@@ -1,0 +1,18 @@
+<%= form_with(model: @rfp,
+               url: @rfp.new_record? ? rfps_path : rfp_path(@rfp),
+               local: true) do |f| %>
+  <%= f.hidden_field :current_step %>
+  <%= render 'shared/components/forms/errors', model: @rfp %>
+
+  <div class="space-y-8">
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Do you need help moving or hauling/junk removal?",
+                  name: :type do %>
+        <%= f.select :type, [['I need help moving', 'MovingRequest'], ['I need help hauling', 'HaulingRequest']] ,class: form_control_classes %>
+      <% end %>
+    <div>
+      <%= f.submit "Go", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

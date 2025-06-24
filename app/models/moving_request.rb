@@ -1,0 +1,2 @@
+class MovingRequest < Rfp
+end

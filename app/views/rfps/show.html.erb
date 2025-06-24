@@ -24,7 +24,209 @@
               title: @rfp.load_address %>
 
   <div>
-    <%= t('scaffold.show_body', resource: 'rfp', field: 'load_address', default: 'This is the show view for the rfp, load_address.') %>
+<div class="grid grid-cols-2 gap-4">
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+      Where are you moving from?
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.load_address %>
+     </p> 
   </div>
 
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+      Where are you moving to?  
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.unload_address %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+      When do you have to move?  
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.move_date.strftime('%B %d, %Y') %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+      What is the earliest date that you can move?
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.earliest_move_date.strftime('%B %d, %Y') %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+     What date must your move be completed by? 
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.move_finish_date.strftime('%B %d, %Y') %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+     What type of move are you making? 
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.move_type  %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+    How many movers are you requesting? 
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.number_of_movers_requested %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+    Please estimate the amount of time you expect this to move take.
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.estimated_time_in_hours %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+      Are there stairs at the loading location?
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.loading_stairs %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+      Is there an elevator at the loading location? 
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.loading_elevator %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+      What floor is the loading location on? (if applicable)  
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.loading_floor %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+      Please describe the stairs situation at the loading location
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.loading_stairs_details %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+     Do you any heavy or speciality items?  
+    </p>
+    
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.has_specialty_items %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+     Do you any heavy or speciality items? 
+   </p>
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.specialty_items.collect(&:name).join(',')%>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+     Please describe any heavy or speciality items. 
+   </p>
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.specialty_items_details  %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+     Do you need assistance with moving supplies? 
+   </p>
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.need_assistance_with_moving_supplies %>
+     </p> 
+  </div>
+
+  <div class="bg-blue-200 p-4 rounded">
+    <p>
+     Are you interested in donation or junk removal? 
+   </p>
+  </div>
+  <div class="bg-green-200 p-4 rounded">
+     <p> 
+       <%= @rfp.donation_junk_removal %>
+     </p> 
+  </div>
+
+
+  </div>
 </div>

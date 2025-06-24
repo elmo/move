@@ -10,7 +10,7 @@
     <%= render "shared/components/breadcrumbs/divider" %>
 
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: t('scaffold.new_title', resource: @resource_name, default: 'New %{resource}') %>
+               text: "Need Help" %>
   <% end %>
 <% end %>
 
@@ -18,7 +18,14 @@
 
 <div class="space-y-12">
   <%= render "shared/components/page_header",
-              title: t('scaffold.new_title', resource: @resource_name, default: 'New %{resource}') %>
-
-  <%= render 'form', rfp: @rfp %>
+              title: "What do you need help with?"  %>
+  <% if @rfp.type.present? %>
+    <% if @rfp.is_a?(MovingRequest) %>
+     <%= render 'moving_form', rfp: @rfp %>
+    <% else %>
+     <%= render 'hauling_form', rfp: @rfp %>
+    <% end %>
+  <% else %>
+  <%= render 'type_form', rfp: @rfp %>
+  <% end %>
 </div>
