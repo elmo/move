@@ -11,6 +11,14 @@ module ApplicationHelper
     Current.user
   end
 
+  def bid_statuses
+    [
+     "New",
+     "Pending",
+     "Accepted"
+    ]
+  end
+
   def move_type_options
     [
       "Load & Unload",
@@ -68,5 +76,13 @@ module ApplicationHelper
 
   def yes_or_no_options
     [ "Yes", "No" ]
+  end
+
+  def icon_for_job_type(type:)
+    {
+      'CourierRequest' => 'car',
+      'HaulingRequest' => 'truck',
+      'MovingRequest' => 'box'
+    }[type.to_s]
   end
 end

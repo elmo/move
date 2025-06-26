@@ -1,11 +1,11 @@
-<%= form_with(model: @rfp,
+<%= form_with(model: @rfp.becomes(Rfp),
                url: @rfp.new_record? ? rfps_path : rfp_path(@rfp),
                local: true) do |f| %>
   <%= f.hidden_field :current_step %>
   <%= render 'shared/components/forms/errors', model: @rfp %>
 
   <div class="space-y-8">
-    <h3>Where?</h3>
+    <%= render "shared/components/page_header", title: "Where" -%>
     <%= render "shared/components/forms/field",
                  form: f,
                  label: "Where are you moving from?",
@@ -27,7 +27,7 @@
                 class: form_control_classes %>
       <% end %>
       
-    <h3>When?</h3>
+    <%= render "shared/components/page_header", title: "When" -%>
 
       <%= render "shared/components/forms/field",
                   form: f,
@@ -84,8 +84,8 @@
       <% end %>
     <% end %>
 
-      <h3>Loading</h3>
-      
+      <%= render "shared/components/page_header", title: "Loading" -%>
+
       <%= render "shared/components/forms/field",
                   form: f,
                   label: "Are there stairs at the loading location?",
@@ -121,7 +121,7 @@
                 class: form_control_classes %>
       <% end %>
 
-      <h3>Unloading</h3>
+      <%= render "shared/components/page_header", title: "Unloading" -%>
       
       <%= render "shared/components/forms/field",
                   form: f,
@@ -157,7 +157,7 @@
                 class: form_control_classes %>
       <% end %>
 
-      <h3>Other assistance</h3>
+      <%= render "shared/components/page_header", title: "Other assistance" -%>
       
       <%= render "shared/components/forms/field",
                   form: f,

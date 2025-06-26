@@ -1,0 +1,24 @@
+<div class="space-y-8">
+   <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-6">
+   <% if !current_user.customer? %>
+          <%= render "shared/components/callout",
+            headline_text: "I need help with moving project",
+            link_path: customer_user_path,
+            button_icon: "rocket",
+            button_text: "Get Started" do %>
+    <p> We'll find you vetted providers of moving and hauling services. It's free!</p>
+  <% end %>
+<% end %>
+
+
+   <% if !current_user.provider? %>
+<%= render "shared/components/callout",
+            headline_text: "I provide moving/hauling services",
+            link_path: provider_user_path,
+            button_icon: "rocket",
+            button_text: "Apply now" do %>
+  <p>If you would like to be matched with customers, get started now!</p>
+<% end %>
+<% end %>
+ </div>
+</div>

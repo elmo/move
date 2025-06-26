@@ -1,9 +1,11 @@
 class User < ApplicationRecord
+  rolify
   validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_one_attached :avatar
   has_secure_password
   has_many :sessions, dependent: :destroy
   has_many :rfps
+  has_many :bids
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
   def name
@@ -26,6 +28,18 @@ class User < ApplicationRecord
     else
       email_address[0].to_s
     end
+  end
+
+  def provider?
+    has_role?("provider")
+  end
+
+  def customer?
+    has_role?("customer")
+  end
+
+  def first_and_last_name_present?
+    first_name.present? && last_name.present?
   end
 
 end

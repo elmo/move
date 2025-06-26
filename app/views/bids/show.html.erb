@@ -1,0 +1,27 @@
+<%= content_for(:title) do %>
+  <%= @bid.name %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Bids",
+               link: rfp_bids_path(@rfp) %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @bid.name %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %> 
+  <%= render "bids/bid_subnav", active: "edit_rfp_bid", bid: @bid %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header", title: @bid.name %>
+  <div>
+    <h3><%= link_to @rfp.long_name, rfp_path(@rfp) -%></h3>
+    <p>Bid created: <%= @bid.created_at.strftime('%B %d, %Y %I:%M %P' ) -%></p>
+    <p>Bid amount: <%= number_to_currency(@bid.amount) -%></p>
+  </div>
+</div>

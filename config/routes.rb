@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
 
-  # Rfps
-  resources :rfps, param: :slug
+  resources :rfps, param: :slug do
+    resources :bids, param: :slug do
+      put 'accept'
+      put 'reject'
+      put 'confirm'
+    end
+  end
+
+  resource :user do
+    get 'customer'
+    get 'provider'
+  end
 
   # Authentication
   get "signup", to: "registrations#new", as: :new_registration
@@ -17,8 +27,10 @@ Rails.application.routes.draw do
   patch "users/update_password", to: "users#update_password", as: :update_password
   get "users/remove_avatar", to: "users#remove_avatar", as: :remove_user_avatar
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  match '/my/requests', controller: 'rfps', action: 'index', via: %i[get]
+  get '/users/choose'
 
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

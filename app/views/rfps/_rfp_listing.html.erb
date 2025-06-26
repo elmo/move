@@ -1,8 +1,24 @@
 <%= render "shared/components/listings/listing",
            listing_link: rfp_path(rfp),
-           title: rfp.load_address,
-           description: t('scaffold.created_ago', time: time_ago_in_words(rfp.created_at), default: 'Created %{time} ago') do %>
-           <p> <%= rfp.type -%> </p>
-           <p> <%= rfp.user.email_address -%> </p>
+           title: rfp.long_name,
+           description: t('scaffold.created_ago', 
+                          time: time_ago_in_words(rfp.created_at), 
+                          default: 'Created %{time} ago') do %>
+           <p><%= icon(icon_for_job_type(type:rfp.type)) -%> <%= rfp.type_name -%></p>
+
+           <p><%= link_to pluralize(rfp.bids.count, 'bids'), rfp_bids_path(rfp) -%></p>
+
+           <% if current_user.provider? %>
+           <p>
+             <%= link_to new_rfp_bid_path(rfp) do  -%>
+                 <%= icon('dollar-sign') -%>
+              <% end %>
+           </p>
+           <% end %>
+
+           <% if false %>
+            <p><%= rfp.user.email_address -%></p>
+           <% end %>
+
   <%= render "rfp_settings", rfp: rfp %>
 <% end %>

@@ -1,0 +1,28 @@
+      <% if false %>
+        <%= render "shared/components/forms/field",
+                  image_upload_field: true,
+                  avatar_field: true,
+                  form: f,
+                  label: t('authentication.users.form.avatar_label', default: 'Avatar'),
+                  name: :avatar,
+                  avatar_resource: current_user,
+                  delete_image_path: remove_user_avatar_path do %>
+        <%= f.file_field :avatar,
+                         accept: 'image/*',
+                         data: {
+                           "components--image-upload-target": "input",
+                           action: "components--image-upload#updateImage components--image-upload#revealImagePreview"
+                         } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: t('authentication.users.form.timezone_label', default: 'Timezone'),
+                  name: :timezone,
+                  select_field: true do %>
+        <%= f.select :timezone,
+                     time_zone_options_for_select(current_user.timezone),
+                     {},
+                     { class: "form-control" } %>
+        <% end %>
+      <% end %>

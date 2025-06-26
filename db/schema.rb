@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_22_194253) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_25_182737) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -49,6 +49,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_22_194253) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "bids", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "rfp_id"
+    t.integer "amount"
+    t.string "name"
+    t.string "status"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rfps", force: :cascade do |t|
     t.date "move_date"
     t.string "type"
@@ -84,6 +95,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_22_194253) do
     t.index ["specialty_item_id", "rfp_id"], name: "index_rfps_specialty_items_on_specialty_item_id_and_rfp_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["name"], name: "index_roles_on_name"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -107,6 +129,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_22_194253) do
     t.string "last_name"
     t.string "timezone", default: "UTC"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+  end
+
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

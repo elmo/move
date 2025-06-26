@@ -4,9 +4,10 @@ class Rfp < ApplicationRecord
   has_and_belongs_to_many :specialty_items, dependent: :destroy
   accepts_nested_attributes_for :specialty_items
   attr_accessor :current_step
+  has_many :bids
 
   before_validation :generate_slug, on: :create
-  validates :load_address, presence: true, if: -> { current_step.to_i > 2 } 
+  validates :load_address, presence: true, if: -> { current_step.to_i > 2 }
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-_]+\z/, message: "only allows letters, numbers, hyphens, and underscores" }
   validates :move_date, presence: true, if: -> { current_step.to_i > 2 }
   validates :move_type, presence: true, if: -> { current_step.to_i > 2 }
@@ -28,6 +29,22 @@ class Rfp < ApplicationRecord
   validates :specialty_items_details, presence: true, if: -> { current_step.to_i > 2 }
   validates :need_assistance_with_moving_supplies, presence: true, if: -> { current_step.to_i > 2 }
   validates :donation_junk_removal, presence: true, if: -> { current_step.to_i > 2 }
+
+  def name
+    "rfp-#{id}-#{slug}"
+  end
+
+  def long_name
+    "#{load_address} - #{unload_address}"
+  end
+
+  def type_name
+    {
+      'MovingRequest' => 'moving job', 
+      'HaulingRequest' => 'hauling job', 
+      'CourierRequest' => 'courier job', 
+    }[self.class.to_s]
+  end
 
   def to_param
     slug

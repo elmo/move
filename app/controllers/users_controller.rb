@@ -37,6 +37,16 @@ class UsersController < ApplicationController
     redirect_to edit_user_profile_path, notice: t("authentication.users.avatar_removed", default: "Avatar removed successfully.")
   end
 
+  def customer
+    current_user.add_role("customer") unless current_user.has_role?("customer")
+    redirect_to rfps_path, notice: "get started"
+  end
+
+  def provider
+    current_user.add_role("provider") unless current_user.has_role?("provider")
+    redirect_to rfps_path, notice: "get started"
+  end
+
   private
 
   def user_profile_params
@@ -44,7 +54,8 @@ class UsersController < ApplicationController
                                  :avatar,
                                  :timezone,
                                  :first_name,
-                                 :last_name)
+                                 :last_name,
+                                 :roles)
   end
 
   def user_password_params

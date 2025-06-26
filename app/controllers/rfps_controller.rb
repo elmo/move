@@ -4,9 +4,17 @@ class RfpsController < ApplicationController
   before_action :set_rfp, only: [ "show", "edit", "update", "destroy" ]
 
   def index
-    @rfps = Rfp.all
+    redirect_to edit_user_path and return false if current_user.roles.empty?
+    if current_user.provider?
+      @rfps = Rfp.all
+    else
+      @rfps = current_user.rfps.all
+    end
 
     @pagy, @rfps = pagy(@rfps, items: 12)
+  end
+
+  def choose
   end
 
   def new
@@ -17,7 +25,7 @@ class RfpsController < ApplicationController
   def create
     @rfp = current_user.rfps.new(rfp_params)
     if @rfp.save
-      redirect_to edit_rfp_path(@rfp.slug), notice: "rfp was successfully created."
+      redirect_to edit_rfp_path(@rfp.slug), notice: "Request was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,12 +35,12 @@ class RfpsController < ApplicationController
   end
 
   def edit
-    @rfp.current_step = @rfp.type.present? ? 3 : 2 
+    @rfp.current_step = @rfp.type.present? ? 3 : 2
   end
 
   def update
     if @rfp.update(rfp_params)
-      redirect_to edit_rfp_path(@rfp.slug), notice: "rfp was successfully updated."
+      redirect_to edit_rfp_path(@rfp.slug), notice: "Request was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,12 +48,7 @@ class RfpsController < ApplicationController
 
   def destroy
     @rfp.destroy
-    redirect_to rfps_path, notice: "rfp was successfully destroyed."
-  end
-
-  def remove_image
-    @rfp.image.purge
-    redirect_to edit_rfp_path(rfp_slug: @rfp.slug), notice: "Image removed successfully."
+    redirect_to rfps_path, notice: "Request was successfully destroyed."
   end
 
   private

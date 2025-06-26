@@ -1,0 +1,23 @@
+<%= form_with(model: @bid,
+               url: @bid.new_record? ? rfp_bids_path(@rfp) : rfp_bid_path(@rfp,@bid),
+               local: true) do |f| %>
+  <%= render 'shared/components/forms/errors', model: @bid %>
+
+  <div class="space-y-8">
+      <%= f.hidden_field :name -%>
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Amount",
+                  name: :amount do %>
+
+        <%= f.number_field :amount,
+                placeholder: "Amount",
+                class: form_control_classes %>
+      <% end %>
+    
+    <div>
+      <%= f.submit 'Submit your bid', class: "btn btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

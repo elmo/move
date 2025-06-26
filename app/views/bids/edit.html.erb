@@ -1,0 +1,26 @@
+<%= content_for(:title) do %>
+  Edit <%= @bid.name %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Bids",
+               link: rfp_bids_path(@rfp) %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               link: rfp_bid_path(@rfp,@bid),
+               text: @bid.name %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: 'Modify' %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "bids/bid_subnav", active: "edit_bid", bid: @bid %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header", title: 'Modify bid' %>
+  <%= render 'form', bid: @bid %>
+</div>

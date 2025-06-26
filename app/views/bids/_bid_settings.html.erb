@@ -1,21 +1,30 @@
 <%= render "shared/components/dropdown/dropdown",
            menu_position: "left-auto right-8 -top-4" do %>
+
   <%= render "shared/components/dropdown/dropdown_link",
-             link_text: 'View request',
-             link_path: rfp_path(rfp),
+             link_text: 'View bid', 
+             link_path: rfp_bid_path(@rfp,bid),
              icon_name: "arrow-right" %>
+
+
+  <% if current_user.provider? and bid.user.id == current_user.id %>
+
   <%= render "shared/components/dropdown/dropdown_link",
-               link_text: 'Edit request',
-               link_path: edit_rfp_path(rfp),
+               link_text: 'Modify bid',
+               link_path: edit_rfp_bid_path(@rfp,bid),
                icon_name: "square-pen" %>
+
+
   <%= render "shared/components/dropdown/dropdown_link",
-               link_text: 'Delete request', 
+               link_text: "Retract bid", 
                icon_name: "trash",
-               link_path: rfp_path(rfp),
+               link_path: rfp_bid_path(@rfp, bid),
                link_method: :delete,
                button_link: true,
                data: {
                    turbo_method: :delete,
-                   turbo_confirm: t('scaffold.really_delete', resource: rfp, default: 'Really delete %{resource}?')
+                   turbo_confirm: 'Do you really want to retract this bid?'
                } %>
+  <% end %>
+
 <% end %>

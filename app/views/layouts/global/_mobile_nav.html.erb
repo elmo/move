@@ -7,18 +7,13 @@
   </div>
 
   <div class="space-y-8 relative py-4 px-4">
-
     <div>
       <%= render "shared/components/logo",
-                  
-                  
-                  
-                  link_path: root_path,
-                  link_classes: "" %>
+          logo_text: 'Northwest Passage',
+          link_path: root_path,
+          link_classes: "" %>
     </div>
-
     <div class="px-2 space-y-12">
-
       <%= render "layouts/global/nav",
                   container_classes: "space-y-1 h-screen overflow-y-auto",
                   link_classes: "group/nav-link",
@@ -27,11 +22,7 @@
                   active_icon_container_classes: "text-gray-800 dark:text-gray-100",
                   inactive_label_classes: "text-primary dark:text-primary",
                   active_label_classes: "text-black dark:text-white" %>
-
       <%= render "layouts/global/mobile_nav_user_links" %>
-
     </div>
-
   </div>
-
 </div>

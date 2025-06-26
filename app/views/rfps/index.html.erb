@@ -1,37 +1,40 @@
 <%= content_for(:title) do %>
-  Rfps
+  My requests 
 <% end %>
 
 <%= content_for(:breadcrumbs) do %>
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: "Requests" %>
+               text: "My Requests" %>
   <% end %>
 <% end %>
 
 <div class="space-y-12">
 
   <% if @rfps.any? %>
-    <%= render "shared/components/page_header",
-                title: "Help Request",
-                button_link_path: new_rfp_path %>
+
+    <% if current_user.customer? %>
+      <%= render "shared/components/page_header", 
+         title: "help requests", 
+         button_link_path: new_rfp_path %>
+     <% else %>
+      <%= render "shared/components/page_header", 
+         title: "Browse opportunities", 
+         button_link_path: nil %>
+     <% end %>
 
     <div class="space-y-6">
-
       <%= render "shared/components/listings/listings" do %>
         <% @rfps.each do |rfp| %>
           <%= render "rfps/rfp_listing", rfp: rfp %>
         <% end %>
       <% end %>
-
       <% if @pagy.pages > 1 %>
         <div class="pagy-container">
           <%== pagy_nav(@pagy) %>
         </div>
       <% end %>
-
     </div>
-
   <% else %>
     <%= render "shared/components/listings/no_listings",
                 singular_object_name: "Help request",

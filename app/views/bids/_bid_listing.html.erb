@@ -1,0 +1,20 @@
+<%= render "shared/components/listings/listing",
+           listing_link: rfp_bid_path(@rfp, bid),
+           title: bid.name,
+           description: t('scaffold.created_ago', 
+                          time: time_ago_in_words(bid.created_at), 
+                          default: 'Created %{time} ago') do %>
+  <p><%= bid.status  -%>  </p>
+  <p><%=bid.user.first_name -%></p>
+  <p>Amount: <%= number_to_currency(bid.amount) -%>  </p>
+
+  <% if current_user.customer? && bid.new?  %>
+    <%= button_to 'Reject', rfp_bid_reject_path(@rfp, bid),  method: :put, class: 'btn btn-secondary' %>  
+    <%= button_to 'Accept', rfp_bid_accept_path(@rfp, bid), method: :put, class: 'btn btn-secondary' %>  
+  <% else %>
+    <% if current_user.provider? && bid.accepted? %>
+      <%= button_to 'Confirm', rfp_bid_confirm_path(@rfp, bid), method: :put, class: 'btn btn-secondary' %>  
+    <% end %>
+  <% end %>
+  <%= render "bid_settings", bid: bid %>
+<% end %>
