@@ -5,15 +5,12 @@
 <%= content_for(:breadcrumbs) do %>
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: "Requests",
+               text: "Job Requests",
                link: rfps_path %>
     <%= render "shared/components/breadcrumbs/divider" %>
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               link: rfp_path(@rfp),
-               text: @rfp.load_address %>
-    <%= render "shared/components/breadcrumbs/divider" %>
-    <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: @rfp.long_name %>
+               link: edit_rfp_path(@rfp),
+               text: 'Edit job request' %>
   <% end %>
 <% end %>
 
@@ -22,9 +19,13 @@
 <% end %>
 
 <div class="space-y-12">
+  <%= render "shared/components/page_header", title: "Edit job request" -%>
+  <%= render partial: 'publishing_status', locals: {rfp: @rfp} -%>
+  <% if @rfp.is_new? %> 
     <% if @rfp.is_a?(MovingRequest) %>
      <%= render 'moving_form', rfp: @rfp %>
     <% else %>
      <%= render 'hauling_form', rfp: @rfp %>
     <% end %>
+  <% end %>
 </div>

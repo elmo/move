@@ -11,6 +11,13 @@ module ApplicationHelper
     Current.user
   end
 
+  def customer_type_options
+    [
+      'Moving',
+      'Hauling / Junk removal'
+    ]
+  end
+
   def bid_statuses
     [
      "New",

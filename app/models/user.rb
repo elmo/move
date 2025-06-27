@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :rfps
   has_many :bids
+  has_many :customers
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   attr_accessor :current_step
 

@@ -1,14 +1,14 @@
 class RfpsController < ApplicationController
   include Pagy::Backend
 
-  before_action :set_rfp, only: [ "show", "edit", "update", "destroy" ]
+  before_action :set_rfp, only: [ "show", "edit", "update", "destroy" , "publish", "unpublish"]
 
   def index
     redirect_to edit_user_path and return false if current_user.roles.empty?
     if current_user.provider?
-      @rfps = Rfp.all
+      @rfps = Rfp.published
     else
-      @rfps = current_user.rfps.all
+      @rfps = current_user.rfps.published
     end
 
     @pagy, @rfps = pagy(@rfps, items: 12)
@@ -19,7 +19,12 @@ class RfpsController < ApplicationController
 
   def new
     @rfp = Rfp.new
-    @rfp.current_step = 0
+    if params[:type].present? and params[:type] == 'Moving'
+      @rfp = MovingRequest.new
+    else
+      @rfp = HaulingRequest.new
+    end
+    @rfp.current_step = 2
   end
 
   def create
@@ -35,7 +40,7 @@ class RfpsController < ApplicationController
   end
 
   def edit
-    @rfp.current_step = @rfp.type.present? ? 3 : 2
+    @rfp.current_step = 2
   end
 
   def update
@@ -44,6 +49,16 @@ class RfpsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+  
+  def publish
+    @rfp.publish!
+    redirect_to edit_rfp_path(@rfp), notice: "Your job request has been published"
+  end
+
+  def unpublish
+    @rfp.unpublish!
+    redirect_to edit_rfp_path(@rfp), notice: "Your job request has been published"
   end
 
   def destroy

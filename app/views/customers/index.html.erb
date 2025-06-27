@@ -1,0 +1,39 @@
+<%= content_for(:title) do %>
+  Customers
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Customers" %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+
+  <% if @customers.any? %>
+    <%= render "shared/components/page_header",
+                title: "Customers",
+                button_link_path: new_customer_path %>
+
+    <div class="space-y-6">
+
+      <%= render "shared/components/listings/listings" do %>
+        <% @customers.each do |customer| %>
+          <%= render "customers/customer_listing",
+                        customer: customer %>
+        <% end %>
+      <% end %>
+
+      
+
+    </div>
+
+  <% else %>
+    <%= render "shared/components/listings/no_listings",
+                singular_object_name: "customer",
+                plural_object_name: "customers",
+                new_path: new_customer_path %>
+  <% end %>
+
+</div>

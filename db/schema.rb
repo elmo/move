@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_27_132818) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_27_161434) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -60,6 +60,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_27_132818) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "customer_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rfps", force: :cascade do |t|
     t.date "move_date"
     t.string "type"
@@ -86,6 +93,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_27_132818) do
     t.string "unloading_elevator"
     t.text "unloading_stairs_details"
     t.integer "user_id"
+    t.integer "current_step", default: 0
+    t.string "status", default: "new"
+    t.index ["status"], name: "index_rfps_on_status"
   end
 
   create_table "rfps_specialty_items", id: false, force: :cascade do |t|

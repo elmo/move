@@ -3,7 +3,7 @@
    <% if !current_user.customer? %>
           <%= render "shared/components/callout",
             headline_text: "I need help with moving project",
-            link_path: customer_user_path,
+            link_path: new_customer_path(type: 'customer') ,
             button_icon: "rocket",
             button_text: "Get Started" do %>
     <p> We'll find you vetted providers of moving and hauling services. It's free!</p>
@@ -14,7 +14,7 @@
    <% if !current_user.provider? %>
 <%= render "shared/components/callout",
             headline_text: "I provide moving/hauling services",
-            link_path: provider_user_path,
+            link_path: new_customer_path(type: 'provider'), 
             button_icon: "rocket",
             button_text: "Apply now" do %>
   <p>If you would like to be matched with customers, get started now!</p>

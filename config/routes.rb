@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
 
+  # Customers
+  resources :customers
+
   resources :rfps, param: :slug do
+    member do
+      get 'publish'
+      get 'unpublish'
+      put 'complete'
+    end
     resources :bids, param: :slug do
       put 'accept'
       put 'reject'

@@ -1,0 +1,25 @@
+<% if rfp.is_new? && rfp.ready_to_publish? %>
+  <%= render "shared/components/callout",
+            headline_text: "Your job request is ready to publish",
+            link_container: true,
+            link_path: publish_rfp_path(rfp),
+            button_text: "Publish!",
+            button_icon: "arrow-right",
+            button_icon_position: "after",
+            icon_name: "truck" do %>
+            Once your request is published, our network of providers will see it and you will start receiving bids.  
+  <% end %>
+<% end %>
+
+<% if rfp.published? %>
+  <%= render "shared/components/callout",
+            headline_text: "Your job request is published!",
+            link_container: true,
+            link_path: unpublish_rfp_path(rfp),
+            button_text: "Un-publish",
+            button_icon: "arrow-right",
+            button_icon_position: "after",
+            icon_name: "truck" do %>
+            Your job request is published. If you would like hide it or edit it, you will need to unpublish it. 
+  <% end %>
+<% end %>

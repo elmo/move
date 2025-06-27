@@ -1,0 +1,30 @@
+<%= content_for(:title) do %>
+  <%= @customer.name %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Customers",
+               link: customers_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @customer.name %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "customers/customer_subnav",
+             active: "edit_customer",
+             customer: @customer %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: @customer.name %>
+
+  <div>
+    <%= t('scaffold.show_body', resource: 'customer', field: 'name', default: 'This is the show view for the customer, name.') %>
+  </div>
+
+</div>

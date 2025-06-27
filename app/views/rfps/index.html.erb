@@ -5,7 +5,7 @@
 <%= content_for(:breadcrumbs) do %>
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: "My Requests" %>
+               text: "My Job Requests" %>
   <% end %>
 <% end %>
 
@@ -15,7 +15,7 @@
 
     <% if current_user.customer? %>
       <%= render "shared/components/page_header", 
-         title: "help requests", 
+         title: "Job requests", 
          button_link_path: new_rfp_path %>
      <% else %>
       <%= render "shared/components/page_header", 

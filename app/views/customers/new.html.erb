@@ -1,0 +1,20 @@
+<%= content_for(:title) do %>
+  New Customer
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Customers",
+               link: customers_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: 'Get started' %>
+  <% end %>
+<% end %>
+
+<%= content_for(:page_max_width, 'max-w-2xl') %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header", title: 'Get started' %>
+  <%= render 'form', customer: @customer %>
+</div>

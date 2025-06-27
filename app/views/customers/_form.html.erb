@@ -1,0 +1,23 @@
+<%= form_with(model: @customer,
+               url: @customer.new_record? ? customers_path : customer_path(@customer),
+               local: true) do |f| %>
+  <%= render 'shared/components/forms/errors', model: @customer %>
+
+  <div class="space-y-8">
+    <%= render "shared/components/callout" do %>
+       Our process is simple. Tell us what you need done, and we'll match you with a vetted service provider.  
+     <% end %>
+
+    <%= render "shared/components/forms/field",
+                 form: f,
+                 label: "What type of job to you need to have done?",
+                 name: :customer_type do %>
+      <%= f.select :customer_type, customer_type_options,  class: form_control_classes, autofocus: true %>
+    <% end %>
+    
+    <div>
+      <%= f.submit "Let's go!",  class: "btn btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

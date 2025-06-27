@@ -1,0 +1,7 @@
+<%= render "shared/components/listings/listing",
+           listing_link: customer_path(customer),
+           title: customer.name,
+           description: t('scaffold.created_ago', time: time_ago_in_words(customer.created_at), default: 'Created %{time} ago') do %>
+  <%= render "customer_settings",
+             customer: customer %>
+<% end %>

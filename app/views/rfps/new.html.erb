@@ -5,27 +5,22 @@
 <%= content_for(:breadcrumbs) do %>
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: "Rfps",
+               text: "Job Requests",
                link: rfps_path %>
     <%= render "shared/components/breadcrumbs/divider" %>
 
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: "Need Help" %>
+               text: "Job details" %>
   <% end %>
 <% end %>
 
 <%= content_for(:page_max_width, 'max-w-2xl') %>
 
 <div class="space-y-12">
-  <%= render "shared/components/page_header",
-              title: "What do you need help with?"  %>
-  <% if @rfp.type.present? %>
+  <%= render "shared/components/page_header", title: "Job Details"  %>
     <% if @rfp.is_a?(MovingRequest) %>
      <%= render 'moving_form', rfp: @rfp %>
     <% else %>
      <%= render 'hauling_form', rfp: @rfp %>
     <% end %>
-  <% else %>
-  <%= render 'type_form', rfp: @rfp %>
-  <% end %>
 </div>

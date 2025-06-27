@@ -5,13 +5,13 @@
   <%= render 'shared/components/forms/errors', model: @rfp %>
 
   <div class="space-y-8">
-    <%= render "shared/components/page_header", title: "Where" -%>
+    <%= render "shared/components/page_sub_header", title: "Where" -%>
     <%= render "shared/components/forms/field",
                  form: f,
-                 label: "Where are you moving from?",
+                 label: "Where are you moving from? (City, Zip)",
                  name: :load_address do %>
       <%= f.text_field :load_address,
-                        placeholder: "City, Zip code",
+                        placeholder: "Example: San Francisco, 94121",
                         class: form_control_classes,
                         autofocus: true %>
     <% end %>
@@ -27,12 +27,17 @@
                 class: form_control_classes %>
       <% end %>
       
-    <%= render "shared/components/page_header", title: "When" -%>
+    <%= render "shared/components/page_sub_header", title: "When" -%>
 
       <%= render "shared/components/forms/field",
                   form: f,
                   label: "When do you have to move?",
                   name: :move_date do %>
+
+        <% if @rfp.errors[:move_date].any? %>
+          <div class="error"><%= @rfp.errors[:move_date].join(", ") %></div>
+         <% end %>
+
         <%= f.date_field :move_date,
                 placeholder: "City, Zip",
                 class: form_control_classes%>
@@ -84,7 +89,7 @@
       <% end %>
     <% end %>
 
-      <%= render "shared/components/page_header", title: "Loading" -%>
+      <%= render "shared/components/page_sub_header", title: "Loading" -%>
 
       <%= render "shared/components/forms/field",
                   form: f,
@@ -121,7 +126,7 @@
                 class: form_control_classes %>
       <% end %>
 
-      <%= render "shared/components/page_header", title: "Unloading" -%>
+      <%= render "shared/components/page_sub_header", title: "Unloading" -%>
       
       <%= render "shared/components/forms/field",
                   form: f,
@@ -157,7 +162,7 @@
                 class: form_control_classes %>
       <% end %>
 
-      <%= render "shared/components/page_header", title: "Other assistance" -%>
+      <%= render "shared/components/page_sub_header", title: "Other assistance" -%>
       
       <%= render "shared/components/forms/field",
                   form: f,
@@ -212,7 +217,7 @@
 
     
     <div>
-      <%= f.submit "Save", class: "btn btn-primary" %>
+      <%= f.submit "Continue", class: "btn btn-primary" %>
     </div>
 
   </div>

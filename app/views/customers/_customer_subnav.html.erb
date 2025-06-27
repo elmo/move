@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: customers_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_customer_path(customer),
+             link_text: t('scaffold.edit', resource: Customer, default: 'Edit %{resource}'),
+             icon_name: "square-pen",
+             active: current_page?(edit_customer_path(customer)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: customer_path(customer),
+             link_text: t('scaffold.view', resource: Customer, default: 'View %{resource}'),
+             icon_name: "arrow-right",
+             active: current_page?(customer_path(customer)) %>
+
+<% end %>
