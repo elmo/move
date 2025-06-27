@@ -34,6 +34,8 @@ gem 'instrumental-components'
 gem 'dotenv'
 gem 'rolify'
 
+gem 'phonelib'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 

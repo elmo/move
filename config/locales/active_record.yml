@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            terms_accepted:
+              inclusion: "You must accept the terms to proceed."
+            allow_text_messages:
+              inclusion: "You must allow text messages"

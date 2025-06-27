@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def edit
+    @user.current_step = 2
     @page_title = t("authentication.users.edit_profile_title", default: "Edit Profile")
   end
 
@@ -55,6 +56,10 @@ class UsersController < ApplicationController
                                  :timezone,
                                  :first_name,
                                  :last_name,
+                                 :phone,
+                                 :allow_text_messages,
+                                 :terms_accepted,
+                                 :current_step,
                                  :roles)
   end
 

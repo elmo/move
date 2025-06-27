@@ -7,6 +7,19 @@ class User < ApplicationRecord
   has_many :rfps
   has_many :bids
   normalizes :email_address, with: ->(e) { e.strip.downcase }
+  attr_accessor :current_step
+
+  validates :phone, phone: {
+    allow_blank: false, # Allows empty values
+    possible: true,  # Validates if the number is possible (less strict)
+    countries: [:us, :ca], # Restrict to US and Canada
+    types: [:mobile]  # Only allow mobile numbers
+  }, if: -> {current_step.to_i > 1}
+
+  validates :first_name, presence: true, if: -> { current_step.to_i > 1 }
+  validates :last_name, presence: true, if: -> { current_step.to_i > 1 }
+  validates :allow_text_messages, acceptance: true, if: -> { current_step.to_i > 1 }
+  validates :terms_accepted, acceptance: true, if: -> { current_step.to_i > 1 }
 
   def name
     if first_name? && last_name?

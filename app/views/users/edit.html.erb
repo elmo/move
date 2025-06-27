@@ -20,6 +20,7 @@
 <% end %>
 
   <%= form_for @user, url: update_user_profile_path, method: :patch do |f| %>
+    <%= f.hidden_field :current_step -%>
     <%= render 'shared/components/forms/errors', model: @user %>
 
     <div class="space-y-8">
@@ -55,6 +56,33 @@
         <% end %>
       </div>
 
+      <div class="space-y-8">
+        <%= render "shared/components/forms/field",
+                    form: f,
+                    label: "Phone", 
+                    name: :phone do  %>
+
+          <%= f.text_field :phone,
+                            placeholder: "your phone number",
+                            class: form_control_classes %>
+        <% end %>
+
+        <%= render "shared/components/forms/field",
+                    form: f,
+                    label: "Allow text messages", 
+                    name: :allow_text_messages do  %>
+          <%= f.checkbox :allow_text_messages %>
+        <% end %>
+      </div>
+
+      <div class="space-y-8">
+        <%= render "shared/components/forms/field",
+                    form: f,
+                    label: "I accept the Terms & Conditions", 
+                    name: :terms_accepted do  %>
+          <%= f.checkbox :terms_accepted %>
+        <% end %>
+      </div>
 
     <div class="mt-12">
       <%= f.submit t('authentication.users.form.update_button', default: 'Update'), class: "btn btn-primary" %>
@@ -64,5 +92,4 @@
     <% if @user.first_and_last_name_present? %>
       <%= render partial: "user_types" %>
     <% end %>
-
 
