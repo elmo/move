@@ -2,6 +2,7 @@
                url: @rfp.new_record? ? rfps_path : rfp_path(@rfp),
                local: true) do |f| %>
   <%= f.hidden_field :current_step %>
+  <%= f.hidden_field :type %>
   <%= render 'shared/components/forms/errors', model: @rfp %>
 
   <div class="space-y-8">

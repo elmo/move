@@ -16,7 +16,7 @@
     <% if current_user.customer? %>
       <%= render "shared/components/page_header", 
          title: "Job requests", 
-         button_link_path: new_rfp_path %>
+         button_link_path: new_customer_path %>
      <% else %>
       <%= render "shared/components/page_header", 
          title: "Browse opportunities", 
@@ -37,9 +37,9 @@
     </div>
   <% else %>
     <%= render "shared/components/listings/no_listings",
-                singular_object_name: "Help request",
-                plural_object_name: "Help request",
-                new_path: new_rfp_path %>
+                singular_object_name: "Job request",
+                plural_object_name: "Job request",
+                new_path: new_customer_path %>
   <% end %>
 
 </div>

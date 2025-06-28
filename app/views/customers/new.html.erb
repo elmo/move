@@ -13,8 +13,11 @@
 <% end %>
 
 <%= content_for(:page_max_width, 'max-w-2xl') %>
-
 <div class="space-y-12">
-  <%= render "shared/components/page_header", title: 'Get started' %>
+  <% if @customer.customer_type == 'provider'%>
+    <%= render "shared/components/page_header", title: 'Apply to be a provider' %>
+  <% else %>
+    <%= render "shared/components/page_header", title: 'Create a job request' %>
+  <% end %>
   <%= render 'form', customer: @customer %>
 </div>

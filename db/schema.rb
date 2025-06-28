@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_27_161434) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_28_142145) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -67,6 +67,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_27_161434) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "providers", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "name"
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "license_number"
+    t.boolean "accept_provider_terms"
+    t.text "description"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status", default: "new"
+    t.date "applied_at"
+    t.index ["status"], name: "index_providers_on_status"
+  end
+
   create_table "rfps", force: :cascade do |t|
     t.date "move_date"
     t.string "type"
@@ -95,6 +114,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_27_161434) do
     t.integer "user_id"
     t.integer "current_step", default: 0
     t.string "status", default: "new"
+    t.string "what_are_you_hauling"
+    t.text "hauling_notes"
+    t.integer "hauling_distance_in_miles"
     t.index ["status"], name: "index_rfps_on_status"
   end
 

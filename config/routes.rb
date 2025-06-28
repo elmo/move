@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
+  get "site/toc", as: :toc
+  get "site/provider_toc", as: :provider_toc
 
-  # Customers
+  resources :providers, param: :slug do
+    member do
+      get 'apply'
+    end
+  end
+
   resources :customers
 
   resources :rfps, param: :slug do

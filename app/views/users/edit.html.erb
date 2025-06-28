@@ -67,21 +67,25 @@
                             class: form_control_classes %>
         <% end %>
 
+        <%= render "shared/components/callout" do %>
         <%= render "shared/components/forms/field",
                     form: f,
                     label: "Allow text messages", 
                     name: :allow_text_messages do  %>
           <%= f.checkbox :allow_text_messages %>
         <% end %>
+        <% end %>
       </div>
 
       <div class="space-y-8">
+        <%= render "shared/components/callout" do %>
         <%= render "shared/components/forms/field",
                     form: f,
                     label: "I accept the Terms & Conditions", 
                     name: :terms_accepted do  %>
           <%= f.checkbox :terms_accepted %>
         <% end %>
+      <% end %>
       </div>
 
     <div class="mt-12">

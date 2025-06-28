@@ -1,0 +1,40 @@
+<%= content_for(:title) do %>
+  <%= @provider.name %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Providers",
+               link: providers_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @provider.name %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "providers/provider_subnav",
+             active: "edit_provider",
+             provider: @provider %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: @provider.name %>
+
+  <div>
+    <%= render "shared/components/data_list/data_list", border_top_and_bottom: true do %>
+    <%= render "shared/components/data_list/data_list_item", label: "Name", value: @provider.name %>
+    <%= render "shared/components/data_list/data_list_item", label: "Address", value: @provider.address_1 %>
+    <%= render "shared/components/data_list/data_list_item", label: "Address line 2", value: @provider.address_2 if @provider.address_2.present?  %>
+    <%= render "shared/components/data_list/data_list_item", label: "City", value: @provider.city %>
+    <%= render "shared/components/data_list/data_list_item", label: "State", value: @provider.state %>
+    <%= render "shared/components/data_list/data_list_item", label: "Zip", value: @provider.zip %>
+    <%= render "shared/components/data_list/data_list_item", label: "License number", value: @provider.license_number %>
+    <%= render "shared/components/data_list/data_list_item", label: "Description", value: @provider.description %>
+  <% end %>
+
+  </div>
+
+</div>

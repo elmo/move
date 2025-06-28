@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: providers_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_provider_path(provider),
+             link_text: 'Edit business details',
+             icon_name: "square-pen",
+             active: current_page?(edit_provider_path(provider)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: provider_path(provider),
+             link_text: 'View my profile',
+             icon_name: "arrow-right",
+             active: current_page?(provider_path(provider)) %>
+
+<% end %>

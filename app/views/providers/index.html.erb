@@ -1,0 +1,39 @@
+<%= content_for(:title) do %>
+  Providers
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Providers" %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+
+  <% if @providers.any? %>
+    <%= render "shared/components/page_header",
+                title: "Providers",
+                button_link_path: new_provider_path %>
+
+    <div class="space-y-6">
+
+      <%= render "shared/components/listings/listings" do %>
+        <% @providers.each do |provider| %>
+          <%= render "providers/provider_listing",
+                        provider: provider %>
+        <% end %>
+      <% end %>
+
+      
+
+    </div>
+
+  <% else %>
+    <%= render "shared/components/listings/no_listings",
+                singular_object_name: "provider",
+                plural_object_name: "providers",
+                new_path: new_provider_path %>
+  <% end %>
+
+</div>

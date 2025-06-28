@@ -1,0 +1,25 @@
+<%= content_for(:title) do %>
+  New Provider
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Providers",
+               link: providers_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: t('scaffold.new_title', resource: @resource_name, default: 'New %{resource}') %>
+  <% end %>
+<% end %>
+
+<%= content_for(:page_max_width, 'max-w-2xl') %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: t('scaffold.new_title', resource: @resource_name, default: 'New %{resource}') %>
+
+  <%= render 'form',
+              provider: @provider %>
+</div>

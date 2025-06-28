@@ -1,0 +1,100 @@
+<%= form_with(model: @provider,
+               url: @provider.new_record? ? providers_path : provider_path(@provider),
+               local: true) do |f| %>
+  <%= render 'shared/components/forms/errors', model: @provider %>
+
+  <div class="space-y-8">
+
+    <%= render "shared/components/forms/field",
+                 form: f,
+                 label: "Business Name",
+                 name: :name do %>
+      <%= f.text_field :name,
+                        placeholder: "Your business name ...",
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+
+    
+    <% unless @provider.new_record? %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Address",
+                  name: :address_1 do %>
+        <%= f.text_field :address_1,
+                placeholder: "123 Main Street",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Address line 2 (optional)",
+                  name: :address_2 do %>
+        <%= f.text_field :address_2,
+                placeholder: "",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "City",
+                  name: :city do %>
+        <%= f.text_field :city,
+                placeholder: "City",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "State",
+                  name: :state do %>
+          <%= f.select :state, Carmen::Country.named('United States').subregions.map { |s| [s.name, s.code] }, { prompt: 'Select a state' }, { class: form_control_classes  } %>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Zip",
+                  name: :zip do %>
+        <%= f.text_field :zip,
+                placeholder: "Zip",
+                class: form_control_classes %>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "License_number",
+                  name: :license_number do %>
+        <%= f.text_field :license_number,
+                placeholder: "Your business license number",
+                class: form_control_classes %>
+      <% end %>
+
+      <%= render "shared/components/callout" do %>
+        <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "I have read and accept provider Terms & Conditions",
+                  name: :accept_provider_terms,
+                  wrap_label: true do %>
+        <%= f.check_box :accept_provider_terms%>
+        <% end %>
+        <%= link_to 'terms and conditions',  provider_toc_path, target: 'blank' -%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Description",
+                  name: :description do %>
+        <%= f.text_area :description,
+                placeholder: "Please enter a short description describing your business",
+                class: form_control_classes%>
+      <% end %>
+      
+    <% end %>
+    
+    <div>
+      <%= f.submit 'Save', class: "btn btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

@@ -18,6 +18,14 @@ module ApplicationHelper
     ]
   end
 
+  def provider_type_options 
+    [
+      'Moving',
+      'Hauling',
+      'Moving & Hauling'
+    ]
+  end
+
   def bid_statuses
     [
      "New",

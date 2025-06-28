@@ -1,0 +1,7 @@
+<%= render "shared/components/listings/listing",
+           listing_link: provider_path(provider),
+           title: provider.name,
+           description: t('scaffold.created_ago', time: time_ago_in_words(provider.created_at), default: 'Created %{time} ago') do %>
+  <%= render "provider_settings",
+             provider: provider %>
+<% end %>

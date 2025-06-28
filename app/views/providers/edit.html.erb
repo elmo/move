@@ -1,0 +1,40 @@
+<%= content_for(:title) do %>
+  Edit <%= @provider.name %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Providers",
+               link: providers_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               link: provider_path(@provider),
+               text: @provider.name %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: 'Business details' %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "providers/provider_subnav", active: "edit_provider", provider: @provider %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header", title: 'Business details' %>
+     <% if @provider.application_ready_to_submit? %>
+      <%= render "shared/components/callout",
+              headline_text: "Your application is ready to submit",
+              link_container: true,
+              link_path: apply_provider_path(@provider),
+              link_method: :put, 
+              button_text: "Submit application",
+              button_icon: "arrow-right",
+              button_icon_position: "after",
+              icon_name: "truck" do %>
+              Submit your application. Once we've approved your appliction, you can start accepting clients. 
+      <% end %>
+    <% end %>
+  <%= render 'form', provider: @provider %>
+</div>
