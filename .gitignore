@@ -38,3 +38,5 @@
 
 # Instrumental registration files
 .instrumental/
+
+/config/credentials/production.key
