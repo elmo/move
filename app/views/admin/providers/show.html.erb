@@ -1,0 +1,35 @@
+<%= content_for(:title) do %>
+  <%= t('admin.common.admin', default: 'Admin') %> | <%= @provider.name %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+                text: t('admin.common.admin', default: 'Admin'),
+                link: admin_dashboard_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+                text: t('admin.providers.title', default: 'Providers'),
+                link: admin_providers_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+                text: @provider.name %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+  <div class="space-y-6">
+    <%= render "shared/components/data_list/data_list",
+                border_top_and_bottom: true do %>
+    <%= render "shared/components/page_header", title: @provider.name %>
+
+    <p><%= render "shared/components/label", text: "Status: #{@provider.status}", icon_name: "tag" %></p>
+
+    <%= button_to 'Reject', reject_admin_provider_path, method: :put, class: 'btn btn-secondary float-right' %>
+    <%= button_to 'Approve', approve_admin_provider_path, method: :put, class: 'btn btn-primary' %>
+    <% @provider.questionnaire_fields.each do |field|%>
+      <%= render "shared/components/data_list/data_list_item", label: @provider.question_map[field], value: @provider.send(field) %>
+    <% end %>
+    <% end %>
+  </div>
+</div>

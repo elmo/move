@@ -45,6 +45,22 @@ class Provider < ApplicationRecord
     status == "pending review"
   end
 
+  def approve!
+    update(status: "approved")
+  end
+
+  def approved?
+    status == 'approved'
+  end
+
+  def reject!
+    update(status: "rejected")
+  end
+
+  def rejected?
+    status == 'rejected'
+  end
+
   def self.statuses
     [
       "new",

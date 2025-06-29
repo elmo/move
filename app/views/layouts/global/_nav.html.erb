@@ -8,30 +8,13 @@
 
   <%# Define the primary navigation links here %>
 
-  <% if current_user.provider? %>
-     <%= render nav_link_partial,
+  <%= render nav_link_partial,
             url: root_path,
             active: active_nav_link?(root_path),
-            label: "Opportunities",
-            icon: "house",
-            **nav_attrs %>
-   <% elsif current_user.customer?  %>
-     <%= render nav_link_partial,
-            url: root_path,
-            active: active_nav_link?(root_path),
-            label: "My Job requests",
-            icon: "house",
-            **nav_attrs %>
-  <% else %>
-     <%= render nav_link_partial,
-            url: edit_user_path,
-            active: active_nav_link?(root_path),
-            label: "Get started",
+            label: "Home",
             icon: "house",
             **nav_attrs %>
 
-  <% end %>
-  
   <%#= render nav_link_partial,
             url: "#",
             active: active_nav_link?("#"),

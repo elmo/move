@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+
+  # Admin > Users
+  get "admin/users", to: "admin/users#index", as: :admin_users
+  get "admin/users/:id", to: "admin/users#show", as: :admin_user
+
+  get "admin/providers", to: "admin/providers#index", as: :admin_providers
+  get "admin/providers/:id", to: "admin/providers#show", as: :admin_provider
+
+  put "admin/providers/:id/approve", to: "admin/providers#approve", as: :approve_admin_provider
+  put "admin/providers/:id/reject", to: "admin/providers#reject", as: :reject_admin_provider
+
+  post "admin/impersonate/:id", to: "admin/users#impersonate_user", as: :impersonate_user
+  delete "admin/impersonate/:id", to: "admin/users#stop_impersonating_user", as: :stop_impersonating_user
+
+  # Admin
+  get "admin", to: "admin/dashboard#dashboard", as: :admin_dashboard
   get "site/toc", as: :toc
   get "site/provider_toc", as: :provider_toc
 

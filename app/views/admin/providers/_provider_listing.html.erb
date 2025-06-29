@@ -1,0 +1,7 @@
+<%= render "shared/components/listings/listing",
+           listing_link: admin_provider_path(provider),
+           title: provider.name,
+           description: provider.name do %>
+           <p><%= provider.status -%></p>
+  <%= render "admin/providers/provider_settings", provider: provider %>
+<% end %>
