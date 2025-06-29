@@ -44,6 +44,21 @@ module ApplicationHelper
     ]
   end
 
+  def employee_type_options
+    [
+      "Employees",
+      "Independent contractors"
+    ]
+  end
+
+  def billing_style_options
+    [
+      "Hourly",
+      "Weight",
+      "Flat Fee"
+    ]
+  end
+
   def number_of_movers_options
     [ 2, 3, 4 ]
   end

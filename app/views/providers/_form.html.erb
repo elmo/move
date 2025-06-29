@@ -70,6 +70,216 @@
                 class: form_control_classes %>
       <% end %>
 
+      <% if false %>
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Description",
+                  name: :description do %>
+        <%= f.text_area :description,
+                placeholder: "Please enter a short description describing your business",
+                class: form_control_classes%>
+      <% end %>
+
+    <% end  %>
+
+       <%= render "shared/components/page_sub_header", title: "Business Legitimacy & Operations" -%>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:do_you_have_license],
+                  name: :do_you_have_license do %>
+          <%= f.select :do_you_have_license, yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:year_in_business],
+                  name: :years_in_business do %>
+        <%= f.text_field :years_in_business,
+                placeholder: "Number of years",
+                class: form_control_classes %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:year_in_business],
+                  name: :number_trucks_and_crew do %>
+        <%= f.text_field :number_trucks_and_crew,
+                placeholder: "Number of trucks and crew members",
+                class: form_control_classes %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:regions_served],
+                  name: :regions_served do %>
+        <%= f.text_field :regions_served,
+                placeholder: "States, regions",
+                class: form_control_classes %>
+      <% end %>
+
+       <%= render "shared/components/page_sub_header", title: "Insurance & Compliance" -%>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:general_liablity_insurance],
+                  name: :general_liablity_insurance do %>
+                  <%= f.select :general_liablity_insurance, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:cargo_insurance],
+                  name: :cargo_insurance do %>
+                  <%= f.select :cargo_insurance, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:commercial_vehichle_insurance],
+                  name: :commercial_vehichle_insurance do %>
+                  <%= f.select :commercial_vehichle_insurance, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:usdot_mc_numbers],
+                  name: :usdot_mc_numbers do %>
+                  <%= f.select :usdot_mc_numbers, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:services],
+                  name: :services do %>
+                  <%= f.select :services, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/page_sub_header", title: "Service & Quality" -%>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:services],
+                  name: :services do %>
+                  <%= f.select :services, 
+                    move_type_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:written_estimates],
+                  name: :written_estimates do %>
+                  <%= f.select :written_estimates, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:damage_claims],
+                  name: :damage_claims do %>
+        <%= f.text_field :damage_claims,
+                placeholder: "TODO",
+                class: form_control_classes %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:yelp_reviews],
+                  name: :yelp_reviews do %>
+        <%= f.text_field :yelp_reviews,
+                placeholder: "Link to your Yelp reviews",
+                class: form_control_classes %>
+
+      <% end %>
+
+
+     <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:google_reviews],
+                  name: :google_reviews  do %>
+        <%= f.text_field :google_reviews,
+                placeholder: "Link to your Google reviews",
+                class: form_control_classes %>
+     <% end %>
+
+     <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:bbb_profile],
+                  name: :bbb_profile do %>
+        <%= f.text_field :bbb_profile ,
+                placeholder: "Link to your BBB profile",
+                class: form_control_classes %>
+     <% end %>
+
+    <%= render "shared/components/page_sub_header", title: "Workforce" -%>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:employee_types],
+                  name: :employee_types do %>
+                  <%= f.select :employee_types, 
+                    employee_type_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:employee_background_checks],
+                  name: :employee_background_checks do %>
+                  <%= f.select :employee_background_checks, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:employee_uniforms],
+                  name: :employee_uniforms do %>
+                  <%= f.select :employee_uniforms, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+    <%= render "shared/components/page_sub_header", title: "Communication & Reliability" -%>
+
+     <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:typical_response_time],
+                  name: :typical_response_time do %>
+        <%= f.text_field :typical_response_time ,
+                placeholder: "Number of hours",
+                class: form_control_classes %>
+     <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:guarantee_arrival_windows],
+                  name: :guarantee_arrival_windows do %>
+                  <%= f.select :guarantee_arrival_windows, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:billing_style],
+                  name: :billing_style do %>
+                  <%= f.select :billing_style, 
+                    billing_style_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+    <%= render "shared/components/page_sub_header", title: "Agreement" -%>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:willing_to_sign_agreement],
+                  name: :willing_to_sign_agreement do %>
+                  <%= f.select :willing_to_sign_agreement, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+
+      <% end %>
+
       <%= render "shared/components/callout" do %>
         <%= render "shared/components/forms/field",
                   form: f,
@@ -80,16 +290,7 @@
         <% end %>
         <%= link_to 'terms and conditions',  provider_toc_path, target: 'blank' -%>
       <% end %>
-      
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Description",
-                  name: :description do %>
-        <%= f.text_area :description,
-                placeholder: "Please enter a short description describing your business",
-                class: form_control_classes%>
-      <% end %>
-      
+
     <% end %>
     
     <div>

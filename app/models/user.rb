@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :customers
   normalizes :email_address, with: ->(e) { e.strip.downcase }
   attr_accessor :current_step
+  has_one :provider
 
   validates :phone, phone: {
     allow_blank: false, # Allows empty values

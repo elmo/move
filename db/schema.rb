@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_28_142145) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_29_142124) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -83,6 +83,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_142145) do
     t.datetime "updated_at", null: false
     t.string "status", default: "new"
     t.date "applied_at"
+    t.string "do_you_have_license"
+    t.string "years_in_business"
+    t.string "number_trucks_and_crew"
+    t.string "regions_served"
+    t.string "general_liablity_insurance"
+    t.string "cargo_insurance"
+    t.string "commercial_vehichle_insurance"
+    t.string "usdot_mc_numbers"
+    t.string "services"
+    t.string "written_estimates"
+    t.string "damage_claims"
+    t.string "yelp_reviews"
+    t.string "google_reviews"
+    t.string "bbb_profile"
+    t.string "employee_types"
+    t.string "employee_background_checks"
+    t.string "employee_uniforms"
+    t.string "typical_response_time"
+    t.string "guarantee_arrival_windows"
+    t.string "billing_style"
+    t.string "willing_to_sign_agreement"
+    t.integer "current_step", default: 0
     t.index ["status"], name: "index_providers_on_status"
   end
 
