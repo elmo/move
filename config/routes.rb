@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  # Agreements
+  #
   # Admin > Users
   get "admin/users", to: "admin/users#index", as: :admin_users
   get "admin/users/:id", to: "admin/users#show", as: :admin_user
@@ -18,9 +21,10 @@ Rails.application.routes.draw do
   get "site/provider_toc", as: :provider_toc
 
   resources :providers, param: :slug do
-    member do
-      get "apply"
-    end
+     resources :agreements, param: :slug
+      member do
+        get "apply"
+      end
   end
 
   namespace :provider do

@@ -1,0 +1,43 @@
+<%= content_for(:title) do %>
+  Agreements
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Agreements" %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+
+  <% if @agreements.any? %>
+    <%= render "shared/components/page_header",
+                title: "Agreements",
+                button_link_path: new_agreement_path %>
+
+    <div class="space-y-6">
+
+      <%= render "shared/components/listings/listings" do %>
+        <% @agreements.each do |agreement| %>
+          <%= render "agreements/agreement_listing",
+                        agreement: agreement %>
+        <% end %>
+      <% end %>
+
+      <% if @pagy.pages > 1 %>
+        <div class="pagy-container">
+          <%== pagy_nav(@pagy) %>
+        </div>
+      <% end %>
+
+    </div>
+
+  <% else %>
+    <%= render "shared/components/listings/no_listings",
+                singular_object_name: "agreement",
+                plural_object_name: "agreements",
+                new_path: new_agreement_path %>
+  <% end %>
+
+</div>

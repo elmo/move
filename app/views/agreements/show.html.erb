@@ -1,0 +1,30 @@
+<%= content_for(:title) do %>
+  <%= @agreement.provider_company_name %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Agreements",
+               link: agreements_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @agreement.provider_company_name %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "agreements/agreement_subnav",
+             active: "edit_agreement",
+             agreement: @agreement %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: @agreement.provider_company_name %>
+
+  <div>
+    <%= t('scaffold.show_body', resource: 'agreement', field: 'provider_company_name', default: 'This is the show view for the agreement, provider_company_name.') %>
+  </div>
+
+</div>

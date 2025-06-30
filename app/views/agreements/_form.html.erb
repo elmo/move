@@ -1,0 +1,63 @@
+<%= form_with(model: @agreement,
+               url: @agreement.new_record? ? provider_agreements_path(@provider) : provider_agreement_path(@agreement),
+               local: true) do |f| %>
+  <%= render 'shared/components/forms/errors', model: @agreement %>
+
+  <div class="space-y-8">
+
+    <%= render "shared/components/forms/field",
+                 form: f,
+                 label: "Your company name",
+                 name: :provider_company_name do %>
+      <%= f.text_field :provider_company_name, placeholder: "company name",
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Company executive signature",
+                  name: :provider_company_signature do %>
+                  <%= f.text_field :provider_company_signature, 
+                    placeholder: "Type your full name", 
+                    class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Signed Date",
+                  name: :provider_company_signed_date do %>
+        <%= f.date_field :provider_company_signed_date, class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Your name",
+                  name: :provider_user_name do %>
+        <%= f.text_field :provider_user_name,
+                placeholder: "Type your full name",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Your signature",
+                  name: :provider_user_signature do %>
+        <%= f.text_field :provider_user_signature,
+                placeholder: "Type your full name",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Today's Date",
+                  name: :provider_user_signed_date do %>
+        <%= f.date_field :provider_user_signed_date, class: form_control_classes%>
+      <% end %>
+    
+    <div>
+      <%= f.submit 'Sign agreement',  class: "btn btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

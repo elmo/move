@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: agreements_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_agreement_path(agreement),
+             link_text: t('scaffold.edit', resource: Agreement, default: 'Edit %{resource}'),
+             icon_name: "square-pen",
+             active: current_page?(edit_agreement_path(agreement)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: agreement_path(agreement),
+             link_text: t('scaffold.view', resource: Agreement, default: 'View %{resource}'),
+             icon_name: "arrow-right",
+             active: current_page?(agreement_path(agreement)) %>
+
+<% end %>

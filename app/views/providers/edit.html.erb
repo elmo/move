@@ -24,7 +24,22 @@
 <div class="space-y-12">
   <%= render "shared/components/page_header", title: 'Business details' %>
      <% if @provider.application_ready_to_submit? %>
-      <%= render "shared/components/callout",
+
+       <% if @provider.agreement.blank? %>
+          <%= render "shared/components/callout",
+              headline_text: "Next step: Sign Provider Aggreement",
+              link_container: true,
+              link_path: new_provider_agreement_path(@provider),
+              link_method: :put, 
+              button_text: "Complete provider agreement",
+              button_icon: "arrow-right",
+              button_icon_position: "after",
+              icon_name: "pen" do %>
+              We need you to sign our provider agreement.
+          <% end %>
+
+       <% else %>
+          <%= render "shared/components/callout",
               headline_text: "Your application is ready to submit",
               link_container: true,
               link_path: apply_provider_path(@provider),
@@ -34,7 +49,8 @@
               button_icon_position: "after",
               icon_name: "truck" do %>
               Submit your application. Once we've approved your appliction, you can start accepting clients. 
-      <% end %>
+          <% end %>
+       <% end %>
     <% end %>
   <%= render 'form', provider: @provider %>
 </div>

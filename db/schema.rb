@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_30_152229) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_30_170214) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -47,6 +47,20 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_30_152229) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "agreements", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "provider_id"
+    t.string "provider_company_name"
+    t.string "provider_company_signature"
+    t.datetime "provider_company_signed_date"
+    t.string "provider_user_name"
+    t.string "provider_user_signature"
+    t.datetime "provider_user_signed_date"
+    t.string "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bids", force: :cascade do |t|

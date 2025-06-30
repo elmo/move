@@ -1,0 +1,21 @@
+<%= content_for(:title) do %>
+  New Agreement
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Provider Agreement",
+               link: nil %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: 'Sign' %> 
+  <% end %>
+<% end %>
+
+<%= content_for(:page_max_width, 'max-w-2xl') %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header", title: "Provider Agreement" -%>
+
+  <%= render 'form', agreement: @agreement %>
+</div>

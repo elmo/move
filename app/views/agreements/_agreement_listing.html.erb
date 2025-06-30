@@ -1,0 +1,7 @@
+<%= render "shared/components/listings/listing",
+           listing_link: agreement_path(agreement),
+           title: agreement.provider_company_name,
+           description: t('scaffold.created_ago', time: time_ago_in_words(agreement.created_at), default: 'Created %{time} ago') do %>
+  <%= render "agreement_settings",
+             agreement: agreement %>
+<% end %>

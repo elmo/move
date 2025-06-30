@@ -9,8 +9,8 @@ class Provider < ApplicationRecord
   validates :license_number, presence: true, if: -> { current_step.to_i > 0 }
   validates :accept_provider_terms, acceptance: true
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-_]+\z/, message: "only allows letters, numbers, hyphens, and underscores" }
-
   belongs_to :user
+  has_one :agreement
   has_many :bids
 
   before_validation :generate_slug, on: :create

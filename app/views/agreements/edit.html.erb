@@ -1,0 +1,33 @@
+<%= content_for(:title) do %>
+  Edit <%= @agreement.provider_company_name %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Agreements",
+               link: agreements_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               link: agreement_path(@agreement),
+               text: @agreement.provider_company_name %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: t('scaffold.edit', default: 'Edit') %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "agreements/agreement_subnav",
+             active: "edit_agreement",
+             agreement: @agreement %>
+<% end %>
+
+<div class="space-y-12">
+
+  <%= render "shared/components/page_header",
+              title: t('scaffold.edit_title', resource: @resource_name, default: 'Edit %{resource}') %>
+
+  <%= render 'form',
+              agreement: @agreement %>
+</div>

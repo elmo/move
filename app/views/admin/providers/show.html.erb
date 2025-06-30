@@ -29,5 +29,18 @@
       <%= render "shared/components/data_list/data_list_item", label: @provider.question_map[field], value: @provider.send(field) %>
     <% end %>
     <% end %>
+
+    <% if @provider.agreement.present? %>
+      <% @agreement = @provider.agreement  %>
+       <%= render "shared/components/page_header", title: 'Provider Agreement' %>
+      <%= render "shared/components/data_list/data_list", border_top_and_bottom: true do %>
+        <%= render "shared/components/data_list/data_list_item", label: "Company name" ,  value: @agreement.provider_company_name  %>
+        <%= render "shared/components/data_list/data_list_item", label: "Company signature" ,  value: @agreement.provider_company_signature %>
+        <%= render "shared/components/data_list/data_list_item", label: "Company signed date" ,  value: @agreement.provider_company_signed_date.strftime('%m-%d-%Y') -%>
+        <%= render "shared/components/data_list/data_list_item", label: "User name" ,  value: @agreement.provider_user_name %>
+        <%= render "shared/components/data_list/data_list_item", label: "User signature" ,  value: @agreement.provider_user_signature %>
+        <%= render "shared/components/data_list/data_list_item", label: "User signed date" ,  value: @agreement.provider_user_signed_date.strftime('%m-%d-%Y') -%>
+      <% end %>
+    <% end %>
   </div>
 </div>
