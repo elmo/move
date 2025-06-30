@@ -22,9 +22,7 @@
     <%= render "shared/components/data_list/data_list",
                 border_top_and_bottom: true do %>
     <%= render "shared/components/page_header", title: @provider.name %>
-
     <p><%= render "shared/components/label", text: "Status: #{@provider.status}", icon_name: "tag" %></p>
-
     <%= button_to 'Reject', reject_admin_provider_path, method: :put, class: 'btn btn-secondary float-right' %>
     <%= button_to 'Approve', approve_admin_provider_path, method: :put, class: 'btn btn-primary' %>
     <% @provider.questionnaire_fields.each do |field|%>

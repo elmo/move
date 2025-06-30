@@ -67,7 +67,8 @@
                             class: form_control_classes %>
         <% end %>
 
-        <%= render "shared/components/callout" do %>
+        <%= render "shared/components/callout", 
+          container_padding: "p-2 sm:p-3 lg:p-4 2xl:p-5" do %>
         <%= render "shared/components/forms/field",
                     form: f,
                     label: "Allow text messages", 

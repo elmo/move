@@ -18,18 +18,12 @@ class RfpsController < ApplicationController
   end
 
   def new
-    if params[:type].present? and params[:type] == 'Moving'
-      @rfp = MovingRequest.new
-      @rfp.current_step = 2
-    else
-      @rfp = HaulingRequest.new
-      @rfp.current_step = 2
-    end
+    @rfp = params[:type].constantize.new(current_step: 1)
   end
 
   def create
     @rfp = rfp_params[:type].constantize.new(rfp_params)
-    @rfp.user = current_user 
+    @rfp.user = current_user
     if @rfp.save
       redirect_to edit_rfp_path(@rfp.slug), notice: "Request was successfully created."
     else

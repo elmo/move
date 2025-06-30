@@ -3,23 +3,23 @@
 
   <% if current_user.customer? && current_user.id == rfp.user.id %>
     <%= render "shared/components/subnav/subnav_link",
-             link_path: edit_rfp_path(rfp),
-             link_text: 'Modify Request',
-             icon_name: "square-pen",
-             active: current_page?(edit_rfp_path(rfp)) %>
+    link_path: edit_rfp_path(rfp),
+    link_text: "Modify Request",
+    icon_name: "square-pen",
+    active: current_page?(edit_rfp_path(rfp)) %>
   <% end %>
 
   <%= render "shared/components/subnav/subnav_link",
-             link_path: rfp_path(rfp),
-             link_text: 'View',
-             icon_name: "arrow-right",
-             active: current_page?(rfp_path(rfp)) %>
+  link_path: rfp_path(rfp),
+  link_text: "View",
+  icon_name: "arrow-right",
+  active: current_page?(rfp_path(rfp)) %>
 
   <% if current_user.provider? %>
-  <%= render "shared/components/subnav/subnav_link",
-             link_path: new_rfp_bid_path(@rfp), 
-             link_text: 'Bid on this job',
-             icon_name: "arrow-right",
-             active: current_page?(rfp_path(rfp)) %>
+    <%= render "shared/components/subnav/subnav_link",
+    link_path: new_rfp_bid_path(@rfp),
+    link_text: "Bid on this job",
+    icon_name: "arrow-right",
+    active: current_page?(rfp_path(rfp)) %>
   <% end %>
 <% end %>

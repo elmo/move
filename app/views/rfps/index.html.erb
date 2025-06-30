@@ -1,11 +1,10 @@
 <%= content_for(:title) do %>
-  My requests 
+  My requests
 <% end %>
 
 <%= content_for(:breadcrumbs) do %>
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
-    <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: "My Job Requests" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: "My Job Requests" %>
   <% end %>
 <% end %>
 
@@ -14,14 +13,15 @@
   <% if @rfps.any? %>
 
     <% if current_user.customer? %>
-      <%= render "shared/components/page_header", 
-         title: "Job requests", 
-         button_link_path: new_customer_path %>
-     <% else %>
-      <%= render "shared/components/page_header", 
-         title: "Browse opportunities", 
-         button_link_path: nil %>
-     <% end %>
+      <%= render "shared/components/page_header",
+      title: "Job requests",
+      button_link_text: "Create a new job request",
+      button_link_path: new_customer_path(type: 'Customer') %>
+    <% else %>
+      <%= render "shared/components/page_header",
+      title: "Browse opportunities",
+      button_link_path: nil %>
+    <% end %>
 
     <div class="space-y-6">
       <%= render "shared/components/listings/listings" do %>
@@ -37,9 +37,9 @@
     </div>
   <% else %>
     <%= render "shared/components/listings/no_listings",
-                singular_object_name: "Job request",
-                plural_object_name: "Job request",
-                new_path: new_customer_path %>
+    singular_object_name: "Job request",
+    plural_object_name: "Job request",
+    new_path: new_customer_path %>
   <% end %>
 
 </div>

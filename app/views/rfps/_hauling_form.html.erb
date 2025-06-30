@@ -3,7 +3,7 @@
                local: true) do |f| %>
   <%= f.hidden_field :current_step %>
   <%= f.hidden_field :type %>
-  <%= render 'shared/components/forms/errors', model: @rfp %>
+  <%= render "shared/components/forms/errors", model: @rfp %>
 
   <div class="space-y-8">
     <%= render "shared/components/forms/field",
@@ -11,41 +11,39 @@
                  label: "Where are you moving from?",
                  name: :load_address do %>
       <%= f.text_field :load_address,
-                        placeholder: "City, Zip code",
-                        class: form_control_classes,
-                        autofocus: true %>
+                   placeholder: "City, Zip code",
+                   class: form_control_classes,
+                   autofocus: true %>
     <% end %>
-    
+
     <%= render "shared/components/forms/field",
                   form: f,
                   label: "When do you need it done?",
                   name: :move_date do %>
-        <%= f.date_field :move_date,
-                placeholder: "City, Zip",
-                class: form_control_classes%>
+      <%= f.date_field :move_date, placeholder: "City, Zip", class: form_control_classes %>
     <% end %>
 
     <%= render "shared/components/forms/field",
                   form: f,
                   label: "What are you hauling?",
                   name: :what_are_you_hauling do %>
-        <%= f.text_field :what_are_you_hauling,
-                placeholder: "Furniture, books",
-                class: form_control_classes %>
+      <%= f.text_field :what_are_you_hauling,
+                   placeholder: "Furniture, books",
+                   class: form_control_classes %>
     <% end %>
 
     <%= render "shared/components/forms/field",
                   form: f,
                   label: "Approximately how far in miles do these items need to be taken?",
                   name: :hauling_distance_in_miles do %>
-        <%= f.number_field :hauling_distance_in_miles, class: form_control_classes %>
+      <%= f.number_field :hauling_distance_in_miles, class: form_control_classes %>
     <% end %>
 
     <%= render "shared/components/forms/field",
                   form: f,
                   label: "Please add any special notes that the hauler would need to know.",
                   name: :hauling_notes do %>
-        <%= f.text_area :hauling_notes, class: form_control_classes %>
+      <%= f.text_area :hauling_notes, class: form_control_classes %>
     <% end %>
 
     <div>

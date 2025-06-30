@@ -13,7 +13,7 @@ class ProvidersController < ApplicationController
   end
 
   def create
-    @provider = current_user.provider.present? ? current_user.provider : Provider.new
+    @provider = current_user.provider.present? ? current_user.provider : Provider.new(provider_params)
     @provider.user = current_user
     if @provider.save
       redirect_to edit_provider_path(@provider.slug), notice: "provider was successfully created."

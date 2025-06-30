@@ -13,12 +13,12 @@ module ApplicationHelper
 
   def customer_type_options
     [
-      'Moving',
-      'Hauling / Junk removal'
+      ['Moving', 'MovingRequest'],
+      ['Hauling / Junk removal', 'HaulingRequest']
     ]
   end
 
-  def provider_type_options 
+  def provider_type_options
     [
       'Moving',
       'Hauling',
