@@ -40,12 +40,10 @@ class UsersController < ApplicationController
   end
 
   def customer
-    current_user.add_role("customer") unless current_user.has_role?("customer")
     redirect_to rfps_path, notice: "get started"
   end
 
   def provider
-    current_user.add_role("provider") unless current_user.has_role?("provider")
     redirect_to rfps_path, notice: "get started"
   end
 

@@ -25,8 +25,3 @@
     <p>Bid amount: <%= number_to_currency(@bid.amount) -%></p>
   </div>
 </div>
-
-<div class="m-4">
-  <%= render "shared/components/page_sub_header", title: 'Job Details' %>
-  <%= render partial: 'rfps/show', locals: {rfp: @rfp}  -%>
-</div>

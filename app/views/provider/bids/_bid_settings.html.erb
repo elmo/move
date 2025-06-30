@@ -1,0 +1,20 @@
+<%= render "shared/components/dropdown/dropdown", menu_position: "left-auto right-8 -top-4" do %>
+  <%= render "shared/components/dropdown/dropdown_link",
+             link_text: 'View bid', 
+             link_path: rfp_bid_path(bid.rfp,bid),
+             icon_name: "arrow-right" %>
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: 'Modify bid',
+               link_path: edit_rfp_bid_path(bid.rfp,bid),
+               icon_name: "square-pen" %>
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: "Retract bid", 
+               icon_name: "trash",
+               link_path: rfp_bid_path(bid.rfp, bid),
+               link_method: :delete,
+               button_link: true,
+               data: {
+                   turbo_method: :delete,
+                   turbo_confirm: 'Do you really want to retract this bid?'
+               } %>
+<% end %>

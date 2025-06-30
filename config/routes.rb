@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # Admin > Users
   get "admin/users", to: "admin/users#index", as: :admin_users
   get "admin/users/:id", to: "admin/users#show", as: :admin_user
@@ -20,34 +19,38 @@ Rails.application.routes.draw do
 
   resources :providers, param: :slug do
     member do
-      get 'apply'
+      get "apply"
     end
+  end
+
+  namespace :provider do
+     resources :bids, only: [ :index ]
   end
 
   resources :customers
 
   resources :rfps, param: :slug do
     member do
-      get 'publish'
-      get 'unpublish'
-      put 'complete'
+      get "publish"
+      get "unpublish"
+      put "complete"
     end
     resources :bids, param: :slug do
-      put 'accept'
-      put 'reject'
-      put 'confirm'
+      put "accept"
+      put "reject"
+      put "confirm"
     end
   end
 
   resource :user do
-    get 'customer'
-    get 'provider'
+    get "customer"
+    get "provider"
   end
 
   # Authentication
   get "signup", to: "registrations#new", as: :new_registration
   post "registration/create", to: "registrations#create", as: :registration
-  resource :session, except: %i(new)
+  resource :session, except: %i[new]
   get "login", to: "sessions#new", as: :new_session
   resources :passwords, param: :token
 
@@ -58,8 +61,8 @@ Rails.application.routes.draw do
   patch "users/update_password", to: "users#update_password", as: :update_password
   get "users/remove_avatar", to: "users#remove_avatar", as: :remove_user_avatar
 
-  match '/my/requests', controller: 'rfps', action: 'index', via: %i[get]
-  get '/users/choose'
+  match "/my/requests", controller: "rfps", action: "index", via: %i[get]
+  get "/users/choose"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

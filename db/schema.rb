@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_29_171206) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_30_152229) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -58,6 +58,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_29_171206) do
     t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "agree_to_platform_terms"
+    t.integer "provider_id"
+    t.text "notes"
+    t.index ["provider_id"], name: "index_bids_on_provider_id"
   end
 
   create_table "customers", force: :cascade do |t|

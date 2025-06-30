@@ -8,12 +8,39 @@
 
   <%# Define the primary navigation links here %>
 
+  <% if current_user.provider? %>
+
+  <%= render nav_link_partial,
+            url: root_path,
+            active: active_nav_link?(root_path),
+            label: "Jop Opportunities",
+            icon: "house",
+            **nav_attrs %>
+
+  <%= render nav_link_partial,
+            url: provider_bids_path,
+            active: active_nav_link?(root_path),
+            label: "My bids",
+            icon: "house",
+            **nav_attrs %>
+
+  <% elsif current_user.customer? %>
+
+  <%= render nav_link_partial,
+            url: root_path,
+            active: active_nav_link?(root_path),
+            label: "Job requests",
+            icon: "house",
+            **nav_attrs %>
+  <% else %>
+
   <%= render nav_link_partial,
             url: root_path,
             active: active_nav_link?(root_path),
             label: "Home",
             icon: "house",
             **nav_attrs %>
+  <% end %>
 
   <%#= render nav_link_partial,
             url: "#",

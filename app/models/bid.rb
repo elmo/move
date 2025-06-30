@@ -1,13 +1,13 @@
 class Bid < ApplicationRecord
   include SlugGenerator
   belongs_to :user
+  belongs_to :provider
   belongs_to :rfp
+  validates :agree_to_platform_terms, acceptance: true
   validates :name, presence: true
   validates :amount, presence: true
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-_]+\z/, message: "only allows letters, numbers, hyphens, and underscores" }
-
   before_validation :generate_slug, on: :create
-
   scope :is_new, -> { where(status: "new") }
   scope :pending, -> { where(status: "pending") }
   scope :accepted, -> { where(status: "accepted") }

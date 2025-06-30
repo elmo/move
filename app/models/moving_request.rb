@@ -42,4 +42,9 @@ class MovingRequest < Rfp
       :donation_junk_removal
     ]
   end
+
+  def long_name
+    "#{load_address} -> #{unload_address}"
+  end
+
 end

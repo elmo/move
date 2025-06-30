@@ -13,5 +13,10 @@ class HaulingRequest < Rfp
       :what_are_you_hauling
       ]
    end
+
+  def long_name
+    "#{load_address}"
+  end
+
 end
 

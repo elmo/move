@@ -4,22 +4,26 @@
            description: t('scaffold.created_ago', 
                           time: time_ago_in_words(rfp.created_at), 
                           default: 'Created %{time} ago') do %>
-  <p><%= render "shared/components/label", text: "#{rfp.status}", icon_name: "tag" %></p>
+  <% if current_user.customer? %>
+    <p><%= render "shared/components/label", text: "#{rfp.status}", icon_name: "tag" %></p>
+  <% end %>
+
   <p><%= render "shared/components/label",
     text: "#{rfp.type_name}",
     icon_name: icon_for_job_type(type: rfp.type) %></p>
   <p><%= link_to pluralize(rfp.bids.count, "bids"), rfp_bids_path(rfp) -%></p>
   <% if current_user.provider? %>
     <p>
-      <%= link_to new_rfp_bid_path(rfp) do -%>
-        <%= icon("dollar-sign") -%>
+      <% provider_bid = current_user.provider.bid_on(rfp) %>
+      <% if provider_bid.present? %>
+
+       <%= link_to rfp_bid_path(provider_bid.rfp, provider_bid) do -%>
+           <%= render "shared/components/label", text: "view your bid", icon_name: nil, bg_color: "bg-green-50 dark:bg-green-950"  -%>
+         <% end %>
+      <% else %>
+         <%= render "shared/components/label", text: "submit bid", icon_name: 'dollar-sign', bg_color: "bg-green-50 dark:bg-green-950"  -%>
       <% end %>
     </p>
   <% end %>
-
-  <% if false %>
-    <p><%= rfp.user.email_address -%></p>
-  <% end %>
-
   <%= render "rfp_settings", rfp: rfp %>
 <% end %>

@@ -16,6 +16,7 @@ class BidsController < ApplicationController
   def create
     @bid = @rfp.bids.new(bid_params)
     @bid.user = current_user
+    @bid.provider = current_user.provider
     @bid.status = "new"
     if @bid.save
       redirect_to rfps_path, notice: "Your bid has been saved."
@@ -75,6 +76,6 @@ class BidsController < ApplicationController
   end
 
   def bid_params
-    params.require(:bid).permit(:user_id, :rfp_id, :amount, :name, :status, :slug)
+    params.require(:bid).permit(:user_id, :rfp_id, :amount, :name, :status, :slug, :notes, :agree_to_platform_terms)
   end
 end

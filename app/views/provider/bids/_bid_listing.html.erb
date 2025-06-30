@@ -1,5 +1,5 @@
 <%= render "shared/components/listings/listing",
-           listing_link: rfp_bid_path(@rfp, bid),
+           listing_link:  rfp_bid_path(bid.rfp,bid),
            title: bid.name,
            description: t('scaffold.created_ago', 
                           time: time_ago_in_words(bid.created_at), 
@@ -11,19 +11,20 @@
      bg_color: "bg-green-50 dark:bg-green-950" -%>
 
    <%= link_to provider_path(bid.user.provider), target: '_blank'  do -%>
-     <%= bid.user.provider.name  -%>
+     <%= bid.user.provider.name -%>
    <% end %>
     <p><%= number_to_currency(bid.amount) -%></p>
+
     <%= link_to rfp_bid_path(bid.rfp,bid) do -%>
       <%= render "shared/components/label", text: 'view bid', icon_name: 'file' -%>
     <% end %>
 
   <% if current_user.customer? && bid.new?  %>
-    <%= button_to 'Reject', rfp_bid_reject_path(@rfp, bid),  method: :put, class: 'btn btn-secondary' %>  
-    <%= button_to 'Accept', rfp_bid_accept_path(@rfp, bid), method: :put, class: 'btn btn-secondary' %>  
+    <%= button_to 'Reject', rfp_bid_reject_path(bid.rfp, bid),  method: :put, class: 'btn btn-secondary' %>  
+    <%= button_to 'Accept', rfp_bid_accept_path(bid.rfp, bid), method: :put, class: 'btn btn-secondary' %>  
   <% else %>
     <% if current_user.provider? && bid.accepted? %>
-      <%= button_to 'Confirm', rfp_bid_confirm_path(@rfp, bid), method: :put, class: 'btn btn-secondary' %>  
+      <%= button_to 'Confirm', rfp_bid_confirm_path(bid.rfp, bid), method: :put, class: 'btn btn-secondary' %>  
     <% end %>
   <% end %>
   <% if current_user.provider? %>

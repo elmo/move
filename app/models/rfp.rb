@@ -55,10 +55,6 @@ class Rfp < ApplicationRecord
     "rfp-#{id}-#{slug}"
   end
 
-  def long_name
-    "#{load_address} - #{unload_address}"
-  end
-
   def type_name
     {
       "MovingRequest" => "moving job",

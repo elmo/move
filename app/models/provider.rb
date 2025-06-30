@@ -11,6 +11,7 @@ class Provider < ApplicationRecord
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-_]+\z/, message: "only allows letters, numbers, hyphens, and underscores" }
 
   belongs_to :user
+  has_many :bids
 
   before_validation :generate_slug, on: :create
 
@@ -37,6 +38,14 @@ class Provider < ApplicationRecord
     ]
   end
 
+  def has_bid_on?(rfp)
+    bids.exists?(provider_id: id)
+  end
+
+  def bid_on(rfp)
+    bids.where(provider_id: id).first
+  end
+
   def applied!
     update(status: "pending review", applied_at: Time.zone.now)
   end
@@ -47,6 +56,7 @@ class Provider < ApplicationRecord
 
   def approve!
     update(status: "approved")
+    user.add_role('provider')
   end
 
   def approved?
@@ -55,6 +65,7 @@ class Provider < ApplicationRecord
 
   def reject!
     update(status: "rejected")
+    user.remove_role('provider')
   end
 
   def rejected?
