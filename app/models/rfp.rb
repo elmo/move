@@ -24,7 +24,7 @@ class Rfp < ApplicationRecord
   end
 
   def publish!
-    update(status: "published")
+    update(status: "published") if user.roles.empty?
   end
 
   def published?
@@ -33,6 +33,7 @@ class Rfp < ApplicationRecord
 
   def unpublish!
     update(status: "new")
+    user.add_role(:customer)
   end
 
   def complete!

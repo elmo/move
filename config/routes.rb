@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get "admin", to: "admin/dashboard#dashboard", as: :admin_dashboard
   get "site/toc", as: :toc
   get "site/provider_toc", as: :provider_toc
+  get "start", to: "site#start", as: :start
 
   resources :providers, param: :slug do
      resources :agreements, param: :slug

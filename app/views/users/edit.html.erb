@@ -79,13 +79,15 @@
       </div>
 
       <div class="space-y-8">
-        <%= render "shared/components/callout" do %>
+        <%= render "shared/components/callout", 
+          container_padding: "p-2 sm:p-3 lg:p-4 2xl:p-5" do %>
         <%= render "shared/components/forms/field",
                     form: f,
                     label: "I accept the Terms & Conditions", 
                     name: :terms_accepted do  %>
           <%= f.checkbox :terms_accepted %>
         <% end %>
+        <%= link_to 'Terms and Conditions', toc_path, target: '_blank'  -%>
       <% end %>
       </div>
 
@@ -93,8 +95,3 @@
       <%= f.submit t('authentication.users.form.update_button', default: 'Update'), class: "btn btn-primary" %>
     </div>
   <% end %>
-
-    <% if @user.first_and_last_name_present? %>
-      <%= render partial: "user_types" %>
-    <% end %>
-

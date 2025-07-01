@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def edit
-    @user.phone ||= "+1" 
+    @user.phone ||= "+1"
     @user.current_step = 2
     @page_title = t("authentication.users.edit_profile_title", default: "Edit Profile")
   end
@@ -14,7 +14,11 @@ class UsersController < ApplicationController
 
   def update_profile
     if @user.update(user_profile_params)
-      redirect_to edit_user_profile_path, notice: t("authentication.users.profile_updated", default: "Profile updated successfully")
+      if @user.basic_information_present? && !@user.type_declared?
+        redirect_to start_path, notice: t("authentication.users.profile_updated", default: "Profile updated successfully")
+      else
+        redirect_to edit_user_profile_path, notice: t("authentication.users.profile_updated", default: "Profile updated successfully")
+      end
     else
       render :edit, status: :unprocessable_entity
     end

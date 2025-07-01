@@ -4,4 +4,8 @@ class SiteController < ApplicationController
 
   def provider_toc
   end
+
+  def dashboard
+  end
+
 end

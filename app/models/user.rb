@@ -14,9 +14,9 @@ class User < ApplicationRecord
   validates :phone, phone: {
     allow_blank: false, # Allows empty values
     possible: true,  # Validates if the number is possible (less strict)
-    countries: [:us, :ca], # Restrict to US and Canada
-    types: [:mobile]  # Only allow mobile numbers
-  }, if: -> {current_step.to_i > 1}
+    countries: [ :us, :ca ], # Restrict to US and Canada
+    types: [ :mobile ]  # Only allow mobile numbers
+  }, if: -> { current_step.to_i > 1 }
 
   validates :first_name, presence: true, if: -> { current_step.to_i > 1 }
   validates :last_name, presence: true, if: -> { current_step.to_i > 1 }
@@ -53,8 +53,19 @@ class User < ApplicationRecord
     has_role?("customer")
   end
 
+  def type_declared?
+    provider? || customer?
+  end
+
   def first_and_last_name_present?
     first_name.present? && last_name.present?
   end
 
+  def basic_information_present?
+    first_name.present? &&
+    last_name.present? &&
+    phone.present? &&
+    allow_text_messages.present? &&
+    terms_accepted.present?
+  end
 end

@@ -1,0 +1,28 @@
+<%= render "shared/components/page_header", title: "Get Started" -%>
+
+<div class="space-y-8 m-4 ">
+   <div class="grid grid-cols-2 gap-4">
+     <div>
+     <%= render "shared/components/callout",
+        headline_text: "I need help with moving project",
+        link_path: new_customer_path(type: 'Customer') ,
+        icon_name: 'house',
+        button_icon: "rocket",
+        button_text: "Get Started" do %>
+       <p> We'll find you vetted providers of moving and hauling services. It's free!</p>
+   <% end %>
+   </div>
+
+   <div>
+     <%= render "shared/components/callout",
+            headline_text: "I provide moving/hauling services",
+            link_path: new_customer_path(type: 'Provider'), 
+            icon_name: 'truck',
+            button_icon: "pen",
+            button_text: "Apply now" do %>
+     <p>If you would like to be matched with customers, get started now!</p>
+   <% end %>
+ </div>
+
+</div>
+
