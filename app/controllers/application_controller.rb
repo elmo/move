@@ -12,4 +12,20 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def authorize_account_admin_user
+    return unless @account.present?
+
+    unless current_user.account_admin?(@account)
+      redirect_to root_path, alert: t("teams.authorization.not_authorized", default: "You are not authorized to access this page.")
+    end
+  end
+
+  def authorize_account_user
+    return unless @account.present?
+
+    unless current_user.account_user?(@account)
+      redirect_to root_path, alert: t("teams.authorization.not_authorized", default: "You are not authorized to access this page.")
+    end
+  end
+
 end

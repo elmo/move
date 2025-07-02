@@ -1,4 +1,11 @@
 class User < ApplicationRecord
+  attr_accessor :invite
+
+  has_many :account_users, dependent: :destroy
+  has_many :accounts, through: :account_users
+  has_many :invitations, dependent: :nullify
+
+  after_create :create_account
   rolify
   validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_one_attached :avatar
@@ -68,4 +75,42 @@ class User < ApplicationRecord
     allow_text_messages.present? &&
     terms_accepted.present?
   end
+
+  def account_user(account)
+    account.account_users.find_by(user: self)
+  end
+
+  def account_user?(account)
+    account_user(account).present?
+  end
+
+  def account_role(account)
+    account_user(account)&.role
+  end
+
+  def account_owner?(account)
+    account.owner_id == self.id
+  end
+
+  def account_admin?(account)
+    account_role(account) == "admin"
+  end
+
+  def account_member?(account)
+    account_role(account) == "member"
+  end
+
+
+  private
+
+
+  def create_account
+    return if self.invite
+
+    account_name = self.email_address.split("@").first
+    account = Account.create(name: account_name, owner_id: self.id)
+    account_user = AccountUser.create(account: account, user: self, role: "admin")
+  end
+
+
 end
