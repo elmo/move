@@ -100,6 +100,9 @@ class User < ApplicationRecord
     account_role(account) == "member"
   end
 
+  def subscribed?
+    accounts.first.active_subscription?
+  end
 
   private
 

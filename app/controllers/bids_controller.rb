@@ -2,6 +2,7 @@ class BidsController < ApplicationController
   include Pagy::Backend
   before_action :set_rfp
   before_action :set_bid, only: [ "show", "edit", "update", "destroy", "accept", "reject" ]
+  before_action :subscription_required
 
   def index
     @bids = @rfp.bids.all
@@ -65,6 +66,12 @@ class BidsController < ApplicationController
   end
 
   private
+
+  def subscription_required
+    return true if !current_user.provider?
+    return true if current_user.subscribed? 
+    redirect_to plans_path, notice: "You need an active subscription to place a bid." and return false 
+  end
 
   def set_rfp
     @rfp = Rfp.find_by!(slug: params[:rfp_slug])
