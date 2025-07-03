@@ -6,7 +6,11 @@
             2xl:w-1/6">
   <div class="relative flex items-center justify-between space-x-2 mb-12
               lg:mb-16">
-     <%= render "shared/components/logo", link_path: '/login' , image: 'logo-dark-mode-wide.png', logo_format: 'full'  %>
+    <%= render "shared/components/logo", 
+      link_path: '/login' , 
+      image: 'logo-dark-mode-wide.png', 
+      height: '30px',
+      logo_format: 'full'  %>
   </div>
 
   <%= render "layouts/global/nav",

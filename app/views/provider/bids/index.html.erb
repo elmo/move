@@ -4,12 +4,14 @@
 
 <%= content_for(:breadcrumbs) do %>
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
-    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: "Bids" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: "My Bids" %>
   <% end %>
 <% end %>
 <div class="space-y-12">
   <% if @bids.any? %>
-    <%= render "shared/components/page_header", title: "Bids", button_link_path: root_path %>
+    <%= render "shared/components/page_header", 
+      title: "My Bids", 
+      button_link_path: nil %>
     <% end %>
     <div class="space-y-6">
       <%= render "shared/components/listings/listings" do %>

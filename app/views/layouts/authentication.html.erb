@@ -17,8 +17,12 @@
                 2xl:px-36">
           <div class="w-full text-center mb-6
                   lg:absolute lg:top-12 lg:text-left lg:mb-0">
-            <%= link_to "/", class: "" do %>
-              <%= render "shared/components/logo", link_path: '/login' , image: 'logo-dark-mode-wide.png', logo_format: 'full'  %>
+            <%= link_to "/"  do %>
+              <%= render "shared/components/logo", 
+                link_path: '/login' , 
+                height: '50',
+                image: 'logo-dark-mode-wide.png', 
+                logo_format: 'icon'  %>
             <% end %>
           </div>
           <div class="w-full max-w-sm mx-auto lg:w-96">

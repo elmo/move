@@ -4,7 +4,7 @@
 
 <%= content_for(:breadcrumbs) do %>
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
-    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: "My job #{current_user.provider? ? 'opportunities' : 'requests' }" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: "Job #{current_user.provider? ? 'opportunities' : 'requests' }" %>
   <% end %>
 <% end %>
 
@@ -19,7 +19,7 @@
       button_link_path: new_customer_path(type: 'Customer') %>
     <% else %>
       <%= render "shared/components/page_header",
-      title: "Browse opportunities",
+      title: "Job opportunities",
       button_link_path: nil %>
     <% end %>
 

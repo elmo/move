@@ -15,16 +15,13 @@
 
 
 <%= content_for(:side_col) do %>
-  <%= render "users/user_profile_subnav",
-             active: "edit_profile" %>
+  <%= render "users/user_profile_subnav", active: "edit_profile" %>
 <% end %>
 
   <%= form_for @user, url: update_user_profile_path, method: :patch do |f| %>
     <%= f.hidden_field :current_step -%>
     <%= render 'shared/components/forms/errors', model: @user %>
-
     <div class="space-y-8">
-
       <%= render "shared/components/forms/field",
                   form: f,
                   label: t('authentication.users.form.email_label', default: 'Email address'),

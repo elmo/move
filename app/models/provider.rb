@@ -39,11 +39,11 @@ class Provider < ApplicationRecord
   end
 
   def has_bid_on?(rfp)
-    bids.exists?(provider_id: id)
+    bids.exists?(provider_id: id, rfp_id: rfp.id)
   end
 
   def bid_on(rfp)
-    bids.where(provider_id: id).first
+    bids.where(provider_id: id, rfp_id: rfp.id).first
   end
 
   def applied!
