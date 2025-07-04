@@ -135,5 +135,11 @@ module ApplicationHelper
                          nil
     end
   end
+
+   def qr_code_for_current_page
+     url = request.original_url
+     qr = RQRCode::QRCode.new(url)
+     qr.as_png(size: 200, border_modules: 2).to_data_url
+   end
   
 end

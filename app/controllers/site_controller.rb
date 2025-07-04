@@ -1,4 +1,8 @@
 class SiteController < ApplicationController
+
+  def home
+  end
+
   def toc
   end
 

@@ -199,8 +199,6 @@ GEM
       net-imap
       net-pop
       net-smtp
-    mapbox-gl-rails (3.7.0)
-      railties (>= 3.2)
     marcel (1.0.4)
     matrix (0.4.3)
     mini_magick (5.2.0)
@@ -477,6 +475,7 @@ DEPENDENCIES
   debug
   dotenv
   geocoder
+  httparty
   image_processing (~> 1.2)
   importmap-rails
   instrumental-components
@@ -484,7 +483,6 @@ DEPENDENCIES
   jbuilder
   kamal
   lucide-rails
-  mapbox-gl-rails
   pagy
   phonelib
   positioning
