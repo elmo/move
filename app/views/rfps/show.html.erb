@@ -15,6 +15,7 @@
 
 <% content_for(:side_col) do %>
   <%= render "rfps/rfp_subnav", active: "edit_rfp", rfp: @rfp %>
+  <%= render partial: 'map_box_map', locals: { rfp: @rfp } -%>
 <% end %>
    <%= render "shared/components/page_header", title: "#{@rfp.long_name}" -%>
    <%= render partial: 'show', locals: { rfp: @rfp } -%>

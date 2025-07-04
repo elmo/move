@@ -1,5 +1,4 @@
 <%= render "shared/components/data_list/data_list", border_top_and_bottom: true do %>
-
   <%= render "shared/components/data_list/data_list_item",
   label: "Where are you moving from?",
   value: rfp.load_address %>
@@ -7,6 +6,10 @@
   <%= render "shared/components/data_list/data_list_item",
   label: "Where are you moving to?",
   value: rfp.unload_address %>
+
+  <%= render "shared/components/data_list/data_list_item",
+  label: "Total distance",
+  value: pluralize(rfp.move_distance, 'miles') %>
 
   <%= render "shared/components/data_list/data_list_item",
   label: "When would you like to move?",

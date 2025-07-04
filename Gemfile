@@ -37,6 +37,8 @@ gem 'rolify'
 gem 'phonelib'
 gem 'carmen'
 gem 'aws-sdk-sns'
+gem 'geocoder'
+gem 'rqrcode'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false

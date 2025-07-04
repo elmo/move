@@ -10,6 +10,9 @@ class MovingRequest < Rfp
   validates :move_finish_date, presence: true, if: -> { current_step.to_i > 1 }
   validates :specialty_items, presence: true, if: -> { current_step.to_i > 1 }
   validates :need_assistance_with_moving_supplies, presence: true, if: -> { current_step.to_i > 1 }
+  validates :load_address, length: { is: 5 }, if: -> { current_step.to_i > 0 }
+  validates :unload_address, length: { is: 5 }, if: -> { current_step.to_i > 1 }
+
 
   # validates :donation_junk_removal, presence: true, if: -> { current_step.to_i > 1 }
   # validates :loading_stairs, presence: true, if: -> { current_step.to_i > 1 }

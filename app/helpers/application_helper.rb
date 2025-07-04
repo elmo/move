@@ -15,16 +15,16 @@ module ApplicationHelper
 
   def customer_type_options
     [
-      ['Moving', 'MovingRequest'],
-      ['Hauling / Junk removal', 'HaulingRequest']
+      [ "Moving", "MovingRequest" ],
+      [ "Hauling / Junk removal", "HaulingRequest" ]
     ]
   end
 
   def provider_type_options
     [
-      'Moving',
-      'Hauling',
-      'Moving & Hauling'
+      "Moving",
+      "Hauling",
+      "Moving & Hauling"
     ]
   end
 
@@ -75,11 +75,11 @@ module ApplicationHelper
 
    def specialty_items
      [
-      'Safe',
-      'Piano',
-      'Pool Table',
-      'Large Appliances',
-      'Other'
+      "Safe",
+      "Piano",
+      "Pool Table",
+      "Large Appliances",
+      "Other"
      ]
    end
   end
@@ -112,9 +112,9 @@ module ApplicationHelper
 
   def icon_for_job_type(type:)
     {
-      'CourierRequest' => 'car',
-      'HaulingRequest' => 'truck',
-      'MovingRequest' => 'box'
+      "CourierRequest" => "car",
+      "HaulingRequest" => "truck",
+      "MovingRequest" => "box"
     }[type.to_s]
   end
 
@@ -135,5 +135,5 @@ module ApplicationHelper
                          nil
     end
   end
-
+  
 end

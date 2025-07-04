@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_04_140443) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_04_152238) do
   create_table "account_users", force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "user_id", null: false
@@ -339,6 +339,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_04_140443) do
     t.string "what_are_you_hauling"
     t.text "hauling_notes"
     t.integer "hauling_distance_in_miles"
+    t.float "latitude"
+    t.float "longitude"
+    t.float "unload_latitude"
+    t.float "unload_longitude"
+    t.integer "move_distance"
     t.index ["status"], name: "index_rfps_on_status"
   end
 
