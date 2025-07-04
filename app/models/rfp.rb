@@ -2,7 +2,13 @@ class Rfp < ApplicationRecord
   include SlugGenerator
   belongs_to :user
   has_and_belongs_to_many :specialty_items, dependent: :destroy
+  has_and_belongs_to_many :loading_stairs, dependent: :destroy
+  has_and_belongs_to_many :unloading_stairs, dependent: :destroy
+
   accepts_nested_attributes_for :specialty_items
+  accepts_nested_attributes_for :loading_stairs
+  accepts_nested_attributes_for :unloading_stairs
+
   has_many :bids
 
   scope :is_new, -> { where(status: "new") }

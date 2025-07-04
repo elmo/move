@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+#
+[ 'Stairs', 'Elevator' ].each do |name|
+  LoadingStair.find_or_create_by!(name: name)
+end
+
+[ 'Stairs', 'Elevator' ].each do |name|
+  UnloadingStair.find_or_create_by!(name: name)
+end

@@ -32,7 +32,7 @@
 
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "When do you have to move?",
+                  label: "When is the move date?",
                   name: :move_date do %>
         <%= f.date_field :move_date, placeholder: "City, Zip", class: form_control_classes %>
       <% end %>
@@ -53,7 +53,7 @@
 
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "What type of move are you making?",
+                  label: "What services do you require?",
                   name: :move_type do %>
         <%= f.select :move_type,
                  move_type_options,
@@ -64,7 +64,7 @@
 
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "How many movers are you requesting?",
+                  label: "How many movers do you need?",
                   name: :number_of_movers_requested do %>
         <%= f.select :number_of_movers_requested,
                  number_of_movers_options,
@@ -72,45 +72,31 @@
                  class: form_control_classes %>
       <% end %>
 
-      <% if false %>
-        <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Please estimate the amount of time you expect this to move take",
-                  name: :estimated_time_in_hours do %>
+      <h3>Loading location</h3>
 
-          <%= f.select :estimated_time_in_hours,
-                   number_of_hours_options,
-                   prompt: "Choose",
-                   class: form_control_classes %>
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Stairs / Elevator?",
+                  name: :specialty_items_list do %>
+        <%= collection_check_boxes(:rfp, 
+                                             :loading_stairs_ids, 
+                                             LoadingStair.all, 
+                                             :id, 
+                                             :name) do |b| -%>
+
+          <p>
+            <%= b.check_box -%>
+            <%= b.label -%>
+          </p>
+
         <% end %>
-      <% end %>
-
-      <h3>Loading</h3>
-
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Are there stairs at the loading location?",
-                  name: :loading_stairs do %>
-        <%= f.select :loading_stairs,
-                 loading_stairs_options,
-                 prompt: "Choose",
-                 class: form_control_classes %>
-      <% end %>
-
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Is there an elevator at the loading location?",
-                  name: :loading_elevator do %>
-        <%= f.select :loading_elevator,
-                 yes_or_no_options,
-                 prompt: "Choose",
-                 class: form_control_classes %>
       <% end %>
 
       <%= render "shared/components/forms/field",
                   form: f,
                   label: "What floor is the loading location on? (if applicable)",
                   name: :loading_floor do %>
+
         <%= f.select :loading_floor,
                  loading_floor_options,
                  prompt: "Choose",
@@ -125,26 +111,24 @@
         <%= f.text_area :loading_stairs_details, class: form_control_classes %>
       <% end %>
 
-      <h3>Unloading</h3>
+      <h3>Unloading location</h3>
 
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "Are there stairs at the unloading location?",
-                  name: :unloading_stairs do %>
-        <%= f.select :unloading_stairs,
-                 loading_stairs_options,
-                 prompt: "Choose",
-                 class: form_control_classes %>
-      <% end %>
+                  label: "Stairs / Elevator?",
+                  name: :specialty_items_list do %>
+        <%= collection_check_boxes(:rfp, 
+                                             :unloading_stairs_ids, 
+                                             UnloadingStair.all, 
+                                             :id, 
+                                             :name) do |b| -%>
 
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Is there an elevator at the unloading location?",
-                  name: :unloading_elevator do %>
-        <%= f.select :unloading_elevator,
-                 yes_or_no_options,
-                 prompt: "Choose",
-                 class: form_control_classes %>
+          <p>
+            <%= b.check_box -%>
+            <%= b.label -%>
+          </p>
+
+        <% end %>
       <% end %>
 
       <%= render "shared/components/forms/field",
@@ -157,11 +141,14 @@
                  class: form_control_classes %>
       <% end %>
 
-      <%= render "shared/components/forms/field",
+      <% if false %>
+        <%= render "shared/components/forms/field",
                   form: f,
                   label: "Please describe the stairs situation at the unloading location",
                   name: :unloading_stairs_details do %>
-        <%= f.text_area :unloading_stairs_details, class: form_control_classes %>
+           <%= f.text_area :unloading_stairs_details, class: form_control_classes %>
+        <% end %>
+
       <% end %>
 
       <h3>Other assistance</h3>

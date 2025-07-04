@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_01_164419) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_04_140443) do
   create_table "account_users", force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "user_id", null: false
@@ -260,6 +260,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_01_164419) do
     t.index ["created_by_user_id"], name: "index_invitations_on_created_by_user_id"
   end
 
+  create_table "loading_stairs", force: :cascade do |t|
+    t.string "name"
+  end
+
+  create_table "loading_stairs_rfps", id: false, force: :cascade do |t|
+    t.integer "rfp_id", null: false
+    t.integer "loading_stair_id", null: false
+    t.index ["loading_stair_id", "rfp_id"], name: "index_loading_stairs_rfps_on_loading_stair_id_and_rfp_id"
+    t.index ["rfp_id", "loading_stair_id"], name: "index_loading_stairs_rfps_on_rfp_id_and_loading_stair_id"
+  end
+
   create_table "providers", force: :cascade do |t|
     t.integer "user_id"
     t.string "name"
@@ -309,10 +320,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_01_164419) do
     t.string "unload_address"
     t.integer "number_of_movers_requested"
     t.string "estimated_time_in_hours"
-    t.string "loading_stairs"
     t.integer "loading_floor"
     t.string "loading_stairs_details"
-    t.string "unloading_stairs"
     t.integer "unloading_floor"
     t.string "specialty_items_details"
     t.string "need_assistance_with_moving_supplies"
@@ -323,8 +332,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_01_164419) do
     t.date "earliest_move_date"
     t.date "move_finish_date"
     t.string "has_specialty_items"
-    t.string "loading_elevator"
-    t.string "unloading_elevator"
     t.text "unloading_stairs_details"
     t.integer "user_id"
     t.integer "current_step", default: 0
@@ -340,6 +347,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_01_164419) do
     t.integer "specialty_item_id", null: false
     t.index ["rfp_id", "specialty_item_id"], name: "index_rfps_specialty_items_on_rfp_id_and_specialty_item_id"
     t.index ["specialty_item_id", "rfp_id"], name: "index_rfps_specialty_items_on_specialty_item_id_and_rfp_id"
+  end
+
+  create_table "rfps_unloading_stairs", id: false, force: :cascade do |t|
+    t.integer "rfp_id", null: false
+    t.integer "unloading_stair_id", null: false
+    t.index ["rfp_id", "unloading_stair_id"], name: "index_rfps_unloading_stairs_on_rfp_id_and_unloading_stair_id"
+    t.index ["unloading_stair_id", "rfp_id"], name: "index_rfps_unloading_stairs_on_unloading_stair_id_and_rfp_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -364,6 +378,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_01_164419) do
 
   create_table "specialty_items", force: :cascade do |t|
     t.integer "rfp_id"
+    t.string "name"
+  end
+
+  create_table "unloading_stairs", force: :cascade do |t|
     t.string "name"
   end
 

@@ -27,8 +27,8 @@
   <% elsif current_user.customer? %>
 
   <%= render nav_link_partial,
-            url: root_path,
-            active: active_nav_link?(root_path),
+            url:  rfps_path,
+            active: active_nav_link?(rfps_path),
             label: "My job requests",
             icon: "house",
             **nav_attrs %>

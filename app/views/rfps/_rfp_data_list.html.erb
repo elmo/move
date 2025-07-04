@@ -29,32 +29,20 @@
   value: rfp.number_of_movers_requested %>
 
   <%= render "shared/components/data_list/data_list_item",
-  label: "Please estimate the amount of time you expect this to move take",
-  value: rfp.estimated_time_in_hours %>
-
-  <%= render "shared/components/data_list/data_list_item",
-  label: "Are there stairs at the loading location?",
-  value: rfp.loading_stairs %>
-
-  <%= render "shared/components/data_list/data_list_item",
-  label: "Is there an evelvator in the building?",
-  value: rfp.loading_elevator %>
+  label: "Loading location stairs / elevator?",
+  value: rfp.loading_stairs.collect(&:name).join(",") -%>
 
   <%= render "shared/components/data_list/data_list_item",
   label: "What floor is the loading location on?",
   value: rfp.loading_floor %>
 
   <%= render "shared/components/data_list/data_list_item",
-  label: "Please describe the stairs situation at the loading location",
-  value: rfp.loading_stairs_details -%>
+  label: "Unloading location stairs / elevator?",
+  value: rfp.unloading_stairs.collect(&:name).join(",") -%>
 
   <%= render "shared/components/data_list/data_list_item",
-  label: "Do you any heavy or speciality items?",
-  value: rfp.has_specialty_items -%>
-
-  <%= render "shared/components/data_list/data_list_item",
-  label: "Listed of heavy items",
-  value: rfp.specialty_items.collect(&:name).join(",") -%>
+  label: "What floor is the unloading location on?",
+  value: rfp.unloading_floor %>
 
   <%= render "shared/components/data_list/data_list_item",
   label: "Listed of heavy items",

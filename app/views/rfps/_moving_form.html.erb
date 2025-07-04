@@ -90,26 +90,18 @@
         <% end %>
       <% end %>
 
-      <%= render "shared/components/page_sub_header", title: "Loading" -%>
+      <%= render "shared/components/page_sub_header", title: "Loading location" -%>
 
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "Are there stairs at the loading location?",
+                  label: "Are there stairs or elevators at the loading location?",
                   name: :loading_stairs do %>
-        <%= f.select :loading_stairs,
-                 loading_stairs_options,
-                 prompt: "Choose",
-                 class: form_control_classes %>
-      <% end %>
-
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Is there an elevator at the loading location?",
-                  name: :loading_elevator do %>
-        <%= f.select :loading_elevator,
-                 yes_or_no_options,
-                 prompt: "Choose",
-                 class: form_control_classes %>
+        <%= collection_check_boxes(:rfp, :loading_stair_ids, LoadingStair.all, :id, :name) do |b| -%>
+          <p>
+            <%= b.check_box -%>
+            <%= b.label -%>
+          </p>
+        <% end %>
       <% end %>
 
       <%= render "shared/components/forms/field",
@@ -123,33 +115,19 @@
                  class: form_control_classes %>
       <% end %>
 
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Please describe the stairs situation at the loading location",
-                  name: :loading_stairs_details do %>
-        <%= f.text_area :loading_stairs_details, class: form_control_classes %>
-      <% end %>
 
-      <%= render "shared/components/page_sub_header", title: "Unloading" -%>
+      <%= render "shared/components/page_sub_header", title: "Unloading Location" -%>
 
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "Are there stairs at the unloading location?",
-                  name: :unloading_stairs do %>
-        <%= f.select :unloading_stairs,
-                 loading_stairs_options,
-                 prompt: "Choose",
-                 class: form_control_classes %>
-      <% end %>
-
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Is there an elevator at the unloading location?",
-                  name: :unloading_elevator do %>
-        <%= f.select :unloading_elevator,
-                 yes_or_no_options,
-                 prompt: "Choose",
-                 class: form_control_classes %>
+                  label: "Are there stairs or elevators at the unloading location?",
+                  name: :unloading_stair_list do %>
+        <%= collection_check_boxes(:rfp, :unloading_stair_ids, UnloadingStair.all, :id, :name) do |b| -%>
+          <p>
+            <%= b.check_box -%>
+            <%= b.label -%>
+          </p>
+        <% end %>
       <% end %>
 
       <%= render "shared/components/forms/field",
@@ -160,13 +138,6 @@
                  loading_floor_options,
                  prompt: "Choose",
                  class: form_control_classes %>
-      <% end %>
-
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Please describe the stairs situation at the unloading location",
-                  name: :unloading_stairs_details do %>
-        <%= f.text_area :unloading_stairs_details, class: form_control_classes %>
       <% end %>
 
       <%= render "shared/components/page_sub_header", title: "Other assistance" -%>
@@ -185,17 +156,11 @@
                   form: f,
                   label: "Please select all that apply? ",
                   name: :specialty_items_list do %>
-        <%= collection_check_boxes(:rfp, 
-                                             :specialty_item_ids, 
-                                             SpecialtyItem.all, 
-                                             :id, 
-                                             :name) do |b| -%>
-
+        <%= collection_check_boxes(:rfp, :specialty_item_ids, SpecialtyItem.all, :id, :name) do |b| -%>
           <p>
             <%= b.check_box -%>
             <%= b.label -%>
           </p>
-
         <% end %>
       <% end %>
 
