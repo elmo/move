@@ -1,0 +1,82 @@
+<%= form_with(model: @message,
+               url: @message.new_record? ? messages_path : message_path(@message),
+               local: true) do |f| %>
+  <%= render 'shared/components/forms/errors', model: @message %>
+
+  <div class="space-y-8">
+
+    <%= render "shared/components/forms/field",
+                 form: f,
+                 label: "Subject",
+                 name: :subject do %>
+      <%= f.text_field :subject,
+                        placeholder: "Subject",
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+
+    
+    <% unless @message.new_record? %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Sender_id",
+                  name: :sender_id do %>
+        <%= f.number_field :sender_id,
+                placeholder: "Sender_id",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Recipient_id",
+                  name: :recipient_id do %>
+        <%= f.number_field :recipient_id,
+                placeholder: "Recipient_id",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Sender_phone",
+                  name: :sender_phone do %>
+        <%= f.text_field :sender_phone,
+                placeholder: "Sender_phone",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Recipient_phone",
+                  name: :recipient_phone do %>
+        <%= f.text_field :recipient_phone,
+                placeholder: "Recipient_phone",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Body",
+                  name: :body do %>
+        <%= f.text_area :body,
+                placeholder: "Body",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Slug",
+                  name: :slug do %>
+        <%= f.text_field :slug,
+                placeholder: "Slug",
+                class: form_control_classes%>
+      <% end %>
+      
+    <% end %>
+    
+    <div>
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

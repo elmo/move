@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_04_152238) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_07_140719) do
   create_table "account_users", force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "user_id", null: false
@@ -269,6 +269,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_04_152238) do
     t.integer "loading_stair_id", null: false
     t.index ["loading_stair_id", "rfp_id"], name: "index_loading_stairs_rfps_on_loading_stair_id_and_rfp_id"
     t.index ["rfp_id", "loading_stair_id"], name: "index_loading_stairs_rfps_on_rfp_id_and_loading_stair_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "sender_id"
+    t.integer "recipient_id"
+    t.string "sender_phone"
+    t.string "recipient_phone"
+    t.string "subject"
+    t.text "body"
+    t.string "slug"
+    t.string "email_sending_status"
+    t.string "sms_sending_status"
+    t.datetime "sms_sent_at"
+    t.datetime "email_sent_at"
+    t.datetime "sms_failed_at"
+    t.datetime "email_failed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_sending_status"], name: "index_messages_on_email_sending_status"
+    t.index ["sms_sending_status"], name: "index_messages_on_sms_sending_status"
   end
 
   create_table "providers", force: :cascade do |t|

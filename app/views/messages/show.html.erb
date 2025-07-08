@@ -1,0 +1,30 @@
+<%= content_for(:title) do %>
+  <%= @message.subject %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Messages",
+               link: messages_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @message.subject %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "messages/message_subnav",
+             active: "edit_message",
+             message: @message %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: @message.subject %>
+
+  <div>
+    <%= t('scaffold.show_body', resource: 'message', field: 'subject', default: 'This is the show view for the message, subject.') %>
+  </div>
+
+</div>

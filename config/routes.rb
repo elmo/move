@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  # Messages
+  resources :messages, param: :slug
+
   # Admin > Commerce > Subscriptions
   get "admin/commerce/subscriptions", to: "admin/commerce/subscriptions#index", as: :admin_subscriptions
   get "admin/commerce/subscriptions/:id", to: "admin/commerce/subscriptions#show", as: :admin_subscription

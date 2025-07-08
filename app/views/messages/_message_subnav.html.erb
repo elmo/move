@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: messages_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_message_path(message),
+             link_text: t('scaffold.edit', resource: Message, default: 'Edit %{resource}'),
+             icon_name: "square-pen",
+             active: current_page?(edit_message_path(message)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: message_path(message),
+             link_text: t('scaffold.view', resource: Message, default: 'View %{resource}'),
+             icon_name: "arrow-right",
+             active: current_page?(message_path(message)) %>
+
+<% end %>

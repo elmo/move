@@ -40,6 +40,8 @@ gem 'aws-sdk-sns'
 gem 'geocoder'
 gem 'rqrcode'
 gem 'httparty'
+gem 'twilio-ruby'
+gem 'sendgrid-ruby'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false

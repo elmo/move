@@ -1,0 +1,43 @@
+<%= content_for(:title) do %>
+  Messages
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Messages" %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+
+  <% if @messages.any? %>
+    <%= render "shared/components/page_header",
+                title: "Messages",
+                button_link_path: new_message_path %>
+
+    <div class="space-y-6">
+
+      <%= render "shared/components/listings/listings" do %>
+        <% @messages.each do |message| %>
+          <%= render "messages/message_listing",
+                        message: message %>
+        <% end %>
+      <% end %>
+
+      <% if @pagy.pages > 1 %>
+        <div class="pagy-container">
+          <%== pagy_nav(@pagy) %>
+        </div>
+      <% end %>
+
+    </div>
+
+  <% else %>
+    <%= render "shared/components/listings/no_listings",
+                singular_object_name: "message",
+                plural_object_name: "messages",
+                new_path: new_message_path %>
+  <% end %>
+
+</div>
