@@ -1,6 +1,6 @@
 class Provider < ApplicationRecord
   include SlugGenerator
-
+  include Rails.application.routes.url_helpers
   validates :name, presence: true, if: -> { current_step.to_i >= 0 }
   validates :address_1, presence: true, if: -> { current_step.to_i > 0 }
   validates :city, presence: true, if: -> { current_step.to_i > 0 }
@@ -146,6 +146,10 @@ class Provider < ApplicationRecord
       willing_to_sign_agreement: "Are you willing to sign our Provider Agreement and abide by our platform rules, including reporting completed jobs and not bypassing our system?"
     }
 end
+
+  def full_url
+    provider_url(self, host: Rails.application.config.action_mailer.default_url_options[:host])
+  end
 
   private
 

@@ -1,5 +1,6 @@
 class Rfp < ApplicationRecord
   include SlugGenerator
+  include Rails.application.routes.url_helpers
   belongs_to :user
   has_and_belongs_to_many :specialty_items, dependent: :destroy
   has_and_belongs_to_many :loading_stairs, dependent: :destroy
@@ -34,6 +35,16 @@ class Rfp < ApplicationRecord
 
   def publish!
     update(status: "published") if user.roles.empty?
+    Message.create_message(
+      from: User.system_user,
+      to: self,
+      subject: "Welcome to Arrowline Moving",
+      body: publication_message
+    )
+  end
+
+  def publication_message
+    "Your job request has been published.  Our provider network has been alerted."
   end
 
   def published?
@@ -103,6 +114,10 @@ class Rfp < ApplicationRecord
     center_longitude = (longitude + unload_longitude) / 2
     center_latitude = (latitude + unload_latitude) / 2
     [center_longitude, center_latitude]
+  end
+
+  def full_url
+    rfp_url(self, host: Rails.application.config.action_mailer.default_url_options[:host])
   end
 
   private

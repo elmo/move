@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  include Rails.application.routes.url_helpers
   attr_accessor :invite
 
   has_many :account_users, dependent: :destroy
@@ -6,6 +7,7 @@ class User < ApplicationRecord
   has_many :invitations, dependent: :nullify
 
   after_create :create_account
+  after_create :send_welcome_email
   rolify
   validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   has_one_attached :avatar
@@ -104,8 +106,24 @@ class User < ApplicationRecord
     accounts.first.active_subscription?
   end
 
-  private
+  def send_welcome_email
+    Message.create_message(
+      from: User.system_user,
+      to: self,
+      subject: "Welcome to Arrowline Moving",
+      body: "Welcome to Arrowline moving. Your account has been created. You can manage your profile here: #{profile_management_url} "
+    )
+  end
 
+  def profile_management_url
+    edit_user_profile_url(host: Rails.application.config.action_mailer.default_url_options[:host])
+  end
+
+  def self.system_user
+    User.find_by(email_address: 'info@arrowlinemoving.com')
+  end
+
+  private
 
   def create_account
     return if self.invite

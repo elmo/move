@@ -1,5 +1,6 @@
 class Bid < ApplicationRecord
   include SlugGenerator
+  include Rails.application.routes.url_helpers
   belongs_to :user
   belongs_to :provider
   belongs_to :rfp
@@ -27,6 +28,23 @@ class Bid < ApplicationRecord
 
   def pending!
     update(status: "pending")
+    Message.create_message(
+      from: User.system_user,
+      to: provider.user.email,
+      subject: "Your bid has been placed",
+      body: "Your bid has been placed. The requestor of the work has been notified."
+    )
+
+    Message.create_message(
+      from: User.system_user,
+      to: rfp.user.email,
+      subject: "A bid has been placed on your work request.",
+      body: "A bid has been placed on your work request. Please review the bid: #{full_url}"
+    )
+  end
+
+  def full_url
+    rfp_bid_url(rfp, self, host: Rails.application.config.action_mailer.default_url_options[:host])
   end
 
   def accepted?

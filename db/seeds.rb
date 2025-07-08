@@ -15,3 +15,11 @@ end
 [ 'Stairs', 'Elevator' ].each do |name|
   UnloadingStair.find_or_create_by!(name: name)
 end
+
+User.create(
+  first_name: "System",
+  last_name: "User",
+  email_address: "info@arrowlinemoving.com",
+  password: "N0Password!",
+  password_confirmation: "N0Password!",
+) unless User.exists?(email_address: "info@arrowlinemoving.com")
