@@ -16,12 +16,15 @@ class Rfp < ApplicationRecord
   scope :published, -> { where(status: "published") }
   scope :complete, -> { where(status: "complete") }
 
+  scope :with_active_bids, -> { joins(:bids) }
+
   before_validation :generate_slug, on: :create
   after_validation :calculate_distance
 
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-_]+\z/, message: "only allows letters, numbers, hyphens, and underscores" }
 
-  # geocoded_by :load_address
+  after_validation :calculate_distance
+  after_save :set_move_distance
 
   def ready_to_publish?
     required_fields.each do |field|
@@ -34,7 +37,7 @@ class Rfp < ApplicationRecord
   end
 
   def publish!
-    update(status: "published") if user.roles.empty?
+    update(status: "published")
     Message.create_message(
       from: User.system_user,
       to: self,
@@ -89,13 +92,13 @@ class Rfp < ApplicationRecord
   end
 
   def calculate_distance
-     if self.load_address.present?
+    if self.load_address.present? && self.latitude.blank?
        coordinates = Geocoder.search(load_address).first.coordinates
        self.latitude = coordinates[0]
        self.longitude = coordinates[1]
      end
 
-     if self.unload_address.present?
+    if self.unload_address.present? && self.unload_latitude.blank?
        coordinates = Geocoder.search(unload_address).first.coordinates
        self.unload_latitude = coordinates[0]
        self.unload_longitude = coordinates[1]
@@ -106,9 +109,8 @@ class Rfp < ApplicationRecord
     update(move_distance: Geocoder::Calculations.distance_between(
       [ latitude, longitude ],
       [ unload_latitude, unload_longitude ]).to_i
-     ) if move_distance.blank?
+          ) if move_distance.blank? && latitude.present? && longitude.present?
   end
-
 
   def center_coordinates
     center_longitude = (longitude + unload_longitude) / 2

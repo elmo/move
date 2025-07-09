@@ -24,6 +24,7 @@
     <% end %>
 
     <div class="space-y-6">
+     <%# render partial: '/rfps/map_box_map', locals: { rfp: @rfp } -%>
       <%= render "shared/components/listings/listings" do %>
         <% @bids.each do |bid| %>
           <%= render "bids/bid_listing", bid: bid %>
@@ -46,7 +47,7 @@
      <% end %>
   <% end %>
 
-    <% if current_user.customer? %>
+    <% if current_user.customer? && @rfp.bids.empty?  %>
       <%= render "shared/components/callout",
             headline_text: "There are currently no bids on this job request",
             link_path: rfps_path,

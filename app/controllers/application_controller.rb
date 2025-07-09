@@ -28,4 +28,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def get_map_route
+    if session[:route].blank?
+      coordinates = "#{@rfp.longitude},#{@rfp.latitude};#{@rfp.unload_longitude},#{@rfp.unload_latitude}"
+      access_token = Rails.application.credentials.dig(:mapbox, :token)
+      url ="https://api.mapbox.com/directions/v5/mapbox/driving/#{coordinates}?access_token=#{access_token}"
+      response = HTTParty.get(url)
+      @route = response.parsed_response['routes'][0]['geometry'] if response.success?
+      session[:route] = @route
+    end
+    @route = session[:route]
+  end
+
 end

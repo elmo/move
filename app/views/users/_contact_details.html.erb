@@ -1,0 +1,12 @@
+<% if current_user.provider? %>
+<%= render "shared/components/page_sub_header", title: "Customer contact" -%>
+<% if @bid.present? && @bid.confirmed? %>
+<p>Name: <%= user.name %></p>
+<p>Phone: <%= user.phone %></p>
+<p>Email: <%= user.email_address %></p>
+<% else %>
+  <p> Contact information will be revealed once this bid has been confirmed.
+  </p>
+<% end %>
+<% else %>
+<% end %>

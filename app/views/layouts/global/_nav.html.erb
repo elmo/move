@@ -11,15 +11,15 @@
   <% if current_user.provider? %>
 
   <%= render nav_link_partial,
-            url: root_path,
-            active: active_nav_link?(root_path),
+            url: rfps_path,
+            active: active_nav_link?(rfps_path),
             label: "Jop Opportunities",
             icon: "house",
             **nav_attrs %>
 
   <%= render nav_link_partial,
             url: provider_bids_path,
-            active: active_nav_link?(root_path),
+            active: active_nav_link?(provider_bids_path),
             label: "My bids",
             icon: "dollar-sign",
             **nav_attrs %>
@@ -32,6 +32,19 @@
             label: "My job requests",
             icon: "house",
             **nav_attrs %>
+
+
+    <% if current_user.rfps.with_active_bids.any? %>
+      <% current_user.rfps.with_active_bids.each do |rfp| %>
+          <%= render nav_link_partial,
+            url:  rfp_bids_path(rfp),
+            active: active_nav_link?(rfp_bids_path(rfp)),
+            label: rfp.long_name + ' ' + pluralize(rfp.bids.count, 'bid'),
+            icon: "dollar-sign",
+            **nav_attrs %>
+      <% end %>
+    <% end %>
+
   <% else %>
 
   <%= render nav_link_partial,
@@ -40,6 +53,7 @@
             label: "Home",
             icon: "house",
             **nav_attrs %>
+
   <% end %>
 
   <%#= render nav_link_partial,

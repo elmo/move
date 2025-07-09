@@ -12,6 +12,7 @@ class BidsController < ApplicationController
   def new
     @bid = Bid.new
     @bid.name = "bid-#{@rfp.name}"
+    get_map_route
   end
 
   def create
@@ -42,9 +43,11 @@ class BidsController < ApplicationController
   end
 
   def show
+    get_map_route
   end
 
   def edit
+    get_map_route
   end
 
   def update

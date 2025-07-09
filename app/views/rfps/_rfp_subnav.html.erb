@@ -15,7 +15,7 @@
   icon_name: "arrow-right",
   active: current_page?(rfp_path(rfp)) %>
 
-  <% if current_user.provider? %>
+  <% if current_user.provider? && !current_user.provider.has_bid_on?(rfp) %>
     <%= render "shared/components/subnav/subnav_link",
     link_path: new_rfp_bid_path(@rfp),
     link_text: "Bid on this job",

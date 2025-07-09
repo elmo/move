@@ -18,6 +18,8 @@
 
 <% content_for(:side_col) do %>
   <%= render "bids/bid_subnav", active: "edit_bid", bid: @bid %>
+  <%= render partial: '/rfps/map_box_map', locals: { rfp: @bid.rfp} -%>
+  <%= render partial: '/users/contact_details', locals: { user: @bid.rfp.user } %>
 <% end %>
 
 <div class="space-y-12">

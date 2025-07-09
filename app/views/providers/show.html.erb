@@ -14,7 +14,9 @@
 <% end %>
 
 <% content_for(:side_col) do %>
-  <%= render "providers/provider_subnav", active: "edit_provider", provider: @provider %>
+  <% if current_user.provider == @provider %>
+     <%= render "providers/provider_subnav", active: "edit_provider", provider: @provider %>
+  <% end %>
 <% end %>
 
 <div class="space-y-12">

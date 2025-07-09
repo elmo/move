@@ -14,16 +14,33 @@
 <% end %>
 
 <% content_for(:side_col) do %> 
-  <%= render "bids/bid_subnav", active: "edit_rfp_bid", bid: @bid %>
+  <% if current_user.provider? %>
+    <%= render "bids/bid_subnav", active: "edit_rfp_bid", bid: @bid %>
+    <%= render partial: '/rfps/map_box_map', locals: { rfp: @bid.rfp} -%>
+    <%= render partial: '/users/contact_details', locals: { user: @bid.rfp.user } %>
+  <% end %>
 <% end %>
 
 <div class="space-y-12">
-  <%= render "shared/components/page_header", title: @bid.name %>
   <div>
     <h3><%= link_to @rfp.long_name, rfp_path(@rfp) -%></h3>
-    <p>Bid created: <%= @bid.created_at.strftime('%B %d, %Y %I:%M %P' ) -%></p>
-    <p>Bid amount: <%= number_to_currency(@bid.amount) -%></p>
+     <%= render "shared/components/label",
+       text: @bid.status,
+       icon_name: 'file',
+       bg_color: "bg-green-50 dark:bg-green-950" -%>
+    <p>Created: <%= @bid.created_at.strftime('%B %d, %Y %I:%M %P' ) -%></p>
+    <p>Amount: <%= number_to_currency(@bid.amount) -%></p>
   </div>
+
+  <% if @bid.accepted? %>
+     <%= render "shared/components/callout",
+        headline_text: "This bid has been accepted",
+        link_container: true,
+        icon_name: "truck" do %>
+        <p>This bid has been accepted by you. We are waiting for the provider, <%= @bid.user.provider.name -%> to confirm acceptance of this work.  Once this bid has been confirmed, you will notified and contact information will be shared.
+    </p>   
+    <% end %>
+  <% end %>
 </div>
 
 <div class="m-4">

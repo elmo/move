@@ -1,3 +1,4 @@
+<% cache @rfp do %>
 <div id="map" style="width: 100%; height: 200px;"></div>
 <script>
   mapboxgl.accessToken = '<%= Rails.application.credentials.dig(:mapbox, :token) -%>';
@@ -5,7 +6,7 @@
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v12',
     center: <%= @rfp.center_coordinates -%>,
-    zoom: 5
+    zoom: 4
   });
   map.on('load', () => {
     const route = <%= @route.to_json.html_safe %>;
@@ -33,3 +34,4 @@
     });
   });
 </script>
+<% end %>

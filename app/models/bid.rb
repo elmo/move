@@ -49,6 +49,19 @@ class Bid < ApplicationRecord
 
   def accepted?
     status == "accepted"
+    Message.create_message(
+      from: User.system_user,
+      to: provider.user.email,
+      subject: "Your bid has been accepted",
+      body: "Your bid has been accepted. Please view the details now. #{rfp.full_url}"
+    )
+
+    Message.create_message(
+      from: User.system_user,
+      to: rfp.user.email,
+      subject: "A bid has been placed on your work request.",
+      body: "A bid has been placed on your work request. Please review the bid: #{full_url}"
+    )
   end
 
   def accepted!
@@ -61,6 +74,12 @@ class Bid < ApplicationRecord
 
   def reject!
     update(status: "rejected")
+    Message.create_message(
+      from: User.system_user,
+      to: provider.user.email,
+      subject: "Your bid has been rejected",
+      body: "Your bid has been rejected by the requestor. There is nothing that you need to do. You are welcome to submit a new bid. #{full_url}\n --Arrowlinemoving"
+    )
   end
 
   def rejected?
@@ -69,6 +88,18 @@ class Bid < ApplicationRecord
 
   def confirm!
     update(status: "confirmed")
+    Message.create_message(
+      from: User.system_user,
+      to: rfp.user.email,
+      subject: "Your work request has been confirmed.",
+      body: "Good news! #{provider.name} has confirmed your moving job. They have committed to performing the work. Please reach out to them directly and make the final arrangments. If you have any questions, please feel free to contact us.\n --Arrowlinemoving "
+    )
+    Message.create_message(
+      from: User.system_user,
+      to: provider.user.email,
+      subject: "You have committed to work perform a moving job",
+      body: "Congratulations. You've got work. You've committed to performing moving job. You can now see all the contact information related to this work. If you have any problems Contact us.\n --Arrowlinemoving"
+    )
   end
 
   def confirmed?
