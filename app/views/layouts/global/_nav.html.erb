@@ -8,6 +8,8 @@
 
   <%# Define the primary navigation links here %>
 
+  <% if current_user.present? %>
+
   <% if current_user.provider? %>
 
   <%= render nav_link_partial,
@@ -53,6 +55,8 @@
             label: "Home",
             icon: "house",
             **nav_attrs %>
+
+  <% end %>
 
   <% end %>
 
