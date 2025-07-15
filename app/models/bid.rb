@@ -4,6 +4,8 @@ class Bid < ApplicationRecord
   belongs_to :user
   belongs_to :provider
   belongs_to :rfp
+  has_one :acceptance
+
   validates :agree_to_platform_terms, acceptance: true
   validates :name, presence: true
   validates :amount, presence: true
@@ -41,6 +43,10 @@ class Bid < ApplicationRecord
       subject: "A bid has been placed on your work request.",
       body: "A bid has been placed on your work request. Please review the bid: #{full_url}"
     )
+  end
+
+  def deposit_amount_for_stripe
+    amount * 10
   end
 
   def full_url

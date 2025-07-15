@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_07_140719) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_14_153405) do
+  create_table "acceptances", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "bid_id"
+    t.datetime "paid_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "account_users", force: :cascade do |t|
     t.integer "account_id", null: false
     t.integer "user_id", null: false
@@ -260,6 +268,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_140719) do
     t.index ["created_by_user_id"], name: "index_invitations_on_created_by_user_id"
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "bid_id"
+    t.float "amount"
+    t.string "name"
+    t.text "description"
+    t.string "stripe_customer_id"
+    t.string "slug"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "loading_stairs", force: :cascade do |t|
     t.string "name"
   end
@@ -423,6 +444,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_140719) do
     t.boolean "terms_accepted"
     t.datetime "terms_accepted_at"
     t.boolean "admin", default: false
+    t.string "stripe_customer_id"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 

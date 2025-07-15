@@ -1,0 +1,73 @@
+<%= form_with(model: @invoice,
+               url: @invoice.new_record? ? invoices_path : invoice_path(@invoice),
+               local: true) do |f| %>
+  <%= render 'shared/components/forms/errors', model: @invoice %>
+
+  <div class="space-y-8">
+
+    <%= render "shared/components/forms/field",
+                 form: f,
+                 label: "Name",
+                 name: :name do %>
+      <%= f.text_field :name,
+                        placeholder: "Name",
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+
+    
+    <% unless @invoice.new_record? %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "User_id",
+                  name: :user_id do %>
+        <%= f.number_field :user_id,
+                placeholder: "User_id",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Amount",
+                  name: :amount do %>
+        <%= f.number_field :amount,
+                placeholder: "Amount",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Description",
+                  name: :description do %>
+        <%= f.text_area :description,
+                placeholder: "Description",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Stripe_customer_id",
+                  name: :stripe_customer_id do %>
+        <%= f.text_field :stripe_customer_id,
+                placeholder: "Stripe_customer_id",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Slug",
+                  name: :slug do %>
+        <%= f.text_field :slug,
+                placeholder: "Slug",
+                class: form_control_classes%>
+      <% end %>
+      
+    <% end %>
+    
+    <div>
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

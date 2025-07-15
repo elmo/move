@@ -122,6 +122,10 @@ class Rfp < ApplicationRecord
     rfp_url(self, host: Rails.application.config.action_mailer.default_url_options[:host])
   end
 
+  def invoice_description
+    "Deposit for moving job"
+  end
+
   private
 
   def generate_slug

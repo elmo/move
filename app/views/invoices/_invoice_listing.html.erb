@@ -1,0 +1,7 @@
+<%= render "shared/components/listings/listing",
+           listing_link: invoice_path(invoice),
+           title: invoice.name,
+           description: t('scaffold.created_ago', time: time_ago_in_words(invoice.created_at), default: 'Created %{time} ago') do %>
+  <%= render "invoice_settings",
+             invoice: invoice %>
+<% end %>

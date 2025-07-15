@@ -1,4 +1,4 @@
-require "twilio-ruby"
+#require "twilio-ruby"
 require "sendgrid-ruby"
 
 class Message < ApplicationRecord

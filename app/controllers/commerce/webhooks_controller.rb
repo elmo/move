@@ -15,6 +15,8 @@ module Commerce
 
       # Only process events that happen after subscription creation
       case params[:type]
+      when "charge.succeeded"
+        handle_charge_succeeded(params[:data][:object])
       when "invoice.payment_succeeded"
         handle_invoice_payment_succeeded(params[:data][:object])
       when "invoice.payment_failed"
@@ -34,6 +36,11 @@ module Commerce
 
     def verify_stripe_signature
       head :bad_request unless request.env["HTTP_STRIPE_SIGNATURE"].present?
+    end
+
+    def handle_charge_succeeded(charge)
+      bid = Bid.find(charge["metadata"]["bid_id"])
+      Acceptance.create!(bid: bid, user: bid.rfp.user, paid_at: Time.zone.now)
     end
 
     def handle_invoice_payment_succeeded(invoice)

@@ -4,6 +4,7 @@ class RegistrationsController < ApplicationController
   layout "authentication"
 
   def new
+    @page_title = "Arrowline Moving - Sign up"
     redirect_to root_path if authenticated?
 
     @user = User.new

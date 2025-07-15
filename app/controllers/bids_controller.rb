@@ -28,8 +28,11 @@ class BidsController < ApplicationController
   end
 
   def accept
-   @bid.accepted!
-     redirect_to rfp_bid_path(@rfp, @bid), notice: "Bid has been accepted" and return false
+    if @bid.acceptance.blank?
+      redirect_to new_acceptance_path(bid_id: @bid.slug), notice: "acceptance required" and return false
+    else
+      redirect_to rfp_bid_path(@rfp, @bid), notice: "Bid has been accepted" and return false
+    end
   end
 
   def reject

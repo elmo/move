@@ -1,0 +1,16 @@
+<%= render "shared/components/subnav/subnav",
+             back_link_path: invoices_path do %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: edit_invoice_path(invoice),
+             link_text: t('scaffold.edit', resource: Invoice, default: 'Edit %{resource}'),
+             icon_name: "square-pen",
+             active: current_page?(edit_invoice_path(invoice)) %>
+
+  <%= render "shared/components/subnav/subnav_link",
+             link_path: invoice_path(invoice),
+             link_text: t('scaffold.view', resource: Invoice, default: 'View %{resource}'),
+             icon_name: "arrow-right",
+             active: current_page?(invoice_path(invoice)) %>
+
+<% end %>

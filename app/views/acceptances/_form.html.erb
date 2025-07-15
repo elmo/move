@@ -1,0 +1,55 @@
+<%= form_with(model: @acceptance,
+               url: @acceptance.new_record? ? acceptances_path : acceptance_path(@acceptance),
+               local: true) do |f| %>
+  <%= render 'shared/components/forms/errors', model: @acceptance %>
+
+  <div class="space-y-8">
+
+    <%= render "shared/components/forms/field",
+                 form: f,
+                 label: "Name",
+                 name: :name do %>
+      <%= f.text_field :name,
+                        placeholder: "Name",
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+
+    
+    <% unless @acceptance.new_record? %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "User_id",
+                  name: :user_id do %>
+        <%= f.number_field :user_id,
+                placeholder: "User_id",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Bid_id",
+                  name: :bid_id do %>
+        <%= f.number_field :bid_id,
+                placeholder: "Bid_id",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Paid_at",
+                  name: :paid_at do %>
+        <%= f.datetime_field :paid_at,
+                placeholder: "Paid_at",
+                class: form_control_classes%>
+      <% end %>
+      
+    <% end %>
+    
+    <div>
+      <%= f.submit class: "btn btn-primary" %>
+    </div>
+
+  </div>
+<% end %>

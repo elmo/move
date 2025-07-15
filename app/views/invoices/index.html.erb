@@ -1,0 +1,43 @@
+<%= content_for(:title) do %>
+  Invoices
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Invoices" %>
+  <% end %>
+<% end %>
+
+<div class="space-y-12">
+
+  <% if @invoices.any? %>
+    <%= render "shared/components/page_header",
+                title: "Invoices",
+                button_link_path: new_invoice_path %>
+
+    <div class="space-y-6">
+
+      <%= render "shared/components/listings/listings" do %>
+        <% @invoices.each do |invoice| %>
+          <%= render "invoices/invoice_listing",
+                        invoice: invoice %>
+        <% end %>
+      <% end %>
+
+      <% if @pagy.pages > 1 %>
+        <div class="pagy-container">
+          <%== pagy_nav(@pagy) %>
+        </div>
+      <% end %>
+
+    </div>
+
+  <% else %>
+    <%= render "shared/components/listings/no_listings",
+                singular_object_name: "invoice",
+                plural_object_name: "invoices",
+                new_path: new_invoice_path %>
+  <% end %>
+
+</div>

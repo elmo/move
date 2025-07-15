@@ -3,6 +3,7 @@ class User < ApplicationRecord
   attr_accessor :invite
 
   has_many :account_users, dependent: :destroy
+  has_many :invoices, dependent: :destroy
   has_many :accounts, through: :account_users
   has_many :invitations, dependent: :nullify
 
@@ -121,6 +122,17 @@ class User < ApplicationRecord
 
   def self.system_user
     User.find_by(email_address: 'info@arrowlinemoving.com')
+  end
+
+  def find_or_create_stripe_id
+    return if stripe_customer_id if stripe_customer_id.present?
+    customer = Stripe::Customer.create(
+     email: email_address,
+     name: full_name,
+     description: 'Customer for invoice'
+    )
+    update(stripe_customer_id: customer.id)
+    customer.id
   end
 
   private

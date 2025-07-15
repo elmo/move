@@ -1,0 +1,27 @@
+<%= render "shared/components/dropdown/dropdown",
+           menu_position: "left-auto right-8 -top-4" do %>
+
+  <%= render "shared/components/dropdown/dropdown_link",
+             link_text: t('scaffold.view', resource: Invoice, default: 'View %{resource}'),
+             link_path: invoice_path(invoice),
+             icon_name: "arrow-right" %>
+
+
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: t('scaffold.edit', resource: Invoice, default: 'Edit %{resource}'),
+               link_path: edit_invoice_path(invoice),
+               icon_name: "square-pen" %>
+
+
+  <%= render "shared/components/dropdown/dropdown_link",
+               link_text: t('scaffold.delete', resource: Invoice, default: 'Delete %{resource}'),
+               icon_name: "trash",
+               link_path: invoice_path(invoice),
+               link_method: :delete,
+               button_link: true,
+               data: {
+                   turbo_method: :delete,
+                   turbo_confirm: t('scaffold.really_delete', resource: invoice, default: 'Really delete %{resource}?')
+               } %>
+
+<% end %>

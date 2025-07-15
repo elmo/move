@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
 
+  # Route for the API endpoint to create a PaymentIntent
+  #post 'create_payment_intent', to: 'payments#create_payment_intent'
+  # Route for Stripe to redirect to after payment completion (e.g., 3D Secure)
+  #get 'payment_confirm', to: 'payments#confirm', as: :payment_confirm
+
+  # Route for the API endpoint to create a PaymentIntent
+  post 'create_acceptance_payment_intent', to: 'acceptances#create_acceptance_payment_intent'
+  # Route for Stripe to redirect to after payment completion (e.g., 3D Secure)
+  get 'payment/confirm', to: 'acceptances#confirm', as: :payment_confirm
+
+  # Acceptances
+  resources :acceptances
+
+  # Invoices
+  resources :invoices, param: :slug, only: [:new, :create]
+
   # Messages
   resources :messages, param: :slug
 

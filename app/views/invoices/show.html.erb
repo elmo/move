@@ -1,0 +1,30 @@
+<%= content_for(:title) do %>
+  <%= @invoice.name %>
+<% end %>
+
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: "Invoices",
+               link: invoices_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: @invoice.name %>
+  <% end %>
+<% end %>
+
+<% content_for(:side_col) do %>
+  <%= render "invoices/invoice_subnav",
+             active: "edit_invoice",
+             invoice: @invoice %>
+<% end %>
+
+<div class="space-y-12">
+  <%= render "shared/components/page_header",
+              title: @invoice.name %>
+
+  <div>
+    <%= t('scaffold.show_body', resource: 'invoice', field: 'name', default: 'This is the show view for the invoice, name.') %>
+  </div>
+
+</div>

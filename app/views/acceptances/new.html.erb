@@ -1,0 +1,123 @@
+<h1>Complete Your Purchase</h1>
+
+<form id="payment-form">
+  <%= hidden_field_tag :bid_id, @bid.id -%>
+  <div id="payment-element"> </div>
+  <div id="error-message"></div>
+  <button id="submit-button" type="submit">Pay Now</button>
+</form>
+
+<script nonce="<%= content_security_policy_nonce %>">
+  // --- Configuration ---
+  const stripePublishableKey = "<%= Rails.application.credentials.dig(:stripe, :publishable_key)-%>"; // Pass from Rails env
+  const createPaymentIntentUrl = "/create_acceptance_payment_intent"; // Your Rails endpoint
+  const paymentConfirmUrl = "/payment/confirm"; // Your Rails endpoint for redirect
+  const orderAmountInCents = "<%= @amount -%>"; // Example: $20.00 - **THIS SHOULD COME FROM YOUR BACKEND/ORDER OBJECT IN A REAL APP!**
+                                // For demo purposes, hardcoding. Never trust client-side amount for production!
+
+  // --- Initialize Stripe ---
+  const stripe = Stripe(stripePublishableKey);
+  let elements; // Will hold the Stripe Elements instance
+
+  // --- Fetch Client Secret and Initialize Payment Element ---
+  const fetchPaymentIntentClientSecret = async () => {
+    try {
+      const response = await fetch(createPaymentIntentUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+        },
+        body: JSON.stringify({ amount: orderAmountInCents, bid_id: '<%=@bid.slug -%>' }) // Send amount to backend
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error.message || "Failed to create Payment Intent.");
+      }
+
+      const data = await response.json();
+      return data.clientSecret;
+    } catch (error) {
+      console.error('Error fetching client secret:', error);
+      document.getElementById('error-message').textContent = `Error: ${error.message}`;
+      document.getElementById('submit-button').disabled = true; // Disable button on error
+      return null;
+    }
+  };
+
+  const initializeStripeElements = async () => {
+    const clientSecret = await fetchPaymentIntentClientSecret();
+    if (!clientSecret) return; // Stop if client secret wasn't fetched
+try {
+    elements = stripe.elements({ clientSecret });
+    const paymentElement = elements.create('payment');
+    console.log("Stripe Elements initialized.");
+    paymentElement.mount('#payment-element');
+    console.log("Payment Element mounted.");
+   //setLoading(false); #TOOD delete this if possible ELB 7/15
+} catch (error) {
+  console.error('Error initializing or mounting Payment Element:', error);
+  document.getElementById('error-message').textContent = `Error initializing payment form: ${error.message}`;
+  setLoading(false);
+}
+
+
+  };
+
+  // --- Handle Form Submission ---
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Confirm the payment with Stripe
+    const { error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        // Make sure to change this to your payment completion page
+        //return_url: `${window.location.origin}${paymentConfirmUrl}?payment_intent_id={PAYMENT_INTENT_ID}`,
+        return_url: `${window.location.origin}${paymentConfirmUrl}?payment_intent_id={PAYMENT_INTENT_ID}`,
+        // You can also collect billing details here if not using Address Element
+        // billing_details: {
+        // name: '<%=current_user.name-%>',
+        //   email: '<%= current_user.email_address -%>'
+        // }
+      },
+      // Set redirect to 'if_required' to only redirect when 3D Secure or other
+      // payment method specific redirects are needed.
+      //redirect: 'if_required'
+      redirect: 'always'
+    });
+
+    // This point will only be reached if there is an immediate error.
+    // For redirect-based payment methods, it will redirect away from the page.
+    console.log(error);
+    if (error.type === "card_error" || error.type === "validation_error") {
+      document.getElementById('error-message').textContent = error.message;
+    } else {
+      document.getElementById('error-message').textContent = "An unexpected error occurred.";
+    }
+    setLoading(false);
+  };
+
+  // --- Utility Functions ---
+  const setLoading = (isLoading) => {
+    const submitButton = document.getElementById('submit-button');
+    if (isLoading) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Processing...';
+    } else {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Pay Now';
+    }
+  };
+
+  // --- Event Listeners ---
+  document.addEventListener('turbo:load', () => { // Or 'DOMContentLoaded' if not using Turbo
+    initializeStripeElements();
+    const paymentForm = document.getElementById('payment-form');
+    if (paymentForm) {
+      paymentForm.addEventListener('submit', handleSubmit);
+    }
+  });
+</script>
