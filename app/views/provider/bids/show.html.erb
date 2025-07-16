@@ -6,7 +6,7 @@
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
                text: "Bids",
-               link: rfp_bids_path(@rfp) %>
+               link: provider_bid_path(@bid) %>
     <%= render "shared/components/breadcrumbs/divider" %>
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
                text: @bid.name %>
@@ -14,14 +14,30 @@
 <% end %>
 
 <% content_for(:side_col) do %> 
-  <%= render "bids/bid_subnav", active: "edit_rfp_bid", bid: @bid %>
+    <%= render "bids/bid_subnav", active: "edit_rfp_bid", bid: @bid %>
+    <%= render partial: '/rfps/map_box_map', locals: { rfp: @bid.rfp} -%>
 <% end %>
 
 <div class="space-y-12">
-  <%= render "shared/components/page_header", title: @bid.name %>
-  <div>
-    <h3><%= link_to @rfp.long_name, rfp_path(@rfp) -%></h3>
-    <p>Bid created: <%= @bid.created_at.strftime('%B %d, %Y %I:%M %P' ) -%></p>
-    <p>Bid amount: <%= number_to_currency(@bid.amount) -%></p>
-  </div>
+  <% if @bid.confirmed? %>
+     <%= render "shared/components/callout",
+        headline_text: "This bid has been confirmed",
+        link_container: true,
+        icon_name: "truck" do %>
+        <p>Congratulations! Your winning bid of <%= number_to_currency(@bid.amount) -%> has been confirmed.</p>
+        <p>The customer has paid a deposit of <%= number_to_currency(@bid.deposit_amount_in_dollars) -%>. We have retained this deposit as our finders fee.</p> 
+        <p>The amount owed you for completion of this work is  <%= number_to_currency(@bid.amount_less_deposit) -%>. Feel free to contact the customer and work out the remaining logistics.</p>
+        <%= render partial: '/users/contact_details', locals: { user: @bid.rfp.user } %>
+    </p>   
+    <% end %>
+  <% end %>
+</div>
+
+<div class="m-4">
+  <%= render "shared/components/callout",
+    headline_text: "Job Details",
+    link_container: true,
+    icon_name: "truck" do %>
+  <%= render partial: 'rfps/show', locals: {rfp: @bid.rfp}  -%>
+ <% end %>
 </div>

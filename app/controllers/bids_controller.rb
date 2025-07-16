@@ -40,11 +40,6 @@ class BidsController < ApplicationController
      redirect_to rfp_bid_path(@rfp, @bid), notice: "Bid has been rejected" and return false
   end
 
-  def confirm
-   @bid.confirm!
-     redirect_to rfp_bid_path(@rfp, @bid), notice: "Bid has been confirmed" and return false
-  end
-
   def show
     get_map_route
   end

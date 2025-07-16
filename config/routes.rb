@@ -194,7 +194,11 @@ Rails.application.routes.draw do
   end
 
   namespace :provider do
-     resources :bids, only: [ :index ]
+     resources :bids do
+       member do
+         put 'confirm'
+       end
+     end
   end
 
   resources :customers
@@ -208,7 +212,6 @@ Rails.application.routes.draw do
     resources :bids, param: :slug do
       put "accept"
       put "reject"
-      put "confirm"
     end
   end
 

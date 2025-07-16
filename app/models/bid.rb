@@ -32,14 +32,14 @@ class Bid < ApplicationRecord
     update(status: "pending")
     Message.create_message(
       from: User.system_user,
-      to: provider.user.email,
+      to: provider.user,
       subject: "Your bid has been placed",
       body: "Your bid has been placed. The requestor of the work has been notified."
     )
 
     Message.create_message(
       from: User.system_user,
-      to: rfp.user.email,
+      to: rfp.user,
       subject: "A bid has been placed on your work request.",
       body: "A bid has been placed on your work request. Please review the bid: #{full_url}"
     )
@@ -49,29 +49,37 @@ class Bid < ApplicationRecord
     amount * 10
   end
 
+  def deposit_amount_in_dollars
+    amount * 0.1
+  end
+
+  def amount_less_deposit
+    amount * 0.9
+  end
+
   def full_url
     rfp_bid_url(rfp, self, host: Rails.application.config.action_mailer.default_url_options[:host])
   end
 
   def accepted?
     status == "accepted"
+  end
+
+  def accepted!
+    update(status: "accepted")
     Message.create_message(
       from: User.system_user,
-      to: provider.user.email,
+      to: provider.user,
       subject: "Your bid has been accepted",
       body: "Your bid has been accepted. Please view the details now. #{rfp.full_url}"
     )
 
     Message.create_message(
       from: User.system_user,
-      to: rfp.user.email,
+      to: rfp.user,
       subject: "A bid has been placed on your work request.",
       body: "A bid has been placed on your work request. Please review the bid: #{full_url}"
     )
-  end
-
-  def accepted!
-    update(status: "accepted")
   end
 
   def accepted?
@@ -82,7 +90,7 @@ class Bid < ApplicationRecord
     update(status: "rejected")
     Message.create_message(
       from: User.system_user,
-      to: provider.user.email,
+      to: provider.user.email_address,
       subject: "Your bid has been rejected",
       body: "Your bid has been rejected by the requestor. There is nothing that you need to do. You are welcome to submit a new bid. #{full_url}\n --Arrowlinemoving"
     )
@@ -94,15 +102,16 @@ class Bid < ApplicationRecord
 
   def confirm!
     update(status: "confirmed")
+    rfp.complete!
     Message.create_message(
       from: User.system_user,
-      to: rfp.user.email,
+      to: rfp.user,
       subject: "Your work request has been confirmed.",
       body: "Good news! #{provider.name} has confirmed your moving job. They have committed to performing the work. Please reach out to them directly and make the final arrangments. If you have any questions, please feel free to contact us.\n --Arrowlinemoving "
     )
     Message.create_message(
       from: User.system_user,
-      to: provider.user.email,
+      to: provider.user,
       subject: "You have committed to work perform a moving job",
       body: "Congratulations. You've got work. You've committed to performing moving job. You can now see all the contact information related to this work. If you have any problems Contact us.\n --Arrowlinemoving"
     )
