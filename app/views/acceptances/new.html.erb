@@ -1,4 +1,20 @@
-<h1>Complete Your Purchase</h1>
+
+
+<%= render "shared/components/page_header", title: "Reserve your mover" -%>
+
+<%= render "shared/components/callout",
+        headline_text: "Enter your payment details",
+        link_container: true,
+        icon_name: nil do %>
+        <p> You are accepting a bid of <%= number_to_currency(@bid.amount) -%> to complete your work request <%= @bid.rfp.long_name -%> </p>
+        <p>To reserve your moving provider <%= @bid.user.provider.name -%>, you will need to pay a deposit of <%= number_to_currency(@bid.deposit_amount_in_dollars) -%></p>
+        <p>This amount will be applied to the final balance due of <%= number_to_currency(@bid.amount_less_deposit) -%></p>
+        <p>Once paid, your provider will be notified and they will have 24 hours to confirm acceptance of the work.</p>
+        <p>If the provider doesn't confirm this work, your deposit will be refunded to you.</p>
+        <p>Note: some movers may ask for a portion of this remaining balance be paid to them prior to the start of the job.  
+        The exact terms will need to be negotiated between you and the provider.</p>
+        <p>Note: In some cases, the mover may ask for additional amount, if the nature of the job was not accurately desrcribed. While we hope this never happens</p>
+        <p>If you'd like to more information, feel free to contact us.</p>
 
 <form id="payment-form">
   <%= hidden_field_tag :bid_id, @bid.id -%>
@@ -7,14 +23,14 @@
   <button id="submit-button" type="submit">Pay Now</button>
 </form>
 
+<% end %>
+
 <script nonce="<%= content_security_policy_nonce %>">
   // --- Configuration ---
   const stripePublishableKey = "<%= Rails.application.credentials.dig(:stripe, :publishable_key)-%>"; // Pass from Rails env
   const createPaymentIntentUrl = "/create_acceptance_payment_intent"; // Your Rails endpoint
-  const paymentConfirmUrl = "/payment/confirm"; // Your Rails endpoint for redirect
-  const orderAmountInCents = "<%= @amount -%>"; // Example: $20.00 - **THIS SHOULD COME FROM YOUR BACKEND/ORDER OBJECT IN A REAL APP!**
-                                // For demo purposes, hardcoding. Never trust client-side amount for production!
-
+  const paymentConfirmUrl = "/payment/confirm"; 
+  const orderAmountInCents = "<%= @amount -%>"; 
   // --- Initialize Stripe ---
   const stripe = Stripe(stripePublishableKey);
   let elements; // Will hold the Stripe Elements instance

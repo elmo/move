@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_14_153405) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_17_154628) do
   create_table "acceptances", force: :cascade do |t|
     t.integer "user_id"
     t.integer "bid_id"
@@ -350,6 +350,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_153405) do
     t.string "billing_style"
     t.string "willing_to_sign_agreement"
     t.integer "current_step", default: 0
+    t.float "latitude"
+    t.float "longitude"
+    t.integer "radius", default: 100
     t.index ["status"], name: "index_providers_on_status"
   end
 

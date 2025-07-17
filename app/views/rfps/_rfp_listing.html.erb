@@ -15,20 +15,27 @@
   <% if current_user.provider? %>
     <p>
       <% provider_bid = current_user.provider.bid_on(rfp) %>
+
       <% if provider_bid.present? %>
-       <%= link_to rfp_bid_path(provider_bid.rfp, provider_bid) do -%>
-         <%= render "shared/components/label", 
-           text: "view your bid", 
-           icon_name: nil, 
-           bg_color: "bg-green-50 dark:bg-green-950" -%>
-         <% end %>
-      <% else %>
+         <% if current_user.provider? %>
+
+           <%= link_to provider_bid_path(provider_bid) do -%>
+             <%= render "shared/components/label", 
+              text: "view your bid", 
+              icon_name: nil, 
+              bg_color: "bg-green-50 dark:bg-green-950" -%>
+          <% end %>
+
+        <% end %>
+       <% else %>
+
         <%= link_to new_rfp_bid_path(rfp) do  -%>
           <%= render "shared/components/label", 
             text: "submit a bid", 
             text_color: 'white',
             bg_color: "bg-green-50 dark:bg-green-950" -%>
         <% end %>
+
       <% end %>
     </p>
   <% end %>

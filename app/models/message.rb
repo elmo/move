@@ -77,7 +77,7 @@ class Message < ApplicationRecord
 
   def deliver_email_now
     from = SendGrid::Email.new(email: EMAIL_SENDING_ADDRESS)
-    to = SendGrid::Email.new(email: recipient_user.email_address)
+    to = SendGrid::Email.new(email: Rails.env.development? ? 'elliott.blatt@gmail.com' : recipient_user.email_address)
 
     content = SendGrid::Content.new(
       type: "text/plain",

@@ -14,6 +14,9 @@ class Provider < ApplicationRecord
   has_many :bids
 
   before_validation :generate_slug, on: :create
+  after_validation :geocode, on: :create
+
+  geocoded_by :zip
 
   def to_param
     slug

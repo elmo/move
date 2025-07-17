@@ -19,8 +19,8 @@
                 button_link_path: new_rfp_bid_path(@rfp)  %>
     <% else %>
     <%= render "shared/components/page_header",
-                title: "Bids",
-                button_link_path: nil %>
+      title: "Bids for #{@rfp.public_name} ",
+      button_link_path: nil %>
     <% end %>
 
     <div class="space-y-6">

@@ -60,6 +60,15 @@
                 placeholder: "Zip",
                 class: form_control_classes %>
       <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Maxium distance to start of a job",
+                  name: :radius do %>
+        <%= f.number_field :radius,
+                placeholder: "Number of miles",
+                class: form_control_classes %>
+      <% end %>
       
       <%= render "shared/components/forms/field",
                   form: f,

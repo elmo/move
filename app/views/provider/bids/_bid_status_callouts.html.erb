@@ -1,0 +1,57 @@
+  <% if bid.new? %>
+     <%= render "shared/components/callout",
+        headline_text: "This bid is open",
+        link_container: true,
+        link_path: provider_bid_path(bid),
+        icon_name: "check" do %>
+        <p>This bid is open. The customer is still reviewing this bid.</p>
+        <p>Your bid: <%= number_to_currency(bid.amount) -%></p>
+        <p>Updated: <%= time_ago_in_words(bid.updated_at)  -%> ago</p>
+     <% end %>
+  <% end %>
+
+  <% if bid.rejected? %>
+     <%= render "shared/components/callout",
+        headline_text: "This bid has been rejected",
+        link_container: true,
+        link_path: provider_bid_path(bid),
+        icon_name: "x" do %>
+        <p>You are welome to revise your bid if you think that you can win this job.</p>
+     <% end %>
+  <% end %>
+
+  <% if bid.accepted? %>
+     <%= render "shared/components/callout",
+        headline_text: "This bid has been accepted",
+        link_container: true,
+        link_path: provider_bid_path(bid),
+        icon_name: "check" do %>
+        <p>Congratulations! Your winning bid of <%= number_to_currency(bid.amount) -%> has been accepted by the customer.</p>
+        <p>The customer has paid a deposit of <%= number_to_currency(bid.deposit_amount_in_dollars) -%>. We have retained this deposit as our finders fee.</p> 
+        <p>The amount owed you for completion of this work is <%= number_to_currency(bid.amount_less_deposit) -%>. </p>
+        <p>Once you've confirmed the job, you will be given the customer's contact information. It's up to you to work out the final logistics and payment terms.</p> 
+        <p>Feel free to contact the customer and work out the remaining logistics.</p>
+        <p> <%= button_to 'Confirm', confirm_provider_bid_path(bid), 
+          method: :put, 
+          class: 'btn btn-secondary',
+          data: {
+             turbo_method: :put,
+             turbo_confirm: 'Confirming this bid obligates you to complete the work specified by the job details. Click Ok if you pledge to complete the work in a manner consistent with our terms of service.'
+            }
+          %></p>
+    <% end %>
+  <% end %>
+
+  <% if bid.confirmed? %>
+     <%= render "shared/components/callout",
+        headline_text: "This bid has been confirmed",
+        link_container: true,
+        link_path: provider_bid_path(bid),
+        icon_name: "check" do %>
+        <p>Congratulations! Your winning bid of <%= number_to_currency(bid.amount) -%> has been confirmed.</p>
+        <p>The customer has paid a deposit of <%= number_to_currency(bid.deposit_amount_in_dollars) -%>. We have retained this deposit as our finder's fee.</p> 
+        <p>The amount owed you for completion of this work is <%= number_to_currency(bid.amount_less_deposit) -%>. Feel free to contact the customer and work out the remaining logistics.</p>
+         <%= render partial: '/users/contact_details', locals: { user: bid.rfp.user } %>
+        </p>   
+    <% end %>
+  <% end %>

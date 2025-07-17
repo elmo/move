@@ -18,8 +18,7 @@
       button_link_text: "Create a new job request",
       button_link_path: new_customer_path(type: 'Customer') %>
     <% else %>
-      <%= render "shared/components/page_header",
-      title: "Job opportunities",
+      <%= render "shared/components/page_header", title: "Job opportunities within #{current_user.provider.radius} miles of #{current_user.provider.zip}",
       button_link_path: nil %>
     <% end %>
 

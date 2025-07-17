@@ -2,12 +2,12 @@ require 'httparty'
 class RfpsController < ApplicationController
   include Pagy::Backend
 
-  before_action :set_rfp, only: [ "show", "edit", "update", "destroy" , "publish", "unpublish"]
+  before_action :set_rfp, only: [ "show", "edit", "update", "destroy", "publish", "unpublish"]
 
   def index
     redirect_to edit_user_path and return false if current_user.roles.empty?
     if current_user.provider?
-      @rfps = Rfp.published
+      @rfps = Rfp.published.near(current_user.provider.zip, current_user.provider.radius)
     else
       @rfps = current_user.rfps
     end
@@ -47,7 +47,7 @@ class RfpsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
-  
+
   def publish
     @rfp.publish!
     redirect_to edit_rfp_path(@rfp), notice: "Your job request has been published"

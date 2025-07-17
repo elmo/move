@@ -17,14 +17,12 @@
   <%= render "rfps/rfp_subnav", active: "edit_rfp", rfp: @rfp %>
   <%= render partial: 'map_box_map', locals: { rfp: @rfp } -%>
   <%= render partial: '/users/contact_details', locals: { user: @rfp.user } %>
-  <% if current_user.provider? && current_user.provider.has_bid_on?(@rfp)%>
-    <p> You have bid on this job.</p>
-    <%= link_to rfp_bid_path(@rfp, current_user.provider.bid_on(@rfp)) do -%>
-        <%= render "shared/components/label", text: 'view my bid', icon_name: 'file' -%>
-    <% end %>
-  <% end %>
 <% end %>
+
    <%= render "shared/components/page_header", title: "#{@rfp.long_name}" -%>
+   <% if current_user.provider? && current_user.provider.has_bid_on?(@rfp)%>
+     <%= render partial: '/provider/bids/bid_status_callouts', locals: { bid: current_user.provider.bid_on(@rfp) } -%>
+   <% end %>
    <%= render partial: 'show', locals: { rfp: @rfp } -%>
   </div>
 </div>

@@ -1,3 +1,4 @@
+<%= @bid.status -%>
 <%= form_with(model: @bid,
                url: @bid.new_record? ? rfp_bids_path(@rfp) : rfp_bid_path(@rfp,@bid),
                local: true) do |f| %>
@@ -18,9 +19,9 @@
       <%= render "shared/components/forms/field",
                   form: f,
                   label: "Note to customer (All communications are monitored by staff)",
-                  name: :note do %>
+                  name: :notes do %>
 
-        <%= f.text_area :note , placeholder: "Note to customer", class: form_control_classes %>
+        <%= f.text_area :notes , placeholder: "Note to customer", class: form_control_classes %>
       <% end %>
 
 

@@ -19,18 +19,7 @@
 <% end %>
 
 <div class="space-y-12">
-  <% if @bid.confirmed? %>
-     <%= render "shared/components/callout",
-        headline_text: "This bid has been confirmed",
-        link_container: true,
-        icon_name: "truck" do %>
-        <p>Congratulations! Your winning bid of <%= number_to_currency(@bid.amount) -%> has been confirmed.</p>
-        <p>The customer has paid a deposit of <%= number_to_currency(@bid.deposit_amount_in_dollars) -%>. We have retained this deposit as our finders fee.</p> 
-        <p>The amount owed you for completion of this work is  <%= number_to_currency(@bid.amount_less_deposit) -%>. Feel free to contact the customer and work out the remaining logistics.</p>
-        <%= render partial: '/users/contact_details', locals: { user: @bid.rfp.user } %>
-    </p>   
-    <% end %>
-  <% end %>
+  <%= render partial: 'bid_status_callouts', locals: {bid: @bid } %>
 </div>
 
 <div class="m-4">

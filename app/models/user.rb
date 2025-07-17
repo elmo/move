@@ -55,6 +55,10 @@ class User < ApplicationRecord
     end
   end
 
+  def email
+    email_address
+  end
+
   def provider?
     has_role?("provider")
   end

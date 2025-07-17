@@ -22,15 +22,55 @@
 <% end %>
 
 <div class="space-y-12">
-  <div>
-    <h3><%= link_to @rfp.long_name, rfp_path(@rfp) -%></h3>
-     <%= render "shared/components/label",
-       text: @bid.status,
-       icon_name: 'file',
-       bg_color: "bg-green-50 dark:bg-green-950" -%>
-    <p>Created: <%= @bid.created_at.strftime('%B %d, %Y %I:%M %P' ) -%></p>
-    <p>Amount: <%= number_to_currency(@bid.amount) -%></p>
-  </div>
+  <% if @bid.new? %>
+     <%= render "shared/components/callout",
+        headline_text: "Bid details",
+        link_container: true,
+        icon_name: "truck" do %>
+        <p>Amount: <%= number_to_currency(@bid.amount) -%></p>   
+        <p>Provider: <%= @bid.user.provider.name -%></p>   
+        <p>Created: <%= @bid.created_at.strftime("%B %-d, %Y at %l:%M%P") -%> (<%= time_ago_in_words(@bid.created_at) -%> ago)</p>   
+        <%= button_to 'Reject', rfp_bid_reject_path(@rfp, @bid), 
+          method: :put, 
+          class: 'btn btn-secondary float-left m-4',
+          data: {
+            turbo_method: :put,
+            turbo_confirm: 'Are you sure that you would like to reject this bid?'
+          }
+        %>  
+    <% end %>
+  <% end %>
+
+  <% if @bid.rejected? %>
+     <%= render "shared/components/callout",
+        headline_text: "Bid details",
+        link_container: true,
+        icon_name: "truck" do %>
+        <p>Amount: <%= number_to_currency(@bid.amount) -%></p>   
+        <p>Provider: <%= @bid.user.provider.name -%></p>   
+        <p>Created: <%= @bid.created_at.strftime("%B %-d, %Y at %l:%M%P") -%> (<%= time_ago_in_words(@bid.created_at) -%> ago)</p>   
+        <p>If you've changed your mind, you are still able to accept this bid.</p>
+        <p>
+        <%= button_to 'Accept this bid', rfp_bid_accept_path(@rfp, @bid), 
+          method: :put, 
+          class: 'btn btn-secondary float-left m-4',
+          data: {
+            turbo_method: :put,
+            turbo_confirm: 'Are you sure that you would like to reject this bid?'
+          }
+        %>  
+       </p>
+    <% end %>
+  <% end %>
+
+  <% if @bid.pending? %>
+     <%= render "shared/components/callout",
+        headline_text: "This bid pending",
+        link_container: true,
+        icon_name: "truck" do %>
+        <p>This bid  is pending.</p>   
+    <% end %>
+  <% end %>
 
   <% if @bid.accepted? %>
      <%= render "shared/components/callout",
@@ -41,9 +81,33 @@
     </p>   
     <% end %>
   <% end %>
+
+  <% if @bid.confirmed? %>
+     <%= render "shared/components/callout",
+        headline_text: "Congratulations",
+        link_container: true,
+        icon_name: "truck" do %>
+        <p>Congratulations! This bid has been confirmed.</p>
+        <p><%= @bid.user.provider.name -%> has confirmed acceptance of your job.</p>
+        <p>You're contact informaiton has been shared with <%= @bid.user.provider.name -%>. They may contact you directly by phone or email to make final logistical arrangements for your move.</p>
+        <p>You have already paid a deposit of <%= number_to_currency(@bid.deposit_amount_in_dollars) -%></p>
+        <p>The balance remaining for this work is <%= number_to_currency(@bid.amount_less_deposit) -%></p>
+        <p>
+        It's typical that a moving services provider will ask for a portion of remaining balance at the beginning of the job. And the remainder of the balance after the work has been completed. The exact terms will have to be negotiated between you and 
+        <%= @bid.user.provider.name -%> </p>
+        <p>Thank you for using Arrowline Moving.</p>
+    <% end %>
+  <% end %>
 </div>
 
 <div class="m-4">
-  <%= render "shared/components/page_sub_header", title: 'Job Details' %>
-  <%= render partial: 'rfps/show', locals: {rfp: @rfp}  -%>
+  <% if false %>
+  <%= render "shared/components/callout",
+    headline_text: "Job Details",
+    link_container: true,
+    icon_name: "truck" do %>
+  <%= render partial: 'rfps/show', locals: {rfp: @bid.rfp}  -%>
+ <% end %>
+
+ <% end %>
 </div>

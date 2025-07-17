@@ -26,6 +26,8 @@ class Rfp < ApplicationRecord
   after_validation :calculate_distance
   after_save :set_move_distance
 
+  geocoded_by :zip
+
   def ready_to_publish?
     required_fields.each do |field|
       return false if send(field).blank?
@@ -81,10 +83,14 @@ class Rfp < ApplicationRecord
 
   def type_name
     {
-      "MovingRequest" => "moving job",
-      "HaulingRequest" => "hauling job",
-      "CourierRequest" => "courier job"
+      "MovingRequest" => "Moving job",
+      "HaulingRequest" => "Hauling job",
+      "CourierRequest" => "Mourier job"
     }[self.class.to_s]
+  end
+
+  def public_name
+    "#{type_name} #{name}"
   end
 
   def to_param
