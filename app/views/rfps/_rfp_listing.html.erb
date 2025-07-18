@@ -4,6 +4,7 @@
            description: t('scaffold.created_ago', 
                           time: time_ago_in_words(rfp.created_at), 
                           default: 'Created %{time} ago') do %>
+  <p><%= rfp.distance -%> miles form <%= rfp.load_address -%></p> 
   <% if current_user.customer? %>
     <p><%= render "shared/components/label", text: "#{rfp.status}", icon_name: "tag" %></p>
   <% end %>

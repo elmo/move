@@ -20,7 +20,15 @@
                 icon_name: "circle-user",
                 link_text: t('user_menu.my_profile', default: 'My Profile') %>
 
-    <%# render "layouts/global/account_menu" %>
+    <% if current_user.provider? %>
+       <%= render "shared/components/dropdown/dropdown_link",
+                link_path: edit_provider_path(current_user.provider),
+                icon_name: "circle-user",
+                link_text: 'My Business Profile'  %>
+    <% end %>
+
+
+    <%= render "layouts/global/account_menu" %>
 
     <%= render "shared/components/dropdown/dropdown_link",
                 link_path: session_path,

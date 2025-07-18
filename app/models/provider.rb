@@ -51,6 +51,12 @@ class Provider < ApplicationRecord
 
   def applied!
     update(status: "pending review", applied_at: Time.zone.now)
+    Message.create_message(
+      from: User.system_user,
+      to: user,
+      subject: "An provider application needs to be reviewed.",
+      body: "Please review the application here.\n #{review_url}"
+    )
   end
 
   def pending_review?
@@ -60,6 +66,12 @@ class Provider < ApplicationRecord
   def approve!
     update(status: "approved")
     user.add_role('provider')
+    Message.create_message(
+      from: User.system_user,
+      to: user,
+      subject: "Your application has been approved",
+      body: "Congratulations! Your application to be a trusted moving services in our network has been approved. You can now bid on jobs."
+    )
   end
 
   def approved?
@@ -69,6 +81,12 @@ class Provider < ApplicationRecord
   def reject!
     update(status: "rejected")
     user.remove_role('provider')
+    Message.create_message(
+      from: User.system_user,
+      to: user,
+      subject: "Your application has been rejected",
+      body: "Your application to be a trusted moving services in our network has been rejected. If you'd like more information and, please contact us."
+    )
   end
 
   def rejected?
@@ -82,7 +100,6 @@ class Provider < ApplicationRecord
       "active"
     ]
   end
-
 
   def questionnaire_fields
     [
@@ -152,6 +169,10 @@ end
 
   def full_url
     provider_url(self, host: Rails.application.config.action_mailer.default_url_options[:host])
+  end
+
+  def review_url
+    admin_provider_url(self, host: Rails.application.config.action_mailer.default_url_options[:host])
   end
 
   def total_bid_amount

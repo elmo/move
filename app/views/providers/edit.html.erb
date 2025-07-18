@@ -13,7 +13,7 @@
                text: @provider.name %>
     <%= render "shared/components/breadcrumbs/divider" %>
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: 'Business details' %>
+               text: 'Business profile' %>
   <% end %>
 <% end %>
 
@@ -22,8 +22,20 @@
 <% end %>
 
 <div class="space-y-12">
-  <%= render "shared/components/page_header", title: 'Business details' %>
-     <% if @provider.application_ready_to_submit? %>
+  <%= render "shared/components/page_header", title: 'Business profile' %>
+
+       <% if @provider.pending_review? %>
+          <%= render "shared/components/callout",
+              headline_text: "Your application is being reviewed",
+              link_container: true,
+              button_icon: "check",
+              button_icon_position: "after",
+              icon_name: "truck" do %>
+              You will usually hear back from using within 48 hours of submitting. 
+          <% end %>
+       <% end %>
+
+     <% if @provider.application_ready_to_submit? && !@provider.pending_review?  %>
 
        <% if @provider.agreement.blank? %>
           <%= render "shared/components/callout",
@@ -48,9 +60,12 @@
               button_icon: "arrow-right",
               button_icon_position: "after",
               icon_name: "truck" do %>
-              Submit your application. Once we've approved your appliction, you can start accepting clients. 
+              Submit your application. Once we've approved your application, you can start accepting clients. 
           <% end %>
        <% end %>
+
+
+
     <% end %>
   <%= render 'form', provider: @provider %>
 </div>
