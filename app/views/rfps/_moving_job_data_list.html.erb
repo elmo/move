@@ -1,24 +1,17 @@
 <%= render "shared/components/data_list/data_list", border_top_and_bottom: true do %>
   <%= render "shared/components/data_list/data_list_item", label: "Where are you moving from?", value: rfp.load_address %>
-  <% if rfp.is_a?(MovingRequest)%>
-    <%= render "shared/components/data_list/data_list_item", label: "Where are you moving to?", value: rfp.unload_address %>
-    <%= render "shared/components/data_list/data_list_item", label: "Total distance", value: pluralize(rfp.move_distance, 'miles') %>
-  <% end %>
+  <%= render "shared/components/data_list/data_list_item", label: "Where are you moving to?", value: rfp.unload_address %>
+  <%= render "shared/components/data_list/data_list_item", label: "Total distance", value: pluralize(rfp.move_distance, 'miles') %>
   <%= render "shared/components/data_list/data_list_item", label: "When would you like to move?", value: rfp.move_date.try(:strftime, "%B %d, %Y") %>
-  <% if rfp.is_a?(MovingRequest)%>
-   <%= render "shared/components/data_list/data_list_item", label: "What is the earliest that you can move?", value: rfp.earliest_move_date.try(:strftime, "%B %d, %Y") %>
-   <%= render "shared/components/data_list/data_list_item", label: "What date must your move be completed by?", value: rfp.move_finish_date.try(:strftime, "%B %d, %Y") %>
-   <%= render "shared/components/data_list/data_list_item", label: "Type of move", value: rfp.move_type %>
-   <%= render "shared/components/data_list/data_list_item", label: "How many movers are you requesting?", value: rfp.number_of_movers_requested %>
-  <% end %>
+  <%= render "shared/components/data_list/data_list_item", label: "What is the earliest that you can move?", value: rfp.earliest_move_date.try(:strftime, "%B %d, %Y") %>
+  <%= render "shared/components/data_list/data_list_item", label: "What date must your move be completed by?", value: rfp.move_finish_date.try(:strftime, "%B %d, %Y") %>
+  <%= render "shared/components/data_list/data_list_item", label: "Type of move", value: rfp.move_type %>
+  <%= render "shared/components/data_list/data_list_item", label: "How many movers are you requesting?", value: rfp.number_of_movers_requested %>
   <%= render "shared/components/data_list/data_list_item", label: "Loading location stairs / elevator?", value: rfp.loading_stairs.collect(&:name).join(",") -%>
   <%= render "shared/components/data_list/data_list_item", label: "What floor is the loading location on?", value: rfp.loading_floor %>
   <%= render "shared/components/data_list/data_list_item", label: "Unloading location stairs / elevator?", value: rfp.unloading_stairs.collect(&:name).join(",") -%>
-  <% if rfp.is_a?(MovingRequest)%>
   <%= render "shared/components/data_list/data_list_item", label: "What floor is the unloading location on?", value: rfp.unloading_floor %>
   <%= render "shared/components/data_list/data_list_item", label: "Listed of heavy items", value: rfp.specialty_items.collect(&:name).join(",") -%>
   <%= render "shared/components/data_list/data_list_item", label: "Please describe the heavy items involved", value: rfp.specialty_items_details -%>
   <%= render "shared/components/data_list/data_list_item", label: "Do you need assistance with moving supplies?", value: rfp.need_assistance_with_moving_supplies -%>
-  <%# render "shared/components/data_list/data_list_item", label: "Are you interested in donation or junk removal?", value: rfp.donation_junk_removal -%>
-  <% end %>
 <% end %>

@@ -18,6 +18,7 @@ class Bid < ApplicationRecord
 
   after_validation :set_status_to_new_if_amount_has_changed
   before_save :send_modified_bid_message_to_users
+  after_destroy :notify_users_about_bid_retraction
 
   def to_param
     slug
@@ -135,6 +136,21 @@ class Bid < ApplicationRecord
 
 
   private
+
+  def notify_users_about_bid_retraction
+    Message.create_message(
+      from: User.system_user,
+      to: rfp.user,
+      subject: "A bid on your work request has been retracted.",
+      body: "#{provider.name} has retracted their bid.\n\n No action is required.\n\n --Arrowlinemoving"
+    )
+    Message.create_message(
+      from: User.system_user,
+      to: provider.user,
+      subject: "You have retracted your bid",
+      body: "You bid has been retracted\n --Arrowlinemoving"
+    )
+  end
 
   def send_modified_bid_message_to_users 
     if status_changed? && status == 'new' && status_was == 'rejected'

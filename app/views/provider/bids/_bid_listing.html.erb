@@ -5,24 +5,29 @@
                           time: time_ago_in_words(bid.created_at), 
                           default: 'Created %{time} ago') do %>
 
+   <p>
+   <%= render "shared/components/label",
+    text: "#{bid.rfp.type_name}",
+    icon_name: icon_for_job_type(type: bid.rfp.type) %>
+
+   <%= link_to rfp_path(bid.rfp), target: '_blank'  do -%>
+     <%= bid.rfp.long_name -%>
+   <% end %>
+   </p>
+
+   <p> <%= bid.rfp.move_date.strftime("%B %d, %Y") -%> </p>
+
+
+   <% if current_user.provider? && bid.accepted? %>
+     <p>   <%= button_to 'Confirm', confirm_provider_bid_path(bid), method: :put, class: 'btn btn-secondary' %> </p>
+   <% end %>
+
+  <p><%= number_to_currency(bid.amount) -%></p>
+
   <%= render "shared/components/label", 
      text: bid.status, 
      icon_name: 'file', 
      bg_color: "bg-green-50 dark:bg-green-950" -%>
-
-   <%= link_to provider_path(bid.user.provider), target: '_blank'  do -%>
-     <%= bid.user.provider.name -%>
-   <% end %>
-
-    <p><%= number_to_currency(bid.amount) -%></p>
-
-    <%= link_to provider_bid_path(bid) do -%>
-      <%= render "shared/components/label", text: 'view bid', icon_name: 'file' -%>
-    <% end %>
-
-   <% if current_user.provider? && bid.accepted? %>
-      <%= button_to 'Confirm', confirm_provider_bid_path(bid), method: :put, class: 'btn btn-secondary' %>  
-   <% end %>
 
   <% if current_user.provider? %>
     <%= render "bid_settings", bid: bid %>

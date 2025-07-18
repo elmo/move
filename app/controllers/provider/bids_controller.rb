@@ -16,6 +16,11 @@ class Provider::BidsController < ApplicationController
     @rfp = @bid.rfp
   end
 
+  def destroy
+    @bid.destroy!
+    redirect_to provider_bids_path, notice: "Bid retracted"
+  end
+
   private
 
   def set_bid

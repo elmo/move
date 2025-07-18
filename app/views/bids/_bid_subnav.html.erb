@@ -1,15 +1,20 @@
 <%= render "shared/components/subnav/subnav",
              back_link_path: rfp_bids_path(@rfp) do %>
 
-    <%= render "shared/components/subnav/subnav_link",
+ <% if current_user.provider? && bid.user == current_user %>
+     <%= render "shared/components/subnav/subnav_link",
              link_path: edit_rfp_bid_path(@rfp, bid),
              link_text: "Modify bid",
              icon_name: "square-pen",
              active: current_page?(edit_rfp_bid_path(@rfp,bid) ) %>
+ <% end %> 
 
+
+ <% if current_user.customer? && bid.rfp.user == current_user %>
   <%= render "shared/components/subnav/subnav_link",
              link_path: rfp_bid_path(@rfp, bid),
              link_text: 'Details',
              icon_name: "arrow-right",
              active: current_page?(rfp_bid_path(@rfp,bid)) %>
+  <% end %>
 <% end %>

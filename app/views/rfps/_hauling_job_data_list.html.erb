@@ -1,0 +1,5 @@
+<%= render "shared/components/data_list/data_list", border_top_and_bottom: true do %>
+  <%= render "shared/components/data_list/data_list_item", label: "Where are you located?", value: rfp.load_address %>
+  <%= render "shared/components/data_list/data_list_item", label: "When would you like to the work completed?", value: rfp.move_date.try(:strftime, "%B %d, %Y") %>
+  <%= render "shared/components/data_list/data_list_item", label: "What are you hauling?", value: rfp.what_are_you_hauling -%>
+<% end %>

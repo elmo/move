@@ -97,6 +97,11 @@ class Rfp < ApplicationRecord
     slug
   end
 
+  def force_geocode
+    calculate_distance
+    save
+  end
+
   def calculate_distance
     if self.load_address.present? && self.latitude.blank?
        coordinates = Geocoder.search(load_address).first.coordinates
@@ -104,11 +109,19 @@ class Rfp < ApplicationRecord
        self.longitude = coordinates[1]
      end
 
-    if self.unload_address.present? && self.unload_latitude.blank?
+    if self.is_a?(MovingRequest)
+
+      if self.unload_address.present? && self.unload_latitude.blank?
        coordinates = Geocoder.search(unload_address).first.coordinates
        self.unload_latitude = coordinates[0]
        self.unload_longitude = coordinates[1]
      end
+
+    elsif self.is_a?(HaulingRequest)
+       coordinates = Geocoder.search(load_address).first.coordinates
+       self.unload_latitude = coordinates[0]
+       self.unload_longitude = coordinates[1]
+    end
   end
 
   def set_move_distance

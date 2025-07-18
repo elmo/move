@@ -9,10 +9,11 @@
 <% end %>
 <div class="space-y-12">
   <% if @bids.any? %>
-    <%= render "shared/components/page_header", 
-      title: "My Bids", 
-      button_link_path: nil %>
+    <%= render "shared/components/page_header", title: "My Bids", button_link_path: nil %>
+    <p> You have placed <%= pluralize(current_user.provider.bids.count, 'bid') -%> with a total value of 
+    <%= number_to_currency(current_user.provider.total_bid_amount) -%>. </p>
     <% end %>
+
     <div class="space-y-6">
       <%= render "shared/components/listings/listings" do %>
         <% @bids.each do |bid| %>

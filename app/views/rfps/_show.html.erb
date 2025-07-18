@@ -1,3 +1,7 @@
 <div class="space-y-12 m-4">
-  <%= render partial: "rfps/rfp_data_list", locals: { rfp: rfp } -%>
+  <% if rfp.is_a?(MovingRequest)%>
+    <%= render partial: "rfps/moving_job_data_list", locals: { rfp: rfp } -%>
+  <% elsif rfp.is_a?(HaulingRequest) %>
+    <%= render partial: "rfps/hauling_job_data_list", locals: { rfp: rfp } -%>
+  <% end %>
 </div>

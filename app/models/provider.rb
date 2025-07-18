@@ -154,6 +154,10 @@ end
     provider_url(self, host: Rails.application.config.action_mailer.default_url_options[:host])
   end
 
+  def total_bid_amount
+    bids.pluck(:amount).sum
+  end 
+
   private
 
   def generate_slug

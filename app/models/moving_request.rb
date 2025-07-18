@@ -12,17 +12,6 @@ class MovingRequest < Rfp
   validates :need_assistance_with_moving_supplies, presence: true, if: -> { current_step.to_i > 1 }
   validates :load_address, length: { is: 5 }, if: -> { current_step.to_i > 0 }
   validates :unload_address, length: { is: 5 }, if: -> { current_step.to_i > 1 }
-
-
-  # validates :donation_junk_removal, presence: true, if: -> { current_step.to_i > 1 }
-  # validates :loading_stairs, presence: true, if: -> { current_step.to_i > 1 }
-  # validates :loading_floor, presence: true, if: -> { current_step.to_i > 1 }
-  # validates :loading_elevator, presence: true, if: -> { current_step.to_i > 1 }
-  # validates :loading_stairs_details, presence: true, if: -> { current_step.to_i > 1 && loading_stairs == "Yes" }
-  # validates :specialty_items_details, presence: true, if: -> { current_step.to_i > 1 }
-  # validates :unloading_elevator, presence: true, if: -> { current_step.to_i > 1 }
-  # validates :unloading_stairs_details, presence: true, if: -> { current_step.to_i > 1 && loading_stairs == "Yes" }
-
   def required_fields
     [
       :load_address,

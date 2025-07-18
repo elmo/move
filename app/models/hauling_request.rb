@@ -9,7 +9,6 @@ class HaulingRequest < Rfp
     [
       :load_address,
       :move_date,
-      :load_address,
       :what_are_you_hauling
       ]
    end
