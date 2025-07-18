@@ -141,5 +141,10 @@ module ApplicationHelper
      qr = RQRCode::QRCode.new(url)
      qr.as_png(size: 200, border_modules: 2).to_data_url
    end
+
+   def qr_code_for_home_page
+     qr = RQRCode::QRCode.new("https://arrowlinemoving.com")
+     qr.as_png(size: 200, border_modules: 2).to_data_url
+   end
   
 end

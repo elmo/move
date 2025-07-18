@@ -247,6 +247,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
+  get 'qr', to: "site#qr", as: :qr
   get 'faq', to: "site#faq", as: :faq
   get 'about', to: "site#about", as: :about
   root "site#home"
