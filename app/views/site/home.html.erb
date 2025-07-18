@@ -1,4 +1,57 @@
-<%= render "shared/components/page_header", title: "Welcome to Arrowline Moving " -%>
-<p>
-<%= image_tag qr_code_for_current_page %>
-</p>
+<%# render "shared/components/page_header", title: "Welcome to Arrowline Moving Services " -%>
+<%# render "shared/components/page_sub_header", title: "Your Trusted Moving Matchmaker!" -%>
+
+<%= render "shared/components/callout",
+    headline_text: "Ready to move?",
+    link_container: true,
+    link_path:  new_registration_path,
+    container_margin:  'm-4',
+    icon_name: "house" do %>
+Whether you’re relocating across town or need help with a big move, Arrowline Moving Services makes it effortless.
+Start now and let us handle the heavy lifting!
+Find the Perfect Mover: Get matched with trusted, local movers tailored to your needs.
+<% end %>
+
+<%= render "shared/components/callout",
+    headline_text: "Fast, simple, and stress-free?",
+    link_container: true,
+    link_path:  new_registration_path,
+    container_margin:  'm-4',
+    icon_name: "check" do %>
+Looking for reliable movers or ready to offer your moving services?
+Arrowline Moving Services connects people who need moving help with top-rated movers in their area.
+<% end %>
+
+<%= render "shared/components/callout",
+    headline_text: "How it works?",
+    link_container: true,
+    link_path:  new_registration_path,
+    container_margin:  'm-4',
+    icon_name: "square-library" do %>
+Tell Us Your Needs: Enter your moving details – location, size, and timeline.
+Get Matched: Instantly connect with movers who fit your requirements.
+Book with Confidence: Choose the mover that’s right for you and schedule your move!
+<% end %>
+
+<%= render "shared/components/callout",
+    headline_text: "Why Choose Arrowline Moving Services?",
+    link_container: true,
+    link_path:  new_registration_path,
+    container_margin:  'm-4',
+    icon_name: "smile" do %>
+  Compare quotes, reviews, and services in one place.
+  Save Time & Money: Competitive pricing and transparent options ensure you get the best deal.
+  For Movers: Grow your business by connecting with customers who need your expertise.
+
+<% end %>
+
+<%= render "shared/components/callout",
+    headline_text: "Do you offer moving services?",
+    link_container: true,
+    link_path:  new_registration_path,
+    container_margin:  'm-4',
+    icon_name: "truck" do %>
+    Join our network and get matched with clients who need your services.
+<% end %>
+
+
