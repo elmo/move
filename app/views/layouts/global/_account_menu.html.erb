@@ -68,12 +68,12 @@ border_color = "border-gray-200 dark:border-gray-700" %>
       data-components--toggle-target="toggleable"
     >
 
-      <%= render "shared/components/dropdown/dropdown_link",
+      <%# render "shared/components/dropdown/dropdown_link",
       link_path: account_settings_path(current_account.slug),
       icon_name: "settings",
       link_text: t("teams.account_menu.settings", default: "Settings") %>
 
-      <%= render "shared/components/dropdown/dropdown_link",
+      <%# render "shared/components/dropdown/dropdown_link",
       link_path: account_users_path(current_account.slug),
       icon_name: "users",
       link_text: t("teams.account_menu.team_members", default: "Team Members") %>

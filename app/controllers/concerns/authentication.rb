@@ -40,7 +40,16 @@ module Authentication
     end
 
     def after_authentication_url
-      session.delete(:return_to_after_authenticating) || current_user.provider? ? provider_url(current_user.provider) :  root_url
+      if current_user.admin?
+        starting_path = admin_users_path
+      elsif current_user.customer?
+        starting_path = rfps_path
+      elsif current_user.provider?
+        starting_path = provider_url(current_user.provider)
+      else
+        starting_path = root_path
+      end
+      session.delete(:return_to_after_authenticating) || starting_path
     end
 
     def start_new_session_for(user)

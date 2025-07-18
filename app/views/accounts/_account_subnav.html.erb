@@ -11,6 +11,7 @@
     <% team_active = [account_users_path(current_account.slug),
                       edit_account_user_path(current_account.slug, current_user.account_user(current_account).id),
                       new_invitation_path(current_account.slug)].include?(request.path) %>
+
     <%= render "shared/components/subnav/subnav_link",
                 link_path: account_users_path(current_account.slug),
                 link_text: t('teams.accounts.team_members', default: 'Team Members'),
