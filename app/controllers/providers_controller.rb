@@ -88,7 +88,9 @@ class ProvidersController < ApplicationController
       :guarantee_arrival_windows,
       :billing_style,
       :willing_to_sign_agreement,
-      :current_step
+      :current_step,
+      :radius,
+      images: []
     )
   end
 end

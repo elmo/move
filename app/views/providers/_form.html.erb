@@ -72,26 +72,17 @@
       
       <%= render "shared/components/forms/field",
                   form: f,
-                  label: "License_number",
+                  label: "License umber",
                   name: :license_number do %>
         <%= f.text_field :license_number,
                 placeholder: "Your business license number",
                 class: form_control_classes %>
       <% end %>
 
-      <% if false %>
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: "Description",
-                  name: :description do %>
-        <%= f.text_area :description,
-                placeholder: "Please enter a short description describing your business",
-                class: form_control_classes%>
-      <% end %>
 
-    <% end  %>
+      <%= render partial: 'dropzone_files_upload', locals: {form: f, attachments: @provider.images  } -%>
 
-       <%= render "shared/components/page_sub_header", title: "Business Legitimacy & Operations" -%>
+      <%= render "shared/components/page_sub_header", title: "Business Legitimacy & Operations" -%>
 
       <%= render "shared/components/forms/field",
                   form: f,

@@ -70,6 +70,6 @@ class RfpsController < ApplicationController
   end
 
   def rfp_params
-    params.require(:rfp).permit(:move_date, :type, :move_type, :load_address, :unload_address, :number_of_movers_requested, :estimated_time_in_hours, :loading_stairs, :loading_floor, :loading_stairs_details, :unloading_stairs, :unloading_stairs_details, :unloading_floor, :specialty_items_details, :need_assistance_with_moving_supplies, :donation_junk_removal, :slug, :has_specialty_items, :loading_elevator, :unloading_elevator, :earliest_move_date, :move_finish_date, :current_step, :what_are_you_hauling, :hauling_notes, :hauling_distance_in_miles,  specialty_item_ids: [], loading_stair_ids: [], unloading_stair_ids: [])
+    params.require(:rfp).permit(:move_date, :type, :move_type, :load_address, :unload_address, :number_of_movers_requested, :estimated_time_in_hours, :loading_stairs, :loading_floor, :loading_stairs_details, :unloading_stairs, :unloading_stairs_details, :unloading_floor, :specialty_items_details, :need_assistance_with_moving_supplies, :donation_junk_removal, :slug, :has_specialty_items, :loading_elevator, :unloading_elevator, :earliest_move_date, :move_finish_date, :current_step, :what_are_you_hauling, :hauling_notes, :hauling_distance_in_miles,  specialty_item_ids: [], loading_stair_ids: [], unloading_stair_ids: [], images: [])
   end
 end

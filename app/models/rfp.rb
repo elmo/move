@@ -11,6 +11,7 @@ class Rfp < ApplicationRecord
   accepts_nested_attributes_for :unloading_stairs
 
   has_many :bids
+  has_many_attached :images
 
   scope :is_new, -> { where(status: "new") }
   scope :published, -> { where(status: "published") }

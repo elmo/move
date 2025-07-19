@@ -189,6 +189,10 @@
         <%= f.select :donation_junk_removal, yes_or_no_options, class: form_control_classes %>
       <% end %>
 
+      <%= render "shared/components/page_sub_header", title: "Please upload a few photos to let our movers know roughly how big the job is." -%>
+
+     <%= render partial: '/providers/dropzone_files_upload', locals: {form: f, attachments: @rfp.images  } -%>
+
     <% end %>
 
     <!-- new record -->

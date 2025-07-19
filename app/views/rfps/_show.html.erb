@@ -4,4 +4,7 @@
   <% elsif rfp.is_a?(HaulingRequest) %>
     <%= render partial: "rfps/hauling_job_data_list", locals: { rfp: rfp } -%>
   <% end %>
+  <% rfp.images.each do |image| %>
+     <%= image_tag image.variant(resize_to_fill: [300, 300, { crop: :centre }]), draggable: "true", class: "m-4" %>
+  <% end %>
 </div>

@@ -30,6 +30,11 @@
     <% end %>
     <% end %>
 
+    <%= render "shared/components/page_sub_header", title: "Uploaded files" %>
+    <% @provider.images.each do |image| -%>
+      <%= image_tag image.variant(resize_to_fill: [300, 300, { crop: :centre }]), draggable: "true", class: "m-4" %>
+    <% end %>
+
     <% if @provider.agreement.present? %>
       <% @agreement = @provider.agreement  %>
        <%= render "shared/components/page_header", title: 'Provider Agreement' %>

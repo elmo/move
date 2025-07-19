@@ -13,6 +13,8 @@ class Provider < ApplicationRecord
   has_one :agreement
   has_many :bids
 
+  has_many_attached :images
+
   before_validation :generate_slug, on: :create
   after_validation :geocode, on: :create
 

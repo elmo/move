@@ -1,11 +1,32 @@
-<div>
-   <%= render "shared/components/callout",
-      headline_text: "Frequently Asked Questions",
-      link_container: true,
-      icon_name: nil do %>
 
-     FAQ
+<%= render "shared/components/faq/faq", headline: "Frequently asked questions" do %>
 
-      <% end %>
+  <%= render "shared/components/faq/question", question: "What are you?" do %>
+    We are a lead generation service. We connect movers with people who need to move. 
+  <% end %>
 
-</div>
+  <%= render "shared/components/faq/question", question: "What makes us so good?" do %>
+    We thorougly vette our providers to make sure they are reputable and will do what they say the will? 
+  <% end %>
+
+  <%= render "shared/components/faq/question", question: "Where are you located?" do %>
+    San Francisco, California.
+  <% end %>
+
+  <%= render "shared/components/faq/question", question: "Is your service free?" do %>
+    Yes, if you seaching for movers, our service is free. To book a moving job, you will need to pay deposit if the bid amount. This deposit is applied to your move cost.  For example, if you accept a bid for $1000, you will be required to pay a $100 deposit to secure the services.  However, amount will be applied to the balance owed the moving company performing the work.
+  <% end %>
+
+  <%= render "shared/components/faq/question", question: "I am a mover and I would like to join your network." do %>
+    Great, register and fill out our provider application. We will review the information provided,and once approved.
+  <% end %>
+
+  <%= render "shared/components/faq/question", question: "As a mover, how much does it cost to be a member?" do %>
+    We have three plans meant to serve all sizes of businesses. We are very affordable ranging from $50 to $200. One completed job will make participation in your network more than worth it. See our <%= link_to "Provider plans", plans_path  -%>.
+  <% end %>
+
+<% end %>
+
+<%= render "shared/components/tooltip" do %>
+  Tool tip content goes here.
+<% end %>
