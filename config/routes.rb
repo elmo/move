@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # Route for Stripe to redirect to after payment completion (e.g., 3D Secure)
   #get 'payment_confirm', to: 'payments#confirm', as: :payment_confirm
 
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+
   post 'create_acceptance_payment_intent', to: 'acceptances#create_acceptance_payment_intent'
   # Route for Stripe to redirect to after payment completion (e.g., 3D Secure)
   get 'payment/confirm', to: 'acceptances#confirm', as: :payment_confirm

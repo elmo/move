@@ -43,6 +43,7 @@ gem 'httparty'
 gem 'twilio-ruby'
 gem 'sendgrid-ruby'
 gem 'aws-sdk-s3', '~> 1.142'
+gem 'mission_control-jobs'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
