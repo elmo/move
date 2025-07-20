@@ -1,8 +1,11 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
-  #
+
+  Rails.application.configure do
+    MissionControl::Jobs.base_controller_class = "AdminController"
+  end
+
   config.force_ssl = true
 
   # Make code changes take effect immediately without server restart.
