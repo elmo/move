@@ -46,6 +46,8 @@ module Authentication
         starting_path = rfps_path
       elsif current_user.provider?
         starting_path = provider_url(current_user.provider)
+      elsif current_user.phone.blank?
+        starting_path = edit_user_profile_path
       else
         starting_path = root_path
       end

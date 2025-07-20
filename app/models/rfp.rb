@@ -129,7 +129,7 @@ class Rfp < ApplicationRecord
     update(move_distance: Geocoder::Calculations.distance_between(
       [ latitude, longitude ],
       [ unload_latitude, unload_longitude ]).to_i
-          ) if move_distance.blank? && latitude.present? && longitude.present?
+          ) if move_distance.blank? && latitude.present? && longitude.present? && unload_latitude.present? && unload_longitude.present?
   end
 
   def center_coordinates
