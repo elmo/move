@@ -50,6 +50,12 @@ class ProvidersController < ApplicationController
     redirect_to edit_provider_path(provider_slug: @provider.slug), notice: "Image removed successfully."
   end
 
+  def delete_attachment
+    attachment = @provider.images.find(params[:attachment_id]) # For has_many_attached
+    attachment.purge_later
+    redirect_back(fallback_location: rfp_path(@provider), notice: 'Attachment file deleted successfully.')
+  end
+
   private
 
   def set_provider

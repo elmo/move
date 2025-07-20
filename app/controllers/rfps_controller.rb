@@ -2,7 +2,7 @@ require 'httparty'
 class RfpsController < ApplicationController
   include Pagy::Backend
 
-  before_action :set_rfp, only: [ "show", "edit", "update", "destroy", "publish", "unpublish"]
+  before_action :set_rfp, only: [ "show", "edit", "update", "destroy", "publish", "unpublish", "delete_attachment"]
 
   def index
     redirect_to edit_user_path and return false if current_user.roles.empty?
@@ -61,6 +61,12 @@ class RfpsController < ApplicationController
   def destroy
     @rfp.destroy
     redirect_to rfps_path, notice: "Request was successfully destroyed."
+  end
+
+  def delete_attachment
+    attachment = @rfp.images.find(params[:attachment_id]) # For has_many_attached
+    attachment.purge_later
+    redirect_back(fallback_location: rfp_path(@rfp), notice: 'Attachment file deleted successfully.')
   end
 
   private

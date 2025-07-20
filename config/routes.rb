@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   # Route for Stripe to redirect to after payment completion (e.g., 3D Secure)
   #get 'payment_confirm', to: 'payments#confirm', as: :payment_confirm
 
-  # Route for the API endpoint to create a PaymentIntent
   post 'create_acceptance_payment_intent', to: 'acceptances#create_acceptance_payment_intent'
   # Route for Stripe to redirect to after payment completion (e.g., 3D Secure)
   get 'payment/confirm', to: 'acceptances#confirm', as: :payment_confirm
@@ -18,6 +17,8 @@ Rails.application.routes.draw do
 
   # Messages
   resources :messages, param: :slug
+
+  #resources :active_storage_attachments, only: [:destroy, :show], as: :attachment
 
   # Admin > Commerce > Subscriptions
   get "admin/commerce/subscriptions", to: "admin/commerce/subscriptions#index", as: :admin_subscriptions
@@ -165,8 +166,7 @@ Rails.application.routes.draw do
   patch ":account_slug/update_account", to: "accounts#update", as: :update_account
   delete ":account_slug/destroy_account", to: "accounts#destroy", as: :destroy_account
 
-  # Agreements
-  #
+  
   # Admin > Users
   get "admin/users", to: "admin/users#index", as: :admin_users
   get "admin/users/:id", to: "admin/users#show", as: :admin_user
@@ -202,13 +202,14 @@ Rails.application.routes.draw do
   end
 
   resources :customers
-
   resources :rfps, param: :slug do
     member do
       get "publish"
       get "unpublish"
       put "complete"
+      delete "delete_attachment", providers: :delete_attachment, ad: :delete_attachment 
     end
+
     resources :bids, param: :slug do
       put "accept"
       put "reject"
@@ -247,6 +248,8 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
+  get "attachments/:id", to: "attachments#show", as: "attachment"
+  delete "attachments/:id/purge", to: "attachments#purge", as: "purge_attachment"
   get 'qr', to: "site#qr", as: :qr
   get 'faq', to: "site#faq", as: :faq
   get 'about', to: "site#about", as: :about

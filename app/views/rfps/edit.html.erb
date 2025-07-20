@@ -22,7 +22,7 @@
 <div class="space-y-12">
   <%= render "shared/components/page_header", title: "Edit job request" -%>
   <%= render partial: "publishing_status", locals: { rfp: @rfp } -%>
-  <% if @rfp.is_new? %>
+  <% if true or @rfp.is_new? %>
     <% if @rfp.is_a?(MovingRequest) %>
       <%= render "moving_form", rfp: @rfp %>
     <% else %>
@@ -30,3 +30,5 @@
     <% end %>
   <% end %>
 </div>
+
+<%= render partial: '/shared/attached_photos', locals: { attachable: @rfp} -%>

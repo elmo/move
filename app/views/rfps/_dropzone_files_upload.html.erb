@@ -25,8 +25,9 @@
   </div>
   <div id="dz-previews-container" data-dropzone-target="previewsContainer" class="previews-container">
     <% attachments.each do |attachment| %>
+      <%# next if attachment.persisted? %>
       <div class="dz-preview dz-file-preview preview-file">
-        <%= image_tag attachment_path(attachment.blob.key), size: '50x50' %>
+          <%= image_tag attachment_path(attachment.blob.key), size: '50x50' %>
         <%= form.hidden_field(file_input_name, value: attachment.signed_id, multiple: true) %>
         <div class="dz-progress"><div class="dz-upload" data-dz-uploadprogress style="width: 100%;"></div></div>
         <i class="fa-light fa-file file-icon"></i>
@@ -43,6 +44,9 @@
       <div class="dz-preview dz-file-preview preview-file">
         <div class="dz-progress"><div class="dz-upload" data-dz-uploadprogress style="width: 0;"></div></div>
         <i class="fa-light fa-file file-icon"></i>
+        <div class="dz-image">
+          <img data-dz-thumbnail />
+        </div>
         <div class="dz-details file-details">
           <div class="dz-filename"><span data-dz-name></span></div>
           <div class="dz-size" data-dz-size></div>

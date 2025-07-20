@@ -1,0 +1,9 @@
+<div class="space-y-4">
+  <% attachable.images.each do |image| %>
+    <%= image_tag attachment_path(image.blob.key), size: '100x100', class: 'm-4' -%>
+    <%= button_to purge_attachment_path(image.blob.key), method: :delete, class: 'btn button-secondary' do %>
+      Remove file 
+    <% end %>
+  <% end %>
+</div>
+

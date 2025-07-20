@@ -1,6 +1,8 @@
 <%= form_with(model: @provider,
                url: @provider.new_record? ? providers_path : provider_path(@provider),
-               local: true) do |f| %>
+               local: true, 
+               id: 'arrowlinemoving_dropzone') do |f| %>
+
   <%= render 'shared/components/forms/errors', model: @provider %>
 
   <div class="space-y-8">
@@ -299,3 +301,5 @@
 
   </div>
 <% end %>
+
+<%= render partial: '/shared/attached_photos', locals: {attachable: @provider } -%>
