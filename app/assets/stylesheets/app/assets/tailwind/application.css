@@ -1,6 +1,4 @@
-@theme {
-  --breakpoint-xs: 400px;
-}
+@import "tailwindcss";
 
 :root {
   color-scheme: light !important;

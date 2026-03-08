@@ -1,7 +1,7 @@
 module ApplicationHelper
   include CommerceHelper
 
-  include Pagy::Frontend
+  include Pagy::Backend
 
   include AvatarsHelper
 
