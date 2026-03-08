@@ -8,7 +8,7 @@
 
   # Container
   container_flex = local_assigns[:container_flex] || "flex-1"
-  container_background = local_assigns[:container_background] || "bg-gray-100/80 dark:bg-gray-900"
+  container_background = local_assigns[:container_background] || "bg-gray-100/80"
   container_rounded = local_assigns[:container_rounded] || "rounded-lg"
   container_border = local_assigns[:container_border]
   container_padding = local_assigns[:container_padding] || "p-4 sm:p-6 lg:p-8 2xl:p-10"
@@ -22,7 +22,7 @@
   custom_headline_content = local_assigns[:custom_headline_content] # Set this to replace the headline element with your own
   headline_text = local_assigns[:headline_text]
   headline_text_size = local_assigns[:headline_text_size] || "text-xl sm:text-2xl 2xl:text-3xl"
-  headline_text_color = local_assigns[:headline_text_color] || "text-black dark:text-white"
+  headline_text_color = local_assigns[:headline_text_color] || "text-black dark:text-black"
   headline_font_weight = local_assigns[:headline_font_weight] || "font-semibold"
   headline_text_alignment = local_assigns[:headline_text_alignment] || "text-left"
   headline_tracking = local_assigns[:headline_tracking] || "tracking-tight"
@@ -31,7 +31,7 @@
 
   # Content
   content_text_size = local_assigns[:content_text_size] || "lg:text-lg"
-  content_text_color = local_assigns[:content_text_color] || (link_container ? "text-gray-600 dark:text-gray-400" : nil)
+  content_text_color = local_assigns[:content_text_color] || (link_container ? "text-gray-800" : nil)
   content_font_weight = local_assigns[:content_font_weight] || "font-medium"
   content_space_y = local_assigns[:content_space_y] || "space-y-4 lg:space-y-6"
   content_classes = local_assigns[:content_classes]
