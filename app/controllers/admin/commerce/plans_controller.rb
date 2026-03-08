@@ -1,6 +1,6 @@
 module Admin
   module Commerce
-    class PlansController < AdminController
+    class PlansController < Admin::AdminController
       include Pagy::Backend
 
       before_action :set_plan, only: [ :edit, :update, :destroy, :reorder ]

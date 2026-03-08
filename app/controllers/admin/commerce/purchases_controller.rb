@@ -1,6 +1,6 @@
 module Admin
   module Commerce
-    class PurchasesController < AdminController
+    class PurchasesController < Admin::AdminController
       include Pagy::Backend
 
       before_action :set_purchase, only: [ :show, :destroy ]

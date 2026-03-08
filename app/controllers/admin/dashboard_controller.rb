@@ -1,5 +1,5 @@
 module Admin
-  class DashboardController < AdminController
+  class DashboardController < Admin::AdminController
     def dashboard
     end
   end

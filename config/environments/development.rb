@@ -3,7 +3,7 @@ require "active_support/core_ext/integer/time"
 Rails.application.configure do
 
   Rails.application.configure do
-    MissionControl::Jobs.base_controller_class = "AdminController"
+    MissionControl::Jobs.base_controller_class = "Admin::AdminController"
   end
 
   config.force_ssl = true

@@ -1,6 +1,6 @@
 module Admin
   module Commerce
-    class PaymentsController < AdminController
+    class PaymentsController < Admin::AdminController
       include Pagy::Backend
 
       before_action :set_payment, only: [ :show, :destroy ]

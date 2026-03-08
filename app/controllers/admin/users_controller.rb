@@ -1,5 +1,5 @@
 module Admin
-  class UsersController < AdminController
+  class UsersController < Admin::AdminController
     def index
       @users = User.all.order(created_at: :desc)
       @pagy, @users = pagy(@users, items: 20)

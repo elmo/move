@@ -1,5 +1,5 @@
 module Admin
-  class ProvidersController < AdminController
+  class ProvidersController < Admin::AdminController
     def index
       @providers = Provider.all.order(created_at: :desc)
       @pagy, @providers = pagy(@providers, items: 20)

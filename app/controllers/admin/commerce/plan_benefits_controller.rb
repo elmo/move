@@ -1,6 +1,6 @@
 module Admin
   module Commerce
-    class PlanBenefitsController < AdminController
+    class PlanBenefitsController < Admin::AdminController
       # This manages the benefits on a plan.
       # Management of benefits themselves is handled by the BenefitsController.
 
