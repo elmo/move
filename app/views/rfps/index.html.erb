@@ -4,24 +4,12 @@
 
 <%= content_for(:breadcrumbs) do %>
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
-    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: "Job #{current_user.provider? ? 'opportunities' : 'requests' }" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: "My job requests" %>
   <% end %>
 <% end %>
 
 <div class="space-y-12">
-
   <% if @rfps.any? %>
-
-    <% if current_user.customer? %>
-      <%= render "shared/components/page_header",
-      title: "Job requests",
-      button_link_text: "Create a new job request",
-      button_link_path: new_customer_path(type: 'Customer') %>
-    <% else %>
-      <%= render "shared/components/page_header", title: "Job opportunities within #{current_user.provider.radius} miles of #{current_user.provider.zip}",
-      button_link_path: nil %>
-    <% end %>
-
     <div class="space-y-6">
       <%= render "shared/components/listings/listings" do %>
         <% @rfps.each do |rfp| %>
@@ -35,10 +23,13 @@
       <% end %>
     </div>
   <% else %>
-    <%= render "shared/components/listings/no_listings",
-    singular_object_name: "Job request",
-    plural_object_name: "Job request",
-    new_path: new_customer_path %>
-  <% end %>
 
+ <%= render "shared/components/callout",
+    headline_text: "Let's get started",
+    link_container: true,
+    link_path: new_rfp_path(type: 'MovingRequest'), 
+    icon_name: nil do %>
+    To get started, you'll need to create a request. A request is the essential details of your upcoming move.
+  <% end %>
+  <% end %>
 </div>

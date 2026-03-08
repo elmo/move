@@ -14,7 +14,7 @@
 <%= render "shared/components/callout",
     headline_text: "Looking for a mover you can trust?",
     link_container: true,
-    link_path:  new_registration_path,
+    link_path:  new_registration_path(role: 'customer'  ),
     container_margin:  'm-4',
     icon_name: "house" do %>
     Sign up and meet trusted professionals who will help you get where you are going.
@@ -23,7 +23,7 @@
 <%= render "shared/components/callout",
     headline_text: "Are you a mover with a reputation for integrity?",
     link_container: true,
-    link_path:  new_registration_path,
+    link_path:  new_registration_path(role: 'provider'),
     container_margin:  'm-4',
     icon_name: "truck" do %>
     Sign up and meet people who would like to hire you!

@@ -35,7 +35,6 @@
             icon: "house",
             **nav_attrs %>
 
-
     <% if current_user.rfps.with_active_bids.any? %>
       <% current_user.rfps.with_active_bids.each do |rfp| %>
           <%= render nav_link_partial,

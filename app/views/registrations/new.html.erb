@@ -6,9 +6,8 @@
   <%= render "shared/components/forms/errors",
               model: @user %>
 
-  <%= f.hidden_field :timezone,
-                       id: "user_timezone",
-                       data: { controller: "timezone" } %>
+  <%= f.hidden_field :timezone, id: "user_timezone", data: { controller: "timezone" } %>
+  <%= f.hidden_field :role, id: "user_role" %>
 
   <div class="space-y-6">
 

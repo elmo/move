@@ -5,7 +5,7 @@ if has_accounts
   can_manage_current_account = current_user.account_admin?(current_account)
 end
 
-border_color = "border-gray-200 dark:border-gray-700" %>
+border_color = "border-gray-200" %>
 
 <% if has_accounts && (can_manage_current_account || multiple_accounts) %>
 
@@ -18,7 +18,7 @@ border_color = "border-gray-200 dark:border-gray-700" %>
     <div class="flex items-start justify-between py-2 pl-4 pr-2.5">
       <h3
         class="
-          flex-1 text-xs font-semibold text-gray-400 dark:text-gray-400 uppercase
+          flex-1 text-xs font-semibold text-gray-400 uppercase
           tracking-widest
         "
       >
@@ -41,11 +41,8 @@ border_color = "border-gray-200 dark:border-gray-700" %>
       </h3>
 
       <div
-        class="
-          cursor-pointer text-gray-400 size-5 flex items-center justify-center bg-gray-50
-          dark:bg-gray-700 rounded-sm dark:text-gray-300 hover:text-black
-          dark:hover:text-white
-        "
+        class="cursor-pointer text-gray-400 size-5 flex items-center justify-center bg-gray-50
+          rounded-sm hover:text-black"
         data-action="click->components--toggle#toggle"
       >
         <span

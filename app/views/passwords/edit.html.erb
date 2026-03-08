@@ -1,5 +1,16 @@
 <%= content_for(:title, t('authentication.passwords.title', default: 'Reset your password')) %>
 
+<%= content_for(:breadcrumbs) do %>
+  <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link",
+               text: t('authentication.users.breadcrumbs.my_profile', default: 'Edit my profile'),
+               link: edit_user_profile_path %>
+    <%= render "shared/components/breadcrumbs/divider" %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: t('authentication.users.breadcrumbs.edit', default: 'Edit') %>
+  <% end %>
+<% end %>
+
+
 <%= form_with(url: password_path(params[:token]),
               method: :put,
               class: "") do |f| %>

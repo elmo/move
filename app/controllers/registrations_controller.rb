@@ -4,10 +4,10 @@ class RegistrationsController < ApplicationController
   layout "authentication"
 
   def new
+    @user = User.new
+    @user.role = params[:role] ||= 'customer' 
     @page_title = "Arrowline Moving - Sign up"
     redirect_to root_path if authenticated?
-
-    @user = User.new
   end
 
   def create
@@ -28,6 +28,7 @@ class RegistrationsController < ApplicationController
                                  :last_name,
                                  :password,
                                  :password_confirmation,
+                                 :role,
                                  :timezone)
   end
 end

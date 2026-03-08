@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   include Rails.application.routes.url_helpers
   attr_accessor :invite
+  attr_accessor :role
 
   has_many :account_users, dependent: :destroy
   has_many :invoices, dependent: :destroy
@@ -8,6 +9,7 @@ class User < ApplicationRecord
   has_many :invitations, dependent: :nullify
 
   after_create :create_account
+  after_create :create_role
   after_create :send_welcome_email
   rolify
   validates :email_address, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -140,6 +142,14 @@ class User < ApplicationRecord
   end
 
   private
+
+  def create_role
+    if role == 'provider'
+      add_role(:provider)
+    else
+      add_role(:customer)
+    end
+  end
 
   def create_account
     return if self.invite

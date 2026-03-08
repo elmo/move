@@ -3,7 +3,7 @@
   <% trigger_content = capture do %>
     <div class="inline-flex items-center space-x-3">
       <%= render "shared/components/avatar", resource: current_user %>
-      <div class="flex-1 dark:text-gray-400">
+      <div class="flex-1">
         <%= current_user.name %>
       </div>
     </div>
@@ -28,7 +28,7 @@
     <% end %>
 
 
-    <%= render "layouts/global/account_menu" %>
+    <%# render "layouts/global/account_menu" %>
 
     <%= render "shared/components/dropdown/dropdown_link",
                 link_path: session_path,

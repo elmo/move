@@ -5,14 +5,12 @@
 <%= content_for(:breadcrumbs) do %>
   <%= render "shared/components/breadcrumbs/breadcrumbs" do %>
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: t('authentication.users.breadcrumbs.my_profile', default: 'My Profile'),
+               text: t('authentication.users.breadcrumbs.my_profile', default: 'My profile'),
                link: edit_user_profile_path %>
     <%= render "shared/components/breadcrumbs/divider" %>
-    <%= render "shared/components/breadcrumbs/breadcrumb_link",
-               text: t('authentication.users.breadcrumbs.edit', default: 'Edit') %>
+    <%= render "shared/components/breadcrumbs/breadcrumb_link", text: 'Update account details' %>
   <% end %>
 <% end %>
-
 
 <%= content_for(:side_col) do %>
   <%= render "users/user_profile_subnav", active: "edit_profile" %>
@@ -64,20 +62,15 @@
                             class: form_control_classes %>
         <% end %>
 
-        <%= render "shared/components/callout", 
-          container_padding: "p-2 sm:p-3 lg:p-4 2xl:p-5" do %>
         <%= render "shared/components/forms/field",
                     form: f,
                     label: "Allow text messages", 
                     name: :allow_text_messages do  %>
           <%= f.checkbox :allow_text_messages %>
-        <% end %>
-        <% end %>
+          <% end %>
       </div>
 
       <div class="space-y-8">
-        <%= render "shared/components/callout", 
-          container_padding: "p-2 sm:p-3 lg:p-4 2xl:p-5" do %>
         <%= render "shared/components/forms/field",
                     form: f,
                     label: "I accept the Terms & Conditions", 
@@ -85,7 +78,6 @@
           <%= f.checkbox :terms_accepted %>
         <% end %>
         <%= link_to 'Terms and Conditions', toc_path, target: '_blank'  -%>
-      <% end %>
       </div>
 
     <div class="mt-12">

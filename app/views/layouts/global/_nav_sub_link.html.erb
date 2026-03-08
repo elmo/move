@@ -6,10 +6,10 @@ icon = local_assigns[:icon]
 icon_container_classes = local_assigns[:icon_container_classes]
 classes = local_assigns[:classes]
 link_target = local_assigns[:link_target] || "_self"
-active_classes = local_assigns[:active_classes] || "text-black dark:text-white"
+active_classes = local_assigns[:active_classes] || "text-white"
 inactive_classes =
   local_assigns[:inactive_classes] ||
-    "text-primary dark:text-primary hover:text-black dark:hover:text-white"
+    "text-black hover:text-black"
 sub_link_header = local_assigns.fetch(:sub_link_header, false)
 sub_link_header_padding = local_assigns[:sub_link_header_padding] || "pt-3 pb-1"
 sub_link_header_text_size =
@@ -18,7 +18,7 @@ sub_link_header_font_weight =
   local_assigns[:sub_link_header_font_weight] || "font-semibold"
 sub_link_header_text_color =
   local_assigns[:sub_link_header_text_color] ||
-    "text-gray-400 dark:text-gray-600"
+    "text-black"
 sub_link_header_tracking =
   local_assigns[:sub_link_header_tracking] || "tracking-[2px]"
 sub_link_header_classes = local_assigns[:sub_link_header_classes] || "uppercase" %>

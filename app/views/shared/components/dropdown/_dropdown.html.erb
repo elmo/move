@@ -81,7 +81,7 @@
       <div class="whitespace-nowrap">
         <%= current_selection %>
       </div>
-      <%= icon("chevron-down", size: 16, color: "text-gray-400 dark:text-gray-600") %>
+      <%= icon("chevron-down", size: 16, color: "text-gray-100 dark:text-gray-100") %>
     </div>
   <% else %>
     <div class="cursor-pointer text-gray-400 dark:text-gray-600
@@ -101,7 +101,7 @@
        <% if toggle_on_hover %>
        data-action="mouseover->components--dropdown#openOnHover mouseout->components--dropdown#closeOnHoverOut"
   <% end %>>
-  <div class="rounded-md bg-white dark:bg-gray-950 py-1 shadow-lg border border-gray-200/50 dark:border-gray-700/50">
+  <div class="rounded-md bg-white dark:bg-gray-2-0 py-1 shadow-lg border border-gray-200/50 dark:border-gray-700/50">
     <%= yield %>
   </div>
 </div>
