@@ -1,0 +1,49 @@
+ <%= render "shared/components/callout",
+    headline_text: "License and crew",
+    link_container: false,
+    icon_name: nil do %>
+
+  <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:do_you_have_license],
+                  name: :do_you_have_license do %>
+          <%= f.select :do_you_have_license, yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "License umber",
+                  name: :license_number do %>
+        <%= f.text_field :license_number,
+                placeholder: "Your business license number",
+                class: form_control_classes %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:year_in_business],
+                  name: :years_in_business do %>
+        <%= f.text_field :years_in_business,
+                placeholder: "Number of years",
+                class: form_control_classes %>
+      <% end %>
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:number_of_trucks_and_crew],
+                  name: :number_trucks_and_crew do %>
+        <%= f.text_field :number_of_trucks_and_crew,
+                placeholder: "Number of trucks and crew members",
+                class: form_control_classes %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:regions_served],
+                  name: :regions_served do %>
+        <%= f.text_field :regions_served,
+                placeholder: "States, regions",
+                class: form_control_classes %>
+      <% end %>
+
+
+<% end %>

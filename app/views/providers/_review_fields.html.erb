@@ -1,0 +1,34 @@
+<%= render "shared/components/callout",
+       headline_text: "Reviews",
+       link_container: false,
+       icon_name: nil do %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:yelp_reviews],
+                  name: :yelp_reviews do %>
+        <%= f.text_field :yelp_reviews,
+                placeholder: "Link to your Yelp reviews",
+                class: form_control_classes %>
+
+      <% end %>
+
+
+     <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:google_reviews],
+                  name: :google_reviews  do %>
+        <%= f.text_field :google_reviews,
+                placeholder: "Link to your Google reviews",
+                class: form_control_classes %>
+     <% end %>
+
+     <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:bbb_profile],
+                  name: :bbb_profile do %>
+        <%= f.text_field :bbb_profile ,
+                placeholder: "Link to your BBB profile",
+                class: form_control_classes %>
+     <% end %>
+ <% end %>

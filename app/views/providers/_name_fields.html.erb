@@ -1,0 +1,14 @@
+    <%= render "shared/components/callout",
+       headline_text: "Business name",
+       link_container: false,
+       icon_name: nil do %>
+    <%= render "shared/components/forms/field",
+                 form: f,
+                 label: "Business Name",
+                 name: :name do %>
+      <%= f.text_field :name,
+                        placeholder: "Your business name ...",
+                        class: form_control_classes,
+                        autofocus: true %>
+    <% end %>
+   <% end %>

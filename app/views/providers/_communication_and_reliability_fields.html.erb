@@ -1,0 +1,31 @@
+
+ <%= render "shared/components/callout",
+    headline_text: "Communication and Reliablity",
+    link_container: false,
+    icon_name: nil do %>
+
+<%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:typical_response_time],
+                  name: :typical_response_time do %>
+        <%= f.text_field :typical_response_time ,
+                placeholder: "Number of hours",
+                class: form_control_classes %>
+     <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:guarantee_arrival_windows],
+                  name: :guarantee_arrival_windows do %>
+                  <%= f.select :guarantee_arrival_windows, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:billing_style],
+                  name: :billing_style do %>
+                  <%= f.select :billing_style, 
+                    billing_style_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+ <% end %>

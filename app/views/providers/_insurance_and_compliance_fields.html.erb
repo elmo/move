@@ -1,0 +1,37 @@
+ <%= render "shared/components/callout",
+    headline_text: "Insurance and compliance",
+    link_container: false,
+    icon_name: nil do %>
+
+    <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:general_liablity_insurance],
+                  name: :general_liablity_insurance do %>
+                  <%= f.select :general_liablity_insurance, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:cargo_insurance],
+                  name: :cargo_insurance do %>
+                  <%= f.select :cargo_insurance, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:commercial_vehichle_insurance],
+                  name: :commercial_vehichle_insurance do %>
+                  <%= f.select :commercial_vehichle_insurance, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:usdot_mc_numbers],
+                  name: :usdot_mc_numbers do %>
+                  <%= f.select :usdot_mc_numbers, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+<% end %>

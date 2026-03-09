@@ -1,0 +1,59 @@
+ <%= render "shared/components/callout",
+    headline_text: "Business Address",
+    link_container: false,
+    icon_name: nil do %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Address",
+                  name: :address_1 do %>
+        <%= f.text_field :address_1,
+                placeholder: "123 Main Street",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Address line 2 (optional)",
+                  name: :address_2 do %>
+        <%= f.text_field :address_2,
+                placeholder: "",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "City",
+                  name: :city do %>
+        <%= f.text_field :city,
+                placeholder: "City",
+                class: form_control_classes%>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "State",
+                  name: :state do %>
+          <%= f.select :state, Carmen::Country.named('United States').subregions.map { |s| [s.name, s.code] }, { prompt: 'Select a state' }, { class: form_control_classes  } %>
+      <% end %>
+      
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Zip",
+                  name: :zip do %>
+        <%= f.text_field :zip,
+                placeholder: "Zip",
+                class: form_control_classes %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "Maxium distance to start of a job",
+                  name: :radius do %>
+        <%= f.number_field :radius,
+                placeholder: "Number of miles",
+                class: form_control_classes %>
+      <% end %>
+      
+
+  <% end %>

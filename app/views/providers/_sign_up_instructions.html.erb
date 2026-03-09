@@ -1,0 +1,51 @@
+       <% if @provider.name.blank? %>
+         <%= render "shared/components/callout",
+            headline_text: "Let's get started",
+            link_container: true,
+             icon_name: nil do %>
+          Please enter your company details. 
+         <% end %>
+       <% end %>
+
+       <% if @provider.pending_review? %>
+          <%= render "shared/components/callout",
+              headline_text: "Your application is being reviewed",
+              link_container: true,
+              button_icon: "check",
+              button_icon_position: "after",
+              icon_name: "truck" do %>
+              You will usually hear back from using within 48 hours of submitting. 
+          <% end %>
+       <% end %>
+
+     <% if @provider.application_ready_to_submit? && !@provider.pending_review?  %>
+
+       <% if @provider.agreement.blank? %>
+          <%= render "shared/components/callout",
+              headline_text: "Next step: Sign Provider Aggreement",
+              link_container: true,
+              link_path: new_provider_agreement_path(@provider),
+              link_method: :put, 
+              button_text: "Complete provider agreement",
+              button_icon: "arrow-right",
+              button_icon_position: "after",
+              icon_name: "pen" do %>
+              We need you to sign our provider agreement.
+          <% end %>
+
+       <% else %>
+          <%= render "shared/components/callout",
+              headline_text: "Your application is ready to submit",
+              link_container: true,
+              link_path: apply_provider_path(@provider),
+              link_method: :put, 
+              button_text: "Submit application",
+              button_icon: "arrow-right",
+              button_icon_position: "after",
+              icon_name: "truck" do %>
+              Submit your application. Once we've approved your application, you can start accepting clients. 
+          <% end %>
+       <% end %>
+
+    <% end %>
+

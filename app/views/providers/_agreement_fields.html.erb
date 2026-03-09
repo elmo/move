@@ -1,0 +1,23 @@
+<%= render "shared/components/callout",
+       headline_text: "Agreement",
+       link_container: false,
+       icon_name: nil do %>
+
+     <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:willing_to_sign_agreement],
+                  name: :willing_to_sign_agreement do %>
+                  <%= f.select :willing_to_sign_agreement, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+
+      <% end %>
+
+       <%= render "shared/components/forms/field",
+                  form: f,
+                  label: "I have read and accept provider Terms & Conditions",
+                  name: :accept_provider_terms,
+                  wrap_label: true do %>
+        <%= f.check_box :accept_provider_terms%>
+        <% end %>
+     <%= link_to 'terms and conditions',  provider_toc_path, target: 'blank' -%>
+  <% end %>

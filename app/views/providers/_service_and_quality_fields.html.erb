@@ -1,0 +1,31 @@
+
+ <%= render "shared/components/callout",
+    headline_text: "Service & Quality",
+    link_container: false,
+    icon_name: nil do %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:services],
+                  name: :services do %>
+                  <%= f.select :services, 
+                    move_type_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:written_estimates],
+                  name: :written_estimates do %>
+                  <%= f.select :written_estimates, 
+                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
+      <% end %>
+
+      <%= render "shared/components/forms/field",
+                  form: f,
+                  label: @provider.question_map[:damage_claims],
+                  name: :damage_claims do %>
+        <%= f.text_area :damage_claims,
+                placeholder: "Explain your procedure",
+                class: form_control_classes %>
+     <% end %>
+<% end %>

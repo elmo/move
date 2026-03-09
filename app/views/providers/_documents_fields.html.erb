@@ -1,0 +1,6 @@
+<%= render "shared/components/callout",
+    headline_text: "Supporting Documents",
+    link_container: false,
+    icon_name: nil do %>
+      <%= render partial: 'dropzone_files_upload', locals: {form: f, attachments: @provider.images  } -%>
+<% end %>
