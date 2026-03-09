@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_17_154628) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_09_174704) do
   create_table "acceptances", force: :cascade do |t|
     t.integer "user_id"
     t.integer "bid_id"
@@ -448,7 +448,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_17_154628) do
     t.datetime "terms_accepted_at"
     t.boolean "admin", default: false
     t.string "stripe_customer_id"
+    t.string "role"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.index ["role"], name: "index_users_on_role"
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|

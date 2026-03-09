@@ -1,7 +1,6 @@
 class User < ApplicationRecord
   include Rails.application.routes.url_helpers
   attr_accessor :invite
-  attr_accessor :role
 
   has_many :account_users, dependent: :destroy
   has_many :invoices, dependent: :destroy
@@ -62,11 +61,11 @@ class User < ApplicationRecord
   end
 
   def provider?
-    has_role?("provider")
+    provider.present?
   end
 
   def customer?
-    has_role?("customer")
+    role == 'customer'
   end
 
   def type_declared?
@@ -145,9 +144,9 @@ class User < ApplicationRecord
 
   def create_role
     if role == 'provider'
-      add_role(:provider)
+      self.provider = Provider.create(current_step: 0)
     else
-      add_role(:customer)
+      Customer.create!(user: self, customer_type: Customer::TYPE_CUSTOMER)
     end
   end
 

@@ -2,10 +2,6 @@ class Customer < ApplicationRecord
   belongs_to :user
   validates :user_id, presence: true
   validates :customer_type, presence: true
-  after_create :add_user_role
-
-  def add_user_role
-    user.add_role('customer') if customer_type == 'Moving' || customer_type == 'Hauling'
-  end
-
+  TYPE_CUSTOMER = 'customer'
+  TYPE_PROVIDER = 'provider'
 end

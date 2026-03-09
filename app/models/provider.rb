@@ -1,13 +1,13 @@
 class Provider < ApplicationRecord
   include SlugGenerator
   include Rails.application.routes.url_helpers
-  validates :name, presence: true, if: -> { current_step.to_i >= 0 }
+  validates :name, presence: true, if: -> { current_step.to_i > 0 }
   validates :address_1, presence: true, if: -> { current_step.to_i > 0 }
   validates :city, presence: true, if: -> { current_step.to_i > 0 }
   validates :state, presence: true, if: -> { current_step.to_i > 0 }
   validates :zip, presence: true, if: -> { current_step.to_i > 0 }
   validates :license_number, presence: true, if: -> { current_step.to_i > 0 }
-  validates :accept_provider_terms, acceptance: true
+  validates :accept_provider_terms, acceptance: true, if: -> { current_step.to_i > 0 }
   validates :slug, presence: true, uniqueness: true, format: { with: /\A[a-zA-Z0-9\-_]+\z/, message: "only allows letters, numbers, hyphens, and underscores" }
   belongs_to :user
   has_one :agreement

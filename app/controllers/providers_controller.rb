@@ -3,7 +3,6 @@ class ProvidersController < ApplicationController
 
   def index
     @providers = Provider.all
-
     @providers = @providers
   end
 
@@ -27,6 +26,7 @@ class ProvidersController < ApplicationController
   end
 
   def show
+    redirect_to new_provider_path(@provider) if @provider.blank?
   end
 
   def edit

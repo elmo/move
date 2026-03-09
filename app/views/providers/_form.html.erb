@@ -154,14 +154,6 @@
                     yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
       <% end %>
 
-      <%= render "shared/components/forms/field",
-                  form: f,
-                  label: @provider.question_map[:services],
-                  name: :services do %>
-                  <%= f.select :services, 
-                    yes_or_no_options, { prompt: "Choose", class: form_control_classes  } %>
-      <% end %>
-
       <%= render "shared/components/page_sub_header", title: "Service & Quality" -%>
 
       <%= render "shared/components/forms/field",

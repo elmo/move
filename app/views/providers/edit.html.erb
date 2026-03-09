@@ -8,21 +8,36 @@
                text: "Providers",
                link: providers_path %>
     <%= render "shared/components/breadcrumbs/divider" %>
+
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
                link: provider_path(@provider),
                text: @provider.name %>
+
     <%= render "shared/components/breadcrumbs/divider" %>
+
     <%= render "shared/components/breadcrumbs/breadcrumb_link",
                text: 'Business profile' %>
   <% end %>
 <% end %>
 
-<% content_for(:side_col) do %>
-  <%= render "providers/provider_subnav", active: "edit_provider", provider: @provider %>
-<% end %>
+<%# content_for(:side_col) do %>
+  <%# render "providers/provider_subnav", active: "edit_provider", provider: @provider %>
+<%# end %>
+
 
 <div class="space-y-12">
   <%= render "shared/components/page_header", title: 'Business profile' %>
+
+       <% if @provider.name.blank? %>
+         <%= render "shared/components/callout",
+            headline_text: "Let's get started",
+            link_container: true,
+             icon_name: nil do %>
+          Please enter your company details. 
+      <% end %>
+
+       <% end %>
+
 
        <% if @provider.pending_review? %>
           <%= render "shared/components/callout",

@@ -5,12 +5,12 @@ class RegistrationsController < ApplicationController
 
   def new
     @user = User.new
-    @user.role = params[:role] ||= 'customer' 
     @page_title = "Arrowline Moving - Sign up"
     redirect_to root_path if authenticated?
   end
 
   def create
+    @page_title = "Arrowline Moving - Sign up"
     @user = User.new(user_params)
     if @user.save
       start_new_session_for @user
