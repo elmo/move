@@ -11,16 +11,15 @@
 @utility btn-primary {
   background-image: linear-gradient(to top right, var(--color-primary), var(--color-primary-light));
   color: var(--color-white);
-
   @variant hover {
-    background-image: linear-gradient(to top right, var(--color-primary-400), var(--color-primary-light));
+    background-image: linear-gradient(to top right, var(--color-primary-400), var(--color-primary-900));
   }
 
   @variant dark {
     background-color: var(--color-primary-500);
 
     @variant hover {
-      background-color: var(--color-primary-600);
+      background-color: var(--color-primary-900);
     }
   }
 }

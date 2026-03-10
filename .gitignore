@@ -43,3 +43,4 @@
 
 /config/credentials/development.key
 *.swp
+/node_modules

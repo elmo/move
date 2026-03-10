@@ -3,15 +3,15 @@ en:
   hello: Hello world
   authentication:
     sessions:
-      title: Log in
+      title: Log in to your account
       email_label: Email address
       email_placeholder: name@domain.com
       password_label: Password
       password_placeholder: Create a password
       submit: Sign in
-      new_user: New user?
-      sign_up: Sign up
-      forgot_password: Forgot password?
+      new_user: Don't have an account?
+      sign_up: Sign up now!
+      forgot_password: Forgot your password?
     registrations:
       title: Sign up
       email_label: Email address

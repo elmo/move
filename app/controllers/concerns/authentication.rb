@@ -42,6 +42,8 @@ module Authentication
     def after_authentication_url
       if current_user.admin?
         starting_path = admin_users_path
+      elsif !current_user.basic_information_present?
+        starting_path = edit_user_profile_path
       elsif current_user.customer?
         starting_path = rfps_path
       elsif current_user.provider?
