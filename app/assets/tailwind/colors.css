@@ -12,18 +12,18 @@
   --color-primary-900: var(--color-indigo-900);
   --color-primary-950: var(--color-indigo-950);
 
-  --color-primary-light-50: var(--color-pink-50);
-  --color-primary-light-100: var(--color-pink-100);
-  --color-primary-light-200: var(--color-pink-200);
-  --color-primary-light-300: var(--color-pink-300);
-  --color-primary-light-400: var(--color-pink-400);
-  --color-primary-light: var(--color-pink-400);
-  --color-primary-light-500: var(--color-pink-500);
-  --color-primary-light-600: var(--color-pink-600);
-  --color-primary-light-700: var(--color-pink-700);
-  --color-primary-light-800: var(--color-pink-800);
-  --color-primary-light-900: var(--color-pink-900);
-  --color-primary-light-950: var(--color-pink-950);
+  --color-primary-light-50: var(--color-emerald-50);
+  --color-primary-light-100: var(--color-emerald-100);
+  --color-primary-light-200: var(--color-emerald-200);
+  --color-primary-light-300: var(--color-emerald-300);
+  --color-primary-light-400: var(--color-emerald-400);
+  --color-primary-light: var(--color-emerald-400);
+  --color-primary-light-500: var(--color-emerald-500);
+  --color-primary-light-600: var(--color-emerald-600);
+  --color-primary-light-700: var(--color-emerald-700);
+  --color-primary-light-800: var(--color-emerald-800);
+  --color-primary-light-900: var(--color-emerald-900);
+  --color-primary-light-950: var(--color-emerald-950);
 
   --color-secondary-50: var(--color-emerald-50);
   --color-secondary-100: var(--color-emerald-100);

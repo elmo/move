@@ -12,9 +12,12 @@
   <% end %>
 <% end %>
 
-<%= content_for(:side_col) do %>
-  <%= render "users/user_profile_subnav", active: "edit_profile" %>
-<% end %>
+<%# content_for(:side_col) do %>
+  <%# render "users/user_profile_subnav", active: "edit_profile" %>
+<%# end %>
+
+ <%= render "shared/components/page_header", title: "Update  profile" %>
+  <%= render "shared/components/callout", headline_text: "Complete the following information", link_container: false, icon_name: nil do %>
 
   <%= form_for @user, url: update_user_profile_path, method: :patch do |f| %>
     <%= f.hidden_field :current_step -%>
@@ -28,6 +31,9 @@
                           placeholder: t('authentication.users.form.email_placeholder', default: 'name@domain.com'),
                           class: form_control_classes,
                           autofocus: true %>
+
+      <%# link_to 'Change password', manage_password_path, class: 'btn btn-secondary' -%>
+
       <% end %>
 
       <div class="space-y-8
@@ -77,10 +83,19 @@
                     name: :terms_accepted do  %>
           <%= f.checkbox :terms_accepted %>
         <% end %>
-        <%= link_to 'Terms and Conditions', toc_path, target: '_blank'  -%>
+        <%= link_to 'View Terms and Conditions', toc_path, class: 'btn btn-ghost',  target: '_blank'  -%>
       </div>
 
     <div class="mt-12">
       <%= f.submit t('authentication.users.form.update_button', default: 'Update'), class: "btn btn-primary" %>
     </div>
+
+    <% if current_user.basic_information_present? && current_user.provider? %>
+      <% if current_user.provider.application_ready_to_submit? %>
+      <%= link_to 'Update my business information', edit_provider_path(current_user.provider), class: 'btn btn-secondary' -%>
+     <% else %>
+         <%= link_to 'Add my business information', edit_provider_path(current_user.provider), class: 'btn btn-secondary' -%>
+      <% end %>
+    <% end %>
   <% end %>
+<% end %>

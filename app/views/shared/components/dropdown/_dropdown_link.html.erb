@@ -4,7 +4,7 @@
   icon_name = local_assigns[:icon_name]
   icon_container_position = local_assigns[:icon_container_position]
   icon_container_classes = local_assigns[:icon_container_classes]
-  icon_color = local_assigns[:icon_color] || "text-gray-400 group-hover/link:text-black dark:group-hover/link:text-white"
+  icon_color = local_assigns[:icon_color] || "text-gray-400 group-hover/link:text-black"
   icon_size = local_assigns[:icon_size]
   text_color = local_assigns[:text_color] || "text-primary"
   link_method = local_assigns[:link_method]
@@ -30,7 +30,7 @@
 <% classes = "group/link flex items-start justify-start py-2 w-full text-left cursor-pointer
               #{icon_name ? 'pl-3 pr-4 space-x-2' : 'px-4 space-x-1'}
               #{text_color}
-              hover:bg-gray-500 dark:hover:bg-gray-500 hover:text-black dark:hover:text-black
+              hover:bg-gray-200 hover:text-black
               #{link_classes}" %>
 
 <% link_content = capture do %>

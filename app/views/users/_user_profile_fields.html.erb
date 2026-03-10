@@ -1,0 +1,46 @@
+            <%= render "shared/components/forms/field",
+                  form: f,
+                  label: t('authentication.users.form.email_label', default: 'Email address'),
+                  name: :email_address do %>
+        <%= f.email_field :email_address,
+                          placeholder: t('authentication.users.form.email_placeholder', default: 'name@domain.com'),
+                          class: form_control_classes,
+                          autofocus: true %>
+      <% end %>
+
+        <%= render "shared/components/forms/field",
+                    form: f,
+                    label: t('authentication.users.form.first_name_label', default: 'First name'),
+                    name: :first_name do %>
+          <%= f.text_field :first_name,
+                            placeholder: t('authentication.users.form.first_name_placeholder', default: 'First name'),
+                            class: form_control_classes %>
+        <% end %>
+
+        <%= render "shared/components/forms/field",
+                    form: f,
+                    label: t('authentication.users.form.last_name_label', default: 'Last name'),
+                    name: :last_name do %>
+          <%= f.text_field :last_name,
+                            placeholder: t('authentication.users.form.last_name_placeholder', default: 'Last name'),
+                            class: form_control_classes %>
+        <% end %>
+
+        <%= render "shared/components/forms/field",
+                    form: f,
+                    label: "Phone", 
+                    name: :phone do  %>
+          <%= f.text_field :phone, placeholder: "your phone number", class: form_control_classes %>
+        <% end %>
+
+        <%= render "shared/components/forms/field", form: f, label: "Allow text messages", name: :allow_text_messages do  %>
+          <%= f.checkbox :allow_text_messages %>
+          <% end %>
+
+        <%= render "shared/components/forms/field",
+                    form: f,
+                    label: "I accept the Terms & Conditions", 
+                    name: :terms_accepted do  %>
+          <%= f.checkbox :terms_accepted %>
+        <% end %>
+        <%= link_to 'Terms and Conditions', toc_path, target: '_blank'  -%>

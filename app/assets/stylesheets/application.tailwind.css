@@ -1,9 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  body {
-    @apply bg-white text-slate-900;
-  }
+@theme {
+  /* Your custom colors, fonts, and breakpoints go here */
+  --color-primary: #3b82f6;
 }
