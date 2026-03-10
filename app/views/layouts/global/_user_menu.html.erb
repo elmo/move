@@ -27,8 +27,12 @@
                 link_text: 'My Business Profile'  %>
     <% end %>
 
-
     <%# render "layouts/global/account_menu" %>
+
+    <%= render "shared/components/dropdown/dropdown_link",
+                link_path: manage_password_path,
+                icon_name: "circle-user",
+                link_text: 'Change password' %>
 
     <%= render "shared/components/dropdown/dropdown_link",
                 link_path: session_path,

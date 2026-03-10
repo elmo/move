@@ -20,6 +20,11 @@ class Provider < ApplicationRecord
 
   geocoded_by :zip
 
+  STATUS_NEW = "new"
+  STATUS_PENDING_REVIEW = "pending review"
+  STATUS_APPROVED = "approved"
+  STATUS_REJECTED= "rejected"
+
   def to_param
     slug
   end
@@ -62,12 +67,11 @@ class Provider < ApplicationRecord
   end
 
   def pending_review?
-    status == "pending review"
+    status == STATUS_PENDING_REVIEW
   end
 
   def approve!
-    update(status: "approved")
-    user.add_role('provider')
+    update(status: STATUS_APPROVED)
     Message.create_message(
       from: User.system_user,
       to: user,
@@ -77,12 +81,11 @@ class Provider < ApplicationRecord
   end
 
   def approved?
-    status == 'approved'
+    status == STATUS_APPROVED
   end
 
   def reject!
-    update(status: "rejected")
-    user.remove_role('provider')
+    update(status: STATUS_REJECTED)
     Message.create_message(
       from: User.system_user,
       to: user,
@@ -92,14 +95,14 @@ class Provider < ApplicationRecord
   end
 
   def rejected?
-    status == 'rejected'
+    status == STATUS_REJECTED
   end
 
   def self.statuses
     [
-      "new",
-      "pending review",
-      "active"
+      STATUS_NEW,
+      STATUS_PENDING_REVIEW,
+      STATUS_APPROVED
     ]
   end
 
@@ -179,7 +182,7 @@ end
 
   def total_bid_amount
     bids.pluck(:amount).sum
-  end 
+  end
 
   private
 

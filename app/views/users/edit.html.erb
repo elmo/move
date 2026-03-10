@@ -31,9 +31,6 @@
                           placeholder: t('authentication.users.form.email_placeholder', default: 'name@domain.com'),
                           class: form_control_classes,
                           autofocus: true %>
-
-      <%# link_to 'Change password', manage_password_path, class: 'btn btn-secondary' -%>
-
       <% end %>
 
       <div class="space-y-8
@@ -94,7 +91,7 @@
       <% if current_user.provider.application_ready_to_submit? %>
       <%= link_to 'Update my business information', edit_provider_path(current_user.provider), class: 'btn btn-secondary' -%>
      <% else %>
-         <%= link_to 'Add my business information', edit_provider_path(current_user.provider), class: 'btn btn-secondary' -%>
+         <%= link_to 'Enter my business information', edit_provider_path(current_user.provider), class: 'btn btn-secondary' -%>
       <% end %>
     <% end %>
   <% end %>
